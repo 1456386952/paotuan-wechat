@@ -1,0 +1,67 @@
+<style>
+ span{
+   color: white;
+ }
+</style>
+ <h4 ng-if="order_title" class="page-header" style="margin:14px 0" ng-bind="order_title"></h4>
+<div class="container-fluid text-center" ng-if="!loading&&no_data" style="margin-top:44px">
+    暂无订单
+</div>
+
+<div class="container-fluid no-padding" ng-if="!loading&&!no_data">
+   <div class="col-xs-12 col-lg-3" ng-if="need_pays" style="padding:4px">
+   <div class="list-group list-no-topborder no-border-side"  style="padding:4px" >
+  <div class="panel panel-default no-margin" >
+  <div class="panel-body" style="padding:4px">
+   <div class="panel-heading" role="tab" style="padding-left:0">
+      <h4 class="panel-title" ><i class="fa fa-credit-card main-color"></i> 待支付 </h4>
+    </div>
+<a ng-href="#/race/orderinfo?order_id={{o.orderid}}" class="list-group-item container-fluid" ng-repeat="o in need_pays" style="padding:4px">
+<div class="col-xs-9 no-padding">
+ <h5 class="list-group-item-heading text-truncate" ng-bind="o.items_desc "></h5>
+    <p class="list-group-item-text text-muted" >
+        <i class="fa fa-cny"></i> {{o.amount}}
+    </p>
+</div>
+
+<div class="col-xs-3" style="padding-top:3px">
+ <button class="btn btn-success" ng-if="o.need_pay" ng-click="pay(o);">支付</button>
+</div>
+  </a>
+  </div>
+  </div>
+  </div>
+   </div>
+   
+      <div class="col-xs-12 col-lg-3" ng-if="done" style="padding:4px">
+      <div class="list-group list-no-topborder no-border-side"  style="padding:4px" >
+  <div class="panel panel-default no-margin" >
+  <div class="panel-body" style="padding:4px">
+   <div class="panel-heading" role="tab" style="padding-left:0">
+      <h4 class="panel-title" ><i class="fa fa-check-square-o main-color"></i> 已完成</h4>
+    </div>
+<a ng-href="#/race/orderinfo?order_id={{o.orderid}}" class="list-group-item container-fluid" ng-repeat="o in done" style="padding:4px">
+ <h5 class="list-group-item-heading text-truncate" ng-bind="o.items_desc "></h5>
+    <p class="list-group-item-text text-muted" >
+        <i class="fa fa-cny"></i> {{o.amount}}
+    </p>
+  </a>
+  </div>
+  </div>
+</div>
+      </div>
+</div>
+<div ng-if="loading" style="width: 100%;height:20px;text-align: center;">
+	   <i class="fa fa-spinner fa-spin"></i>
+</div>
+
+<form  action="/wxpay/index?showwxpaytitle=1" style="display: none" method="post" id="payForm">
+    <input type="text" name="openid" value="{{openid}}">
+    <input type="text" name="uid" id="uid" value="{{order.uid}}">
+    <input type="text" name="goodDesc"  value="{{order.order_title}}"  id="gd">
+    <input type="text" name="orderid" id="orderid" value="{{order.orderid}}">
+    <input type="text" name="total_fee" value="{{order.actual_payment*100}}"  id="tf">
+    <input type="text" name="hash" id="hash" value="{{hash}}">
+    <input type="text" name="expire_time" value="{{order.expire_time}}" id="ex_time">
+ </form>
+

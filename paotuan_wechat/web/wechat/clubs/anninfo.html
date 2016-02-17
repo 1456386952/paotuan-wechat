@@ -1,0 +1,15 @@
+<style>
+ img{
+   max-width: 100%;
+ }
+</style>
+<div ng-if="ann" class="container" style="padding:14px">
+ <h4 ng-bind="ann.subject" class="no-margin" style="color:black;"></h4>
+ <small class="text-muted" ng-bind="ann.create_time"></small><small class="text-muted" ng-bind="ann.user.nick_name" style="margin-left:14px"></small>
+  <div class="no-margin-p"  data-ng-bind-html="ann.content" style="color: black;"></div>
+  <footer class="text-muted" style="padding:14px 0 14px 0"> 阅读 <span  ng-bind="ann.views"></span></i></footer>
+</div>
+
+<div ng-if="!ann" class="container text-center" style="padding:14px;">
+<img src="/image/paotuanzhuce/annnotfound.png">
+</div>

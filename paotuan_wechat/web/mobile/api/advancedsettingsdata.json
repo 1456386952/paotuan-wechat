@@ -1,0 +1,51 @@
+{
+    "code": 0,
+    "message": {
+        "activityProjectList": [
+            {
+                "activityProjectInfo": "活动项目1"
+            },
+          {
+                "activityProjectInfo": "活动项目2"
+            },
+          {
+                "activityProjectInfo": "活动项目3"
+            },
+          {
+                "activityProjectInfo": "活动项目4"
+            },
+          {
+                "activityProjectInfo": "活动项目5"
+            },
+          {
+                "activityProjectInfo": "活动项目6"
+            },
+          {
+                "activityProjectInfo": "活动项目7"
+            }
+       ],
+        "registrationInfoList": [
+            {
+                "registrationInfo": "报名信息1"
+            },
+          {
+                "registrationInfo": "报名信息2"
+            },
+          {
+                "registrationInfo": "报名信息3"
+            },
+          {
+                "registrationInfo": "报名信息4"
+            },
+          {
+                "registrationInfo": "报名信息5"
+            },
+          {
+                "registrationInfo": "报名信息6"
+            },
+          {
+                "registrationInfo": "报名信息7"
+            }
+       ]
+    }
+}

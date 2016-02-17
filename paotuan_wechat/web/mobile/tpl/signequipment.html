@@ -1,0 +1,35 @@
+<section class="signequipment section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="signinfo"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">签到设备</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+						<div ng-click="bind()"><lable class="ok_btn">完成</lable></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ul>
+		<li ng-repeat="signequipment in bindInfo">
+			<div class="container bg-wight padding-top-7px padding-bottom-7px margin-bottom-5px">
+				<label>
+				<input type="radio" name="signequipment" ng-click="bindsignequipment(signequipment.device_id, signequipment.act_id)">{{signequipment.name}}</input>
+				</label>
+				<div ng-if="signequipment.act_id">
+					<hr>
+					<label class="font-size-12px" style="padding-left: 17px;">已绑定{{signequipment.act_title}}约跑活动</label>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<div class="container">
+		<label class="font-size-12px color-grey">提示:一个签到设备只能绑定一个活动，完成后，所选签到设备会绑定当前活动</label>
+	</div>
+</section>

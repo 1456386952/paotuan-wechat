@@ -1,0 +1,154 @@
+<link href="/bootstrap-slider/bootstrap-slider.min.css" rel="stylesheet">
+<style>
+.list-group-item.container-fluid{
+  padding:4px
+}
+   input[type='file'],select{
+        position: absolute;
+        top: 0;
+        right:80px;
+        height:100%;
+        opacity:0;
+        display:{{registerData.is_reg?'none':'false'}}
+     }
+      select{
+      right:0;
+       width:100%;
+     }
+</style>
+
+
+<div class="container-fluid"  style="padding:4px">
+<h4  class="page-header" style="margin:14px 0" ng-bind="registerData.act_name"></h4>
+ <div class="list-group list-no-topborder animated fadeInRight">
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('passport_name','text','请输入真实姓名',register.passport_name)">
+      <span class="col-xs-3 no-padding text-muted">真实姓名</span><span class="col-xs-9 text-right no-padding" ng-bind='register.passport_name?register.passport_name:"未填写"'></span>
+  </a>
+  <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">性别</span><span class="col-xs-9 text-right no-padding" ng-bind="user_genders[register.user_gender]?user_genders[register.user_gender]:'未设置'"></span>
+   <select ng-if="!registerData.is_reg" ng-selected="register.user_gender" id="user_gender" name="user_gender"  ng-model="register.user_gender" ng-change="submitData('user_gender',register.user_gender,false,false,false)">
+        <option value="1">男</option>
+          <option value="2">女</option>
+            <option value="0">其他</option>
+      </select>
+  </a>
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('nationality','text','请输入国籍',register.nationality)">
+      <span class="col-xs-3 no-padding text-muted">国籍</span><span class="col-xs-9 text-right no-padding" ng-bind='register.nationality?register.nationality:"未填写"'></span>
+  </a>
+    <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">出生日期</span><span class="col-xs-9 text-right no-padding" ng-bind='register.birthday?register.birthday:"未填写"'></span>
+      <input date-component style="position: absolute;top: 0;left:0;height: 100%;width:100%;opacity:0" type="text" date-type="date" id="birthday" date-max="now" value="{{register.birthday}}" ng-model="register.birthday" ng-change="submitData('birthday',register.birthday,false,false,false)">
+   </a>
+     <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">证件类型</span><span class="col-xs-9 text-right no-padding" ng-bind='register.id_type!=null?id_types[register.id_type]:"未填写"'></span>
+      <select  id="id_type" name="id_type"  ng-model="register.id_type" ng-change="submitData('id_type',register.id_type,false,false,false)">
+        <option value="1">身份证</option>
+          <option value="2">护照</option>
+            <option value="3">台胞证</option>
+            <option value="4">港澳通行证</option>
+           <option value="0">其他</option>
+      </select>
+  </a>
+    <a class="list-group-item container-fluid no-border-side" ng-click="showModify('id_number','text','请输入证件号码',register.id_number)">
+      <span class="col-xs-3 no-padding text-muted">证件号码</span><span class="col-xs-9 text-right no-padding" ng-bind='register.id_number?register.id_number:"未填写"'></span>
+  </a>
+    <a class="list-group-item container-fluid no-border-side" ng-click="showModify('user_cell','tel','请输入手机号',register.user_cell)">
+      <span class="col-xs-3 no-padding text-muted">手机号码</span><span class="col-xs-9 text-right no-padding" ng-bind='register.user_cell?register.user_cell:"未填写"'></span>
+  </a>
+    <a class="list-group-item container-fluid no-border-side" ng-click="showModify('user_email','email','请输入邮箱',register.user_email)">
+      <span class="col-xs-3 no-padding text-muted">邮箱</span><span class="col-xs-9 text-right no-padding" ng-bind='register.user_email?register.user_email:"未填写 "'></span>
+  </a>
+   <a class="list-group-item container-fluid no-border-side" ng-click="showModify('address','text','请输入通讯地址',register.address)">
+      <span class="col-xs-3 no-padding text-muted">通讯地址</span><span class="col-xs-9 text-right no-padding" ng-bind='register.address?register.address:"未填写 "'></span>
+  </a>
+   <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">上衣尺寸</span><span class="col-xs-9 text-right no-padding" ng-bind='register.tshirt_size?register.tshirt_size:"未填写"'></span>
+     <select id="tshirt_size" name="tshirt_size"  ng-model="register.tshirt_size" ng-change="submitData('tshirt_size',register.tshirt_size,false,false)">
+        <option value="XXS">XXS</option>
+          <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+           <option value="L">L</option>
+           <option value="XL">XL</option>
+           <option value="XXL">XXL</option>
+           <option value="XXXL">XXXL</option>
+      </select>
+  </a>
+  <fieldset  style="margin:14px 0 0 0 ">
+ <legend class="no-margin" style="font-size: 14px">紧急联系人</legend>
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('emerge_name','text','请输入紧急联系人姓名',register.emerge_name)">
+      <span class="col-xs-3 no-padding text-muted">姓名</span><span class="col-xs-9 text-right no-padding" ng-bind='register.emerge_name?register.emerge_name:"未填写"'></span>
+  </a>
+   <a class="list-group-item container-fluid no-border-side" ng-click="showModify('emerge_ship','text','请输入于紧急联系人的关系',register.emerge_ship)">
+      <span class="col-xs-3 no-padding text-muted">关系</span><span class="col-xs-9 text-right no-padding" ng-bind='register.emerge_ship?register.emerge_ship:"未填写"'></span>
+  </a>
+  
+   <a class="list-group-item container-fluid no-border-side" ng-click="showModify('emerge_cell','tel','请输入紧急联系人的电话',register.emerge_cell)">
+      <span class="col-xs-3 no-padding text-muted">联系人电话</span><span class="col-xs-9 text-right no-padding" ng-bind='register.emerge_cell?register.emerge_cell:"未填写"'></span>
+  </a>
+</fieldset>
+
+  <fieldset  style="margin:14px 0 0 0 ">
+ <legend class="no-margin" style="font-size: 14px">资料证明</legend>
+  <div class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">身份证正面</span>
+      <span class="col-xs-9 text-right no-padding">
+      <img ng-if="register.id_copy" data-pre="{{register.id_copy}}" ng-src="{{register.id_copy}}!mid">
+      <span ng-if="!register.id_copy">未上传</span>
+      </span>
+       <input ng-fileupload='{"isPre":false,"callback":"uploadComplete"}' type="file" name="file[]" id="id_copy" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+  </div>
+   <div class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">身份证反面</span>
+      <span class="col-xs-9 text-right no-padding">
+      <img ng-if="register.id_copy_back" data-pre="{{register.id_copy_back}}" ng-src="{{register.id_copy_back}}!mid">
+      <span ng-if="!register.id_copy_back">未上传</span>
+      </span>
+       <input ng-fileupload='{"isPre":false,"callback":"uploadComplete"}' type="file" name="file[]" id="id_copy_back" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+  </div>
+  <div class="list-group-item container-fluid no-border-side">
+     <input type="hidden" id="health_value" name="health">
+      <span class="col-xs-3 no-padding text-muted">体检证明</span>
+      <span class="col-xs-9 text-right no-padding">
+      <img ng-if="register.medical_report"  data-pre="{{register.medical_report}}" ng-src="{{register.medical_report}}!mid" style="max-height:50px">
+      <span ng-if="!register.medical_report" >未上传</span>
+      </span>
+      <input ng-fileupload='{"isPre":false,"callback":"uploadComplete"}' type="file" name="file[]" id="medical_report" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+  </div>
+   <div class="list-group-item container-fluid no-border-side">
+       <input type="hidden" id="certs_value">
+      <span ng-class="{true:'col-xs-12',false:'col-xs-3'}[register.certs]" class="col-xs-3 no-padding text-muted">完赛证明</span>
+      <span ng-if="register.certs" class="col-xs-12  no-padding container-fluid">
+      <span class="col-xs-4 col-md-2" ng-repeat="cert in register.certs">
+      <img ng-if="cert" data-pre="{{cert.paper_url}}" ng-src="{{cert.paper_url}}!mid" style="max-width: 100%;margin-top: 4px;max-height: 50px">
+      </span>
+      </span>
+       <span class="col-xs-9 text-right no-padding" ng-if="!register.certs">未上传</span>
+       <input ng-fileupload='{"isPre":false,"callback":"uploadComplete"}' style="height:25px" type="file" name="file[]" id="certs" multiple="multiple" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+  </div>
+ 
+</fieldset>
+
+ <fieldset  style="margin:14px 0 0 0 ">
+ <legend class="no-margin" style="font-size: 14px">其他</legend>
+ <a class="list-group-item container-fluid no-border-side" ng-click="showTextAreaModify('medical_history','text','请输入既往病史',register.medical_history)">
+      <span ng-class="{true:'col-xs-12',false:'col-xs-3'}[register.medical_history!=null&&register.medical_history!='']" class="no-padding text-muted">既往病史</span>
+      <pre ng-if="register.medical_history" class="col-xs-12 no-padding no-border">{{register.medical_history}}</pre>
+      <span ng-if="register.medical_history==null||register.medical_history==''" class="col-xs-9 no-padding text-right">未填写</span>
+  </a>
+  
+    <a class="list-group-item container-fluid no-border-side" ng-click="showTextAreaModify('remark','text','请输入备注',register.remark)">
+      <span ng-class="{true:'col-xs-12',false:'col-xs-3'}[register.remark!=null&&register.remark!='']" class="no-padding text-muted">备注</span>
+      <pre ng-if="register.remark" class="col-xs-12 no-padding no-border">{{register.remark}}</pre>
+      <span ng-if="register.remark==null||register.remark==''" class="col-xs-9 no-padding text-right">未填写</span>
+  </a>
+ </fieldset>
+</div>
+
+</div>
+<form  role="form" id="regForm" method="post" style="display: none">
+   <input type="hidden" value="{{register.registerid}}" name="registerid">
+   <input id="sub_data">
+   <textarea rows="" cols="" id="sub_data_textarea"></textarea>
+</form>
+

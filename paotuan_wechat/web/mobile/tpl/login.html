@@ -1,0 +1,31 @@
+<section class="login section" ng-hide="hidelogin">
+	<div class="container login-main">
+		<img src="images/logo.png" class="logo">
+		<h4>跑团助手</h4>
+		<form class="form-horizontal" name="loginForm" ng-submit="submitForm(loginForm.$valid)" novalidate>
+			<div class="login-registe">
+				<img src="images/user-name.png">
+				<input type="text" placeholder="请输入手机号/邮箱" class="color-white width-80" name="account" ng-model="user.account" required>
+			</div>
+			<div class="login-registe">
+				<img src="images/password.png">
+				<input type="password" class="color-white width-80" placeholder="请输密码" name="password" ng-minlength="8" ng-maxlength="16" ng-model="user.password" required>
+			</div>
+			<div>
+				<button type="submit" class="login-btn" ng-disabled="loginForm.$invalid">登录</button>
+				<div>
+					<a ng-if="isWechat" href="http://wechat.runningtogether.net/login/index"><img src="images/wechat_logo.png"></a>
+					<!-- <a><img src="images/qq_logo.png"></a> -->
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div ui-sref="register" class="col-xs-4 foot-font"><a ui-sref="register">用户注册</a></div>
+			<div class="col-xs-4"></div>
+			<div ui-sref="lostpw" class="col-xs-4 foot-font"><a ui-sref="lostpw">忘记密码</a></div>
+		</div>
+	</div>
+	<div class="login-backgurond">
+		<img src="images/background_img.png">
+	</div>
+</sectiom>

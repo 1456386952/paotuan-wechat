@@ -1,0 +1,62 @@
+<style>
+  td{
+   padding:0 !important;
+  }
+</style>
+
+<div ng-if="!islogin" class="container-fluid"  style="padding:8px">
+<form role="form"  method="post">
+<div class="form-group">
+<label for="cell">手机号</label>
+<input type="number" id="cell" name="cell" class="form-control">
+</div>
+
+<div class="form-group">
+<label for="code">验证码</label>
+
+ <div class="input-group">
+      <input type="number" id="code" name="code" class="form-control">
+      <div class="input-group-addon no-padding">
+      <button class="btn btn-danger no-radius" autocomplete="off" style="min-width: 94px" id="code_btn" ng-click="getCode();">获取验证码</button></div>
+    </div>
+</div>
+
+<button class="btn btn-primary btn-block" ng-click="login()" data-loading-text="登录中..." id="loginBtn">登录</button>
+  
+</form>
+</div>
+
+<div ng-if="islogin&&clubs.length==0" class="container-fluid text-center" style="padding-top:14px;padding-bottom:14px">
+暂无数据
+</div>
+<div ng-if="islogin&&clubs.length>0" class="container-fluid" style="padding:8px">
+<h3>总会员数{{total.member_sum}}<small ng-if="total.member_percent!=0"><i class="fa {{total.member_percent>0?'fa-long-arrow-up color-red':'fa-long-arrow-down color-green'}}">{{total.member_percent}}%</i></small></h3>
+<h6>上次数据采集时间:{{total.create_date1}}</h6>
+<h6>数据采集时间:{{total.create_date}}</h6>
+  <table class="table table-bordered table-condensed table-responsive">
+   <thead>
+     <tr>
+       <td>名称</td>
+        <td>会员总数</td>
+        <td>新增打卡次数</td>
+        <td>新增活动数</td>
+        <td>新增报名人数</td>
+         <td>新增签到人数</td>
+     </tr>
+   </thead>
+   <tbody>
+   <tr ng-repeat="club in clubs">
+     <td ng-bind="club.club_name"></td>
+      <td>{{club.member_sum}}<small><i ng-if="club.member_percent!=0" class="fa {{club.member_percent>0?'fa-long-arrow-up color-red':'fa-long-arrow-down color-green'}}">{{club.member_percent}}%</i></small></td>
+      <td ng-bind="club.mileage_count_new"></td>
+      <td ng-bind="club.activity_sum_new"></td>
+       <td ng-bind="club.activity_regs_new"></td>
+       <td ng-bind="club.activity_checkins_new"></td>
+   </tr>
+   </tbody>
+</table>
+</div>
+  <div style="width: 100%;height:20px;text-align: center;background-image: url('/artificial-reason-1.4.3/img/preload.gif');background-position: center;background-repeat: no-repeat;background-size:20px;display: none" id="loadingEl">
+    </div>
+
+

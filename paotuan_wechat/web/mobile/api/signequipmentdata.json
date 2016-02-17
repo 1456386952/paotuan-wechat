@@ -1,0 +1,31 @@
+{
+    "code": 0,
+    "message": {
+        "signequipmentList": [
+            {
+                "signequipmentInfo": "签到设备1",
+                "bindInfo": "顾村公园夜跑团111"
+            },
+            {
+                "signequipmentInfo": "签到设备2",
+                "bindInfo": "顾村公园夜跑团222"
+            },
+            {
+                "signequipmentInfo": "签到设备3",
+                "bindInfo": "顾村公园夜跑团333"
+            },
+            {
+                "signequipmentInfo": "签到设备4",
+                "bindInfo": "顾村公园夜跑团44"
+            },
+            {
+                "signequipmentInfo": "签到设备5",
+                "bindInfo": "顾村公园夜跑团55"
+            },
+            {
+                "signequipmentInfo": "签到设备6",
+                "bindInfo": ""
+            }
+       ]
+    }
+}

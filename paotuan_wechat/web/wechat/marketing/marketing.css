@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+img{
+	max-width: 100%
+}
+
+.btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open>.dropdown-toggle.btn-default {
+background-color:transparent;
+ border-color:transparent;
+}
+
+.modal-sure .btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open>.dropdown-toggle.btn-default {
+background-color:transparent;
+ border-color:#ccc;
+}
+
+.btn-default{
+ background-color:transparent;
+}
+
+.btn-default.disabled,.btn-default.disabled.active, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled:focus, .btn-default.disabled:hover, .btn-default[disabled], .btn-default[disabled].active, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled]:focus, .btn-default[disabled]:hover, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default.active, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:hover{
+	background-color:transparent;
+}
+
+.marketing-font-color{
+	color:#54382b
+}
+
+.container-fluid{
+	padding:0 8px 0 8px
+}
+
+.marketing-modal .modal-content{
+	background-image:url('/image/marketing/club_list.png');
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	background-color: transparent;
+	box-shadow:none;
+	border: none;
+	height: 318px;
+	width: 280px;
+	margin: auto;
+}
+
+.marketing-modal .modal-header {
+min-height: 16.43px;
+padding: 15px;
+border-bottom: 0;
+}

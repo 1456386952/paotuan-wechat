@@ -1,0 +1,120 @@
+<div id="sb-site" >
+	<div class="boxed">
+		<nav class="navbar navbar-static-top navbar-default navbar-header-full yamm" role="navigation" id="header">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="pull-right">
+				<a href="javascript:void(0);" class="sb-icon-navbar sb-toggle-right"><i class="fa fa-bars"></i></a>
+			</div>
+			<div class="navbar-header">
+				<div class="navbar-brand" style="margin-left: 0">跑团助手</div>
+			</div> <!-- navbar-header -->
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+		</nav> 
+
+		<div class="top thumbnail">
+			<img src="{{club.club_bgimage}}" data-pre="{{club.club_bgimage}}" />
+			<h3 class="thumbnail-title" style="display: {{club.slogan_display">{{club.club_slogan}}</h3>
+				</div>
+				<div class="container">
+				<div class="col-md-3 col-sm-6">
+					<div class="content-box box-default animated fadeInUp animation-delay-2">
+						<div class="pull-left"><i class="fa fa-users"></i> {{total}}跑友</div>
+						<div class="pull-right">
+							<img ng-repeat="member in members" src="{{member.face}}" class="thumb-circle" style="width:30px;height:30px">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<div
+						class="content-box box-default animated fadeInUp animation-delay-2">
+						<div class="pull-left">活动</div>
+						<div class="pull-right">
+							<a class="btn btn-link text-muted btn-xs" href="#/activity/new?club_id={{club.clubid}}"><i
+									class="fa fa-pencil-square-o"></i> 发起活动</a>
+						</div>
+						<hr>
+						<div id="carousel-act" class="carousel slide" data-ride="carousel">
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<li data-target="#carousel-act" ng-repeat="act in acts"
+									data-slide-to="{{$index}}" class="{{$index==0?'active':''}}"></li>
+							</ol>
+
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner" role="listbox">
+								<div ng-repeat="act in acts"
+									 class="{{$index==0?'item active':'item'}}">
+									<a href="#/activity/info?act_id={{act.act_id}}">
+										<img src="{{act.act_image}}" style="height:200px;width: 100%">
+										<div class="thumbnail-title text-left">
+											{{act.act_title}}<br> <i class="fa fa-map-marker"></i>
+											{{act.locationObj.location}}<br> <i class="fa fa-clock-o"></i> <small>{{act.act_start_time}}</small>
+										</div>
+									</a>
+								</div>
+							</div>
+
+							<!-- Controls -->
+							<a class="left carousel-control" data-slide="prev"> <span
+									class="fa fa-chevron-left"></span>
+							</a> <a class="right carousel-control" data-slide="next"> <span
+									class="fa fa-chevron-right"></span>
+							</a>
+						</div>
+						<div ng-if="moreact">
+							<br> <a class=""><small>查看更多</small></a>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div
+						class="content-box box-default animated fadeInUp animation-delay-3" style="padding-bottom: 0">
+						<div class="container">
+							<div class="pull-left">跑量</div>
+							<div class="pull-right">
+								<a class="btn btn-link text-muted btn-xs" href="/runners/mileages"><i
+										class="fa fa-check-square-o"></i>我要打卡</a>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs" style="border-left:none;border-right:none">
+									<li class=""><a  data-toggle="tab" aria-expanded="true" style="border-left:none;" ng-click="getChartData(club.club_eng, 'year');">年</a></li>
+									<li class=""><a  ng-click="getChartData(club.club_eng, 'month');"  data-toggle="tab" aria-expanded="false">月</a></li>
+									<li class=""><a  ng-click="getChartData(club.club_eng, 'week');" data-toggle="tab" aria-expanded="false">周</a></li>
+									<li class="active"><a ng-click="getChartData(club.club_eng, 'seven');"  data-toggle="tab" aria-expanded="false">日</a></li>
+								</ul>
+								<div class="tab-content" style="border:none;padding: 0">
+									<div class="tab-pane active" id="chart" style="width:100%;height:185px;display:block;padding: 0;">
+									</div>
+								</div>
+							</div>
+							<br> <a href="/clubs/{{club.club_eng}}/mileages"><small>查看打卡英雄榜</small></a>
+						</div>
+					</div>
+				</div>
+		</div>
+		<input type="hidden" id="club_id" value="{{club.clubid}}"/>
+	</div>
+</div>
+<div class="sb-slidebar sb-right ">
+	<h4 class="slidebar-header no-margin-bottom">欢迎,这里是<span class="headerText"></span>跑团</h4>
+    <ul class="slidebar-menu">
+        <li><a href="#/clubs/home?club_eng={{club.club_eng}}">跑团主页</a></li>
+        <li><a href="portfolio_topbar.html">活动</a></li>
+        <li><a id="mileageLink">跑量</a></li>
+        <li><a >赛事</a></li>
+        <li><a href="/runners/me">我的</a></li>
+    </ul>
+	<h4 class="slidebar-header">分享</h4>
+	<div class="slidebar-social-icons">
+        <a href="#" class="social-icon-ar sm vine"><i class="fa fa-weixin"></i></a>
+    </div>
+</div>
+<div style="background-color:rgba(0,0,0,.6);width:44px;position: fixed;bottom: 4px;right: 4px;color:white;z-index:999;text-align: center;border-radius:4px" >
+	<a href="/wechat/#/activity/checkin" style="color:white">签到</a>
+</div>

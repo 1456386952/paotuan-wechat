@@ -1,0 +1,23 @@
+{
+    "code": 1,
+    "message": {
+        "paotuanInfo": {
+            "act_title": "JR跑团滨江约跑活动",
+            "act_members": "28",
+            "act_yiyine_members": "354",
+            "act_start_date": "06-18",
+            "act_image": "./images/image-1.jpg",
+            "act_start_time": "19:15",
+            "act_end_time": "21:00",
+            "act_regular": "1",
+            "act_regular_date": "每周四举行",
+            "act_price": "80"
+        },
+        "signInfo": {
+            "sign_no": "123456",
+            "sign_image": "images/two-dimension-code.png",
+            "bind_rock": "1",
+            "bind_puipment": "摇一摇设备"
+        }
+    }
+}

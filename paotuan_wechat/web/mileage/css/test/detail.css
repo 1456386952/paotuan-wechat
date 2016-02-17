@@ -1,0 +1,36 @@
+body{background: url(/mileage/img/bg_01.jpg) no-repeat top; background-size: 100%;}
+
+.share{position: fixed; top: 10px; right: 5px; z-index: 999; width: 100px; padding: 8px 0;  background-color: rgba(0, 0, 0, 0.6); text-align: center; color: #FFF; border-radius: 3px; font-weight: bold;}
+.share:before{content:""; position: absolute; top: -16px; right: 12px; width: 0; height: 0; border-width: 8px; border-style: solid; border-color: transparent transparent rgba(0,0,0,0.6) transparent;}
+.share .c{color: #ff807e;}
+
+header{padding-top: 20px;}
+header .team-logo{width: 65px; height: 65px; margin: 0 auto;}
+header .team-logo img{width: 65px; height: 65px; border-radius: 50%;}
+header .team-name{font-size: 20px; color: #fff; text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); margin-top: 10px; text-align: center;}
+
+.content{width: 260px; background-color: rgba(0, 0, 0, 0.6); margin: 20px auto 0; border-radius: 5px; text-align: center; color: #FFF; padding: 15px 0;}
+.content .km{font-size: 80px; line-height: 80px; padding: 10px 0; font-family: 'Oswald', sans-serif;}
+.content .tit{position: relative;}
+.content .tit:after,article .tit:before{content:""; width: 60px; height: 1px; background-color: #fff; position: absolute; top: 5px;}
+.content .tit:after{left: 30px;}
+.content .tit:before{right: 30px;}
+
+.content .run-data{margin: 10px auto 0; width:70%; display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box;}
+.content .run-data li{-webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; color: #fff;}
+.content .run-data li .icon{font-size: 14px;}
+
+.photo{padding: 20px 0;}
+.photo .photo-list{width: 228px; display: block; margin: 0 auto;}
+.photo .photo-list li{width: 65px; height: 65px; float: left; position: relative; margin: 5px;}
+.photo .photo-list li .img{width: 65px; height: 65px; line-height: 65px; position: absolute; top: 0; left: 0; overflow: hidden; background-color: rgba(0, 0, 0, 0.6);}
+.photo .photo-list li .img img{width: 65px;}
+
+.more-content{background-color: #EEE; box-shadow: 0 1px 6px rgba(0,0,0,0.4) inset; padding: 0 20px 80px;}
+.more-content .btn-box{padding: 20px 0; text-align: center;}
+.more-content .btn-box .btn{width: 60px; height: 50px; padding-top: 10px; background: #bdbdbd; text-align: center; text-decoration: none; display: inline-block; border-radius: 50%; color: #FFF; line-height: 14px;}
+.more-content .btn-box .btn i{font-size: 28px;}
+.more-content .btn-box .btn-on i{color: #F00;}
+.more-content .favors-box{border-top: 1px #DDD solid; padding: 5px 0;}
+.more-content .favors-box li{float: left; width: 30px; height: 30px; margin: 5px 5px 0;}
+.more-content .favors-box li img{width: 30px; height: 30px; border-radius: 50%;}

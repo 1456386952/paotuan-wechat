@@ -1,0 +1,60 @@
+<div class="load-main-box" ng-if="loading">
+	<div class="load-box">
+		<h5>拼命加载中...</h5>
+		<div class="logo"></div>
+		<span id="text" loading>iRunner</span>
+	</div>
+</div>
+
+<section class="activity section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ng-click="back()"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">活动列表</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+						<i class="fa fa-search" ui-sref="search"></i>
+						<i class="fa fa-ellipsis-v" ng-click="isTopNavFn()" ng-if="is_admin||isActer"></i>
+						<ul class="top-nav" ng-class="{active: isTopNav}" ng-if="is_admin||isActer">
+							<li ui-sref="newActivity"><i class="fa fa-plus"></i>新建活动</li>
+							<li ng-click="signHelper()"><i class="fa fa-calendar-check-o"></i>签到助手</li>
+						</ul>
+						<div class="top-nav-overlay" ng-class="{active: isTopNav}" ng-click="closeFn()" ng-if="is_admin||isActer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="head" ng-hide="hide">
+		<div class="info container-fluid">
+			<div class="row">
+				<div class="col-xs-4">
+					<a href="" class="image"><img ng-src="{{clubInfo.club_logo}}" alt="" class="img-responsive"></a>
+				</div>
+				<div class="col-xs-8">
+					<div class="text">
+						<div class="title">{{clubInfo.club_name}}</div>
+						<div class="slogan">{{clubInfo.club_slogan}}</div>
+						<div class="total-number"><i class="fa fa-user"></i><span>{{clubInfo.members}}</span>人</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="alert"><i class="fa fa-volume-up"></i>加入本跑团一律需填写真实信息，否则不接受</div>
+	</div> -->
+	<div class="body">
+		<!-- <tabset class="nav clearfix" ng-hide="hide">
+			<tab ng-repeat="tab in tabs" ui-sref="{{tab.src}}" active="tab.active">
+				{{tab.title}}
+				<span class="badge" ng-if="tab.badge">{{actlength}}</span>
+			</tab>
+		</tabset> -->
+		<div ui-view></div>
+	</div>
+	<!-- <button type="button" class="btn btn-red" ng-hide="hide">立即签到</button> -->
+</section>

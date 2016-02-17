@@ -1,0 +1,162 @@
+<div class="xiaoi-loading" ng-if="hide">
+	<div class="i-loading">
+		<i class="fa fa-spinner fa-spin loading-spinner"></i>
+	</div>
+</div>
+
+<section id="launchactivity" class="section">
+	<form  class="form-horizontal" name="launchActivity" ng-submit="submitForm(launchActivity.$valid)" novalidate>
+		<div class="topBar">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-2">
+						<i class="fa fa-chevron-left" ui-sref="index.activity"></i>
+					</div>
+					<div class="col-xs-8">
+						<div class="title text-center">发起活动</div>
+					</div>
+					<div class="col-xs-2">
+						<button type="submit" class="btn btn-one" ng-disabled="hide">发布</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="bg-color-white">
+			<div class="container">
+				<div class="form-group">
+					<label class="col-xs-1 control-label"><i class="icon icon-title"></i></label>
+					<div class="col-xs-11">
+						<input type="text" class="form-control" placeholder="好的标题能激动人心" name="name" ng-model="copyAct.activity.act_title" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-1 control-label"><i class="icon icon-logo"></i></label>
+					<div class="col-xs-11">
+						<div class="upload-logo"></div>
+						<span class="upload-rule">图片比例 1:1</span>
+						<input class="input-file" type="file" name="act_image" file-model="myFile" file-fn="getFile()">
+						<img ng-src="{{imageSrc}}" id="act_image" ng-show="imageSrc">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-1 control-label"><i class="icon icon-time"></i></label>				
+					<div class="col-xs-11">
+						<!-- <div class="time"> -->
+							<!-- <div class="col-xs-6"> -->
+							<span class="alert-text" ng-if="!copyAct.activity.act_start_time">开始时间</span>
+								<input type="datetime-local" class="form-control" name="startTime" ng-model="copyAct.activity.act_start_time" placeholder="开始时间" min="{{minStartDate}}" max="">
+								<!-- <input type="text" class="form-control input-date" ng-model="copyAct.activity.act_start_time" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="{{minStartDate}}" data-autoclose="1" name="startTime" placeholder="开始时间" bs-datepicker> -->
+							<!-- </div> -->
+							<!-- <div class="col-xs-6"> -->
+								<!-- <input type="text" class="form-control input-time" ng-model="copyAct.activity.act_start_time" data-time-format="h:mm" data-length="1" data-minute-step="5" data-arrow-behavior="picker" data-autoclose="1" data-min-time="" placeholder="" bs-timepicker> -->
+							<!-- </div> -->
+						<!-- </div> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-offset-1 col-xs-11">
+						<!-- <div class="time"> -->
+							<!-- <div class="col-xs-6"> -->
+							<span class="alert-text" ng-if="!copyAct.activity.act_end_time">结束时间</span>
+								<input type="datetime-local" class="form-control" name="endTime" ng-model="copyAct.activity.act_end_time" placeholder="结束时间" min="{{minEndDate}}" max="{{maxEndDate}}">
+								<!-- <input type="text" class="form-control input-date" ng-model="copyAct.activity.act_end_time" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="{{minEndDate}}" data-max-date="{{maxEndDate}}" data-autoclose="1" name="endTime" placeholder="结束时间" bs-datepicker> -->
+							<!-- </div> -->
+							<!-- <div class="col-xs-6"> -->
+								<!-- <input type="text" class="form-control input-time" ng-model="copyAct.activity.act_end_time" data-time-format="h:mm" data-length="1" data-minute-step="5" data-arrow-behavior="picker" data-autoclose="1" data-min-time="" placeholder="" bs-timepicker> -->
+							<!-- </div> -->
+						<!-- </div> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-offset-1 col-xs-11">
+						<!-- <div class="time"> -->
+							<!-- <div class="col-xs-6"> -->
+							<span class="alert-text" ng-if="!copyAct.activity.register_end_time">报名截止时间</span>
+								<input type="datetime-local" class="form-control" name="regEndTime" ng-model="copyAct.activity.register_end_time" placeholder="报名截止时间" min="{{minStartDate}}" max="{{maxdate}}">
+								<!-- <input type="text" class="form-control input-date" ng-model="copyAct.activity.register_end_time" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="{{minStartDate}}" data-max-date="{{maxdate}}" data-autoclose="1" name="regEndTime" placeholder="报名截止时间" bs-datepicker> -->
+							<!-- </div> -->
+							<!-- <div class="col-xs-6"> -->
+								<!-- <input type="text" class="form-control input-time" ng-model="copyAct.activity.register_end_time" data-time-format="h:mm" data-length="1" data-minute-step="5" data-arrow-behavior="picker" data-autoclose="1" data-min-time="" placeholder="" bs-timepicker> -->
+							<!-- </div> -->
+						<!-- </div>								 -->
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-1 control-label"><i class="icon icon-map"></i></label>
+					<div class="col-xs-11">
+						<div class="act-addr">
+							<input type="text" class="form-control text-left" placeholder="活动集合地点" ng-click="findlocation()" name="address" ng-model="act.address" actid="{{act.addr_id}}" required>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-1 control-label"><i class="icon icon-title"></i></label>
+					<div class="col-xs-11">
+						<textarea class="form-control" rows="3" name="text" ng-model="copyAct.activity.act_desc" placeholder="详细描述一下你的活动" required></textarea>
+						<!-- <textarea id="editor_id" name="content"></textarea> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<!-- <div class="gain clearfix">
+						<div class="fl-8">
+							<input type="radio" name="signReceive" ng-model="act.checkin_gain" ng-value="0" required>
+							<label class="color-grey">签到积分</label><br>
+						</div>
+						<div class="fl-2">
+							<input type="text" ng-if="act.checkin_gain==0" name="checkinNum" ng-model="act.checkin_num" required>
+						</div>
+					</div> -->
+
+					<div class="checkbox">
+						<div class="gain clearfix">
+							<label class="checkbox-inline fl-8 color-1D2227">
+								<span class="i-checkbox" ng-class="{'active': act.checkin_gain}">
+									<span class="i-checkbox-inner"></span>
+									<input type="checkbox" class="inlineCheckbox i-checkbox-input" name="signReceive" ng-model="act.checkin_gain">
+								</span>
+								签到积分
+							</label>
+							<div class="fl-2">
+								<input type="text" ng-if="act.checkin_gain" name="checkinNum" ng-model="act.checkin_num">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="checkbox">
+						<label class="checkbox-inline col-xs-6 color-1D2227" ng-if="showcycle" ng-click="cycle()">
+							<span class="i-checkbox" ng-class="{'active': act.cycle}">
+								<span class="i-checkbox-inner"></span>
+								<input type="checkbox" class="inlineCheckbox i-checkbox-input" name="actType" ng-model="act.cycle">
+							</span>
+							周期性活动
+						</label>
+						<label class="checkbox-inline col-xs-6 color-1D2227">
+							<span class="i-checkbox" ng-class="{'active': copyAct.activity.rang_limit}">
+								<span class="i-checkbox-inner" ng-click="copyAct.activity.rang_limit=!copyAct.activity.rang_limit"></span>
+								<input type="checkbox" class="inlineCheckbox i-checkbox-input" name="actType" ng-model="copyAct.activity.rang_limit"> 
+							</span>
+							仅限本跑团
+						</label>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="container bg-color-white margin-top-15px">
+				<div class="advanced-settings font-size-16px color-1D2227" ng-click="settings(launchActivity.$valid)">高级设置</div>
+			</div>
+			<div class="act-protocol">
+				<div class="checkbox">
+					<label class="checkbox-inline">
+						<span class="i-checkbox" ng-class="{'active': act.protocol}">
+							<span class="i-checkbox-inner" ng-click="act.protocol=!act.protocol"></span>
+							<input type="checkbox" class="inlineCheckbox i-checkbox-input" name="protocol" vaule="protocol" ng-model="act.protocol" required>
+						</span>
+						<a ng-click="protocol()">跑团助手平台发布协议</a>
+					</label>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>

@@ -1,0 +1,22 @@
+<div class="container" style="padding:4px">
+<h4 class="page-header no-margin-top">跑友</h4>
+		<table class="table">
+		  <thead>
+		    <tr>
+		     <th></th>
+		     <th></th>
+		     <th ng-if="act.need_register">报名时间</th>
+		     <th>签到时间</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		   <tr ng-repeat="user in users" >
+		   <td ><img src="{{user.userInfo.user_face}}" class="thumb-circle"></td>
+		    <td  style="line-height:55px;height:55px"><span class="text-truncate" style="width:5rem">{{user.userInfo.nick_name}}</span></td>
+		     <td ng-if="act.need_register" style="line-height:55px;height:55px">{{user.reg_short_time}}</td>
+		     <td style="line-height:55px;height:55px">{{user.checkin_short_time}}</td>
+		   </tr>
+		  </tbody>
+		</table>
+</div>
+

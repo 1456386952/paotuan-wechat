@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<base href="/wechat/">
+		<title>跑团助手</title>
+		<link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"  rel="stylesheet">
+		<link href="/css/paotuanzhuce/main.min.css?v=6"  rel="stylesheet">
+		<link href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/slidebars/slidebars.min.css" rel="stylesheet">
+		<link href="/css/wechat.min.css?v=8.1.14.2" rel="stylesheet">
+	</head>
+	<body ng-controller="mainController" ng-init="">
+		<div id="sb-site" style="z-index:1000">
+			<nav id="header" class="navbar navbar-default no-margin" style="line-height:49px;background-color:#f3f3f4;border-radius:0;display: none;border-top:none;border-right:none">
+				<div class="navbar-header pull-left">
+					<div  class="navbar-brand " style="padding:5px;">
+						<img ng-if="header.img"   ng-src="{{header.img}}" class="thumb-circle" style="width:40px;height:40px;">
+					</div>
+					<h4 ng-if="in_club" class="header_text text-truncate" ng-bind="header.text" style="max-width:214px;background-image:{{club.club_status == 1 ? 'url(/image/paotuanzhuce/renzheng.png)' : ''}};background-position: right;background-repeat: no-repeat;background-size:15px;padding-right:20px;margin: 0;float: left;line-height:50px;"></h4>
+					<h4 ng-if="in_me" class="header_text text-truncate" ng-bind="header.text" style="max-width:214px;padding-right:20px;margin: 0;float: left;line-height:50px;"></h4>		
+				</div>
+				<a href="javascript:void(0);" class="sb-icon-navbar sb-toggle-right pull-right" style="width:50px"><i class="fa fa-bars" style="margin:0;padding-left:16px;padding-right:16px"></i></a>
+			</nav>
+			<div ng-view  on-finish-render-filters style="overflow-x: hidden;background-color: #f3f3f4"></div>
+		</div>
+
+		<div id="comp_text_length" style="display: none"></div>
+
+		<div class="modal fade bs-example-modal-lg" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content" >
+					<div class="modal-header text-center">
+						<h4 class="modal-title">提示</h4>
+					</div>
+					<div class="modal-body" id="alertContent">
+
+					</div>
+					<div class="modal-footer text-center">
+						<button type="button" class="btn btn-default" id="sureBtn">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-lg" id="confirmModal" tabindex="-1" role="dialog"  aria-hidden="true" >
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content" >
+					<div class="modal-header text-center">
+						<h4 class="modal-title">提示</h4>
+					</div>
+					<div class="modal-body" id="confirmContent">
+
+					</div>
+					<div class="modal-footer text-center">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-danger" id="confirmSureBtn">确定</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="modal fade" id="pro_Modal"  role="dialog" data-backdrop="static">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content" >
+					<div class="modal-header text-center">
+						<h4 class="modal-title" id="pro_modal_title"></h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-danger alert-dismissible animated pulse" role="alert" id="pro_alert" style="display: none">
+						</div>
+						<form>
+							<div class="form-group">
+								<input type="text" class="form-control" id="pro_modal_value" ng-change="proInputChange();" ng-model="ProModal">
+							</div>
+							<div class="input-group" style="display: none" id="bind_code_group">
+								<input type="number" id="bind_code_modal" name="bind_code_modal" class="form-control">
+								<div class="input-group-addon no-padding">
+									<button class="btn btn-danger no-radius no-border" autocomplete="off" style="min-width: 94px" id="code_modal_btn" ng-click="getCode();">获取验证码</button>
+								</div>
+							</div>
+							<div class="form-group" id="value_repeat" style="display: none">
+								<input type="text" class="form-control" id="pro_modal_value_repeat" ng-model="ProModalRepeat" placeholder="请再次输入">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer text-center">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="pro_cancelBtn">取消</button>
+						<button type="button" class="btn btn-primary" id="pro_confirmSureBtn" data-loading-text="处理中..." autocomplete="off">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="pro_textarea_Modal"  role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content" >
+					<div class="modal-header text-center">
+						<h4 class="modal-title" id="pro_textarea_modal_title"></h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-danger alert-dismissible animated pulse" role="alert" id="pro_textarea_alert" style="display: none">
+						</div>
+						<form>
+							<div class="form-group">
+								<textarea rows="4" cols="" class="form-control" id="pro_textarea_modal_value"></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer text-center">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" id=pro_textarea_confirmSureBtn data-loading-text="处理中..." autocomplete="off">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="sb-slidebar sb-right" style="color:#01c66c">
+			<h4 class="slidebar-header no-margin-bottom ng-binding" ng-bind-html="slideMenus.title"></h4>
+			<ul class="slidebar-menu">
+				<li ng-repeat="menu in slideMenus.menus"><a data-type='slidebar' ng-href="{{menu.href}}">{{menu.text}}</a></li>
+				<li><a ng-click="refreshWx();">刷新微信信息</a></li>
+			</ul>
+			<h4 class="slidebar-header">分享</h4>
+			<div class="slidebar-social-icons">
+				<a ng-click="share();" class="social-icon-ar sm vine"><i class="fa fa-weixin"></i></a>
+			</div>
+		</div>
+
+		<div id="shareModal" style="width: 100%;background-color: rgba(0,0,0,0.5);z-index:8888;height:100%;position: fixed;top: 0;left: 0;text-align: center;display:none" onclick="this.style.display = 'none'">
+			<div style="width: 100%;text-align: right;">
+				<img src="/image/share/jt.png">
+			</div>
+			<div>
+				<img src="/image/share/zi.png" style="width:300px">
+			</div>
+		</div>
+		<script id="image-pre-template" type="text/x-handlebars-template"> 
+			<div class="container-fluid upload-pre no-padding">
+			{{#each images}} 
+			<div class="col-xs-3 col-sm-3 col-md-2 col-lg-1 no-padding text-center" style="margin-top:4px;float:left"><img  src="{{pre}}" data-pre="http://xiaoi.b0.upaiyun.com/{{image}}" style="max-width:70px;display:inline-block"/></div>
+			{{/each}}
+			</div>
+		</script>
+		<script src="/js/script.min.js"></script>
+		<script src="main.js?v=9"></script>
+	</body>
+</html>

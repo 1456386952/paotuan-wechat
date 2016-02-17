@@ -1,0 +1,11 @@
+{
+    "code": 1,
+    "message": {
+        "user": {
+            "name": "",
+            "pin": "",
+            "passworld": "",
+            "passworld-again": ""
+        }
+    }
+}

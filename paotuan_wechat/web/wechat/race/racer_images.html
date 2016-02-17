@@ -1,0 +1,31 @@
+<style>
+ span{
+   color: white;
+ }
+</style>
+<div class="container-fluid text-center" ng-if="!loading&&no_data" style="margin-top:44px">
+    暂无照片
+</div>
+
+<div class="container-fluid no-padding" ng-if="!loading&&!no_data" style="margin-top:4px">
+  <div ng-repeat="img in images" class="col-xs-4 col-sm-4 col-md-2 animated fadeInUp animation-delay-{{member.delay}} text-center" style="padding:4px">
+      <img ng-src="{{STATIC_IMG_PRE+'/'+img.img_url}}!wx.cover" data-pre="{{STATIC_IMG_PRE+'/'+img.img_url}}" style="max-width:100%;max-height:100%;display: inline-block;">
+  </div>
+  <div class="col-xs-12">
+  <h4 class="page-header" style="margin:14px 0">索取原照</h4>
+  <form ng-vbt id="email_form">
+     <div class="form-group">
+                <label for="contract_name">邮箱:<span class="i-red-12"> *</span>
+                </label>
+                  <input check-type="required mail" class="form-control" id="email"  placeholder="请填写您的邮箱！" type="email">     
+      </div>
+      <button id="sendEmail_btn" ng-click="sendEmail()" class="btn btn-primary btn-block">提交</button>
+  </form>
+  </div>
+</div>
+
+
+	<div ng-if="loading" style="width: 100%;height:20px;text-align: center;">
+	   <i class="fa fa-spinner fa-spin"></i>
+    </div>
+

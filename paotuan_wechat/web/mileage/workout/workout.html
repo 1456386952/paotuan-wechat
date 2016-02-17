@@ -1,0 +1,56 @@
+
+<link href="css/workout/workout.css" rel="stylesheet" />
+<div class="header">
+  <div class="team-logo animated fadeIn">
+    <img ng-src={{user.avatar}}>
+  </div>
+  <div class="team-name animated fadeInUp">{{user.name}}</div>
+</div>
+<form name="signForm" ng-submit="doSign(signForm)" novalidate>
+  <div class="content-box animated shark">
+    <div class="km">
+      <input type="number" placeholder="0.0" ng-model="sign.distance" id="distance">
+      <span>KM</span>
+    </div>
+    <ul class="date">
+      <li ng-repeat="date in dates" ng-class="sign.date == date.date ? 'on' : ''" ng-click="seleteDate(date.date)">{{date.text}}</li>
+    </ul>
+    <div class="time">
+      <!-- <div class="tit clearfix">
+        <span class="left">持续时间</span>
+        <span class="right">{{timeText}}</span>
+      </div> -->
+      <ul class="time-list">
+        <li>
+          <pt-duration-select min="0" max="35" placeholder="时" type="hours" ng-model="sign.duration.h"></pt-duration-select>
+        </li>
+        <li>
+          <pt-duration-select min="0" max="59" placeholder="分" type="minutes" ng-model="sign.duration.m"></pt-duration-select>
+        </li>
+        <li>
+          <pt-duration-select min="0" max="59" placeholder="秒" type="seconds" ng-model="sign.duration.s"></pt-duration-select>
+        </li>
+      </ul>
+    </div>
+    <ul class="photo-list clearfix" id="images-container">
+      <li class="photo" id="image-cleaner" style="display:none;">
+        <a href="javascript://" class="upload-btn" ng-click="cleanImage()"><i class="ion-ios-minus-empty"></i></a>
+      </li>
+      <li class="photo" id="image-picker">
+        <a href="javascript://" class="upload-btn" ng-click="chooseImage()"><i class="ion-ios-plus-empty"></i></a>
+      </li>
+      <li id="upload-tip"><span>上传运动APP截屏、跑步靓照</span></li>
+    </ul>
+  </div>
+  <!-- <a class="submit-btn" href="javascript://"><i class="ion-android-clipboard"></i> 保存</a> -->
+  <ul class="button-list">
+    <li>
+      <button type="submit" class="btn submit-btn" ng-disabled="isSubmiting"><i class="ion-android-clipboard"></i>
+      {{isSubmiting ? '保存中' : '保存'}}
+      </button>
+    </li>
+    <li>
+      <button type="button" class="btn cancel-btn" ng-disabled="isSubmiting" ng-click="cancel()"><i class="ion-backspace-outline"></i> 取消</button>
+    </li>
+  </ul>
+</form>

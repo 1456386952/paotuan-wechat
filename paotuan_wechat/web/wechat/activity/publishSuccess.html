@@ -1,0 +1,36 @@
+<script src="/js/qrcode.js"></script>
+<div ng-if="act.act_status==1&&act.owner" class="container" on-finish-render-filters>
+<div class="top thumbnail no-margin-bottom" >
+	<img ng-src="http://xiaoi.b0.upaiyun.com/{{act.image}}{{COVER}}" data-pre="http://xiaoi.b0.upaiyun.com/{{act.image}}" />
+	<h5 class="thumbnail-title">{{act.act_title}}</h5>
+</div>
+
+<div class="no-margin" style="padding:0 14px 0 14px"> 
+<label><i class="fa fa-calendar"></i> {{act.date}}</label>
+<label class="pull-right"><i class="fa fa-clock-o"></i> {{act.act_start_time}}-{{act.act_end_time}}</label>
+<br>
+<i class="fa fa-map-marker"></i> {{location.name}}
+</div>
+<hr>
+<div ng-if="act.act_status==1" class="container text-center no-margin-top" style="padding:0 14px">
+<h4 style="color:#000">恭喜您，活动发起成功<a ng-if="act.canCancel" class="btn btn-danger btn-link" ng-click="cancel();">取消活动</a></h4>
+<h4 style="color:#000">活动签到码:<font style="font-size:3rem;color:#0099da;">{{act.check_code}}</font></h4> 
+<a ng-if="!act.isEnd" class="btn btn-ar btn-link" id="reGenCode" ng-click="getCode()">刷新签到码</a>
+<div id="qrcodeContainer"></div>
+<a ng-if="!act.isEnd" class="btn btn-ar btn-link" id="qr_btn" ng-click="getQrCode()">刷新二维码</a>
+</div>
+<div class="container text-center" style="padding:4px 14px">
+<a ng-if="act.act_status==1" class="btn btn-ar btn-success btn-block" ng-click="share();">分享</a>
+<a class="btn btn-ar btn-primary btn-block" href="/wechat/#/activity/info?act_id={{act.act_id}}">查看活动详情</a>
+</div>
+
+</div>
+
+<div ng-if="act.act_status==0">
+<div  class="container" style="height:300px;background-image: url('/image/paotuanzhuce/act_cancel.jpg');background-position: center;background-size:100% 300px ">
+</div>
+<div class="container text-center" style="padding:44px 44px">
+ <a class="btn btn-info btn-block" ng-href="/wechat/#/activity/list?club_eng={{club.club_eng}}">返回活动列表</a>
+</div>
+</div>
+ 

@@ -1,0 +1,96 @@
+<div class="share-alert" ng-if="openShareAlert" ng-click="closeShareAlert()"></div>
+
+<section id="activity-detail" class="section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<!-- <i class="fa fa-chevron-left" ui-sref="activityInfo({act_id: actId})"></i> -->
+					<i class="fa fa-chevron-left" ng-click="goActInfo()"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center menu-scan">
+						活动详情
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+						<i class="fa fa-paper-plane share-btn" ng-click="openShare()"></i>
+						<i class="fa fa-ellipsis-v" ng-click="isTopNavFn()" ng-if="is_admin||isActer"></i>
+						<ul class="top-nav" ng-class="{active: isTopNav}" ng-if="is_admin||isActer">
+							<li ng-click="actAlert(); copyact()"><i class="icon icon-cp"></i>复制</li>
+							<li ng-click="actAlert(); editact()"><i class="icon icon-edit"></i>编辑</li>
+							<li ng-click="cancelact()"><i class="icon icon-cancel"></i>取消活动</li>
+						</ul>
+						<div class="top-nav-overlay" ng-class="{active: isTopNav}" ng-click="closeFn()" ng-if="is_admin||isActer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<dl class="activity-list dl-horizontal margin-bottom-10">
+		<dt>
+			<a href=""><img ng-src="{{actInfo.act_image}}" alt="" class="img-responsive"></a>
+		</dt>
+		<dd>
+			<div class="text">
+				<span class="regular" ng-if="actInfo.recurring_type&&actInfo.recurring_type=='1'">[定期]</span>
+				<span class="title">{{actInfo.act_title}}</span>
+				<span class="badge" ng-if="actInfo.register_fee&&actInfo.register_fee!='0.00'"></span>
+				<span class="limit" ng-if="actInfo.rang_limit==1">限</span>
+			</div>
+			<div class="number">
+				<i class="fa fa-user"></i>{{actInfo.members}}人
+				<span ng-class="{'praise': isPraise}" ng-click="praise()"><i class="fa fa-thumbs-o-up"></i><span>{{actInfo.act_praise}}</span></span>
+			</div>
+			<div class="time">{{actInfo.check_time}}</div>
+			<div class="start-time">{{actInfo.recurring_type_time}}</div>
+		</dd>
+	</dl>
+
+	<div class="act-project margin-bottom-10" ng-if="project.length">
+		<h4>活动项目</h4>
+		<div class="con">
+			<ul>
+				<li ng-repeat="item in project">
+					<h5><span>{{item.project_name=='0'?'默认':item.project_name}}</span> <span class="limit">积分</span></h5>
+					<span class="txt">数量 <span>{{item.project_num=='10000'?'无限制':item.project_num}}</span></span>
+					<!-- <span class="txt">报名积分 <span>{{item.reg_gain!=0?item.reg_gain:(item.reg_consume!=0?item.reg_consume:0)}}</span></span><br> -->
+					<!-- <span class="txt">签到积分 <span>{{item.checkin_gain!=0?item.checkin_gain:(item.checkin_consume!=0?item.checkin_consume:0)}}</span></span> -->
+					<!-- <span class="txt">失约积分 <span>{{item.meet_consume}}</span></span> -->
+					<span class="price" ng-if="item.price!=0">￥<span>{{item.price}}</span></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="body">
+		<h4>{{actInfo.act_title}}</h4>
+		<div class="desc" ng-bind-html="actInfo.act_desc"></div>
+		<!-- <div class="desc" id="act_desc"></div> -->
+		<span><img ng-src="{{actInfo.bg_image}}" alt="" class="img-responsive"></span>
+	</div>
+	
+	<div id="activity-runner" ng-controller="RunnerlistController">
+		<div class="content isreg">
+			<h4>已报名跑友 <span class="num"><span>{{runners.length}}</span>人</span></h4>
+			<div ng-include="'./tpl/activity.runnerlist.reg.html'"></div>
+			<!-- <div class="view-more">展开更多 <i class="fa fa-chevron-down"></i></div> -->
+		</div>
+		<div class="content issign">
+			<h4>已签到跑友 <span class="num"><span>{{sign .length}}</span>人</span></h4>
+			<div ng-include="'./tpl/activity.runnerlist.sign.html'"></div>
+			<!-- <div class="view-more">展开更多 <i class="fa fa-chevron-down"></i></div> -->
+		</div>
+	</div>
+
+	<button ng-if="inreg&&!cancel||incheck" type="button" class="btn" ng-class="{true: 'btn-grey', false: 'btn-red'}[isChecked]" ng-disabled="isChecked" ng-click="joinProject()">
+		{{btnText}}
+	</button>
+
+	<div class="btn-status" ng-if="cancel">
+		<button type="button" class="btn btn-grey" ng-disabled="cancel">已报名</button>
+		<button type="button" class="btn btn-red" ng-click="cancelFn()">{{btnText2}}</button>
+	</div>
+
+</section>

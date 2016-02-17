@@ -1,0 +1,18 @@
+<div class="alert text-center ng-hide" ng-show="sign.length==0">暂无签到!</div>
+
+<ul class="runner">
+	<li ng-repeat="item in sign" ng-click="runnerinfo(item.uid)">
+		<dl class="runner-list dl-horizontal">
+			<dt>
+				<a href=""><img ng-src="{{item.user_face}}" alt="" class="img-responsive"></a>
+				<i class="icon-arrow" ng-if="item.icon"></i>	
+			</dt>
+			<dd>
+				<div class="txt">
+					<span class="name">{{item.nick_name}}</span>
+					<span class="time">{{item.diff}}</span>
+				</div>
+			</dd>
+		</dl>
+	</li>
+</ul>

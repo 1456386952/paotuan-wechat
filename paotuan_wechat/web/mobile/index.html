@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App" class="height">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>跑团助手</title>
+
+<!-- build:css ./styles/main.min.css -->	
+<link rel="stylesheet" href="./styles/main.min.css">
+<!-- endbuild -->
+
+</head>
+<body ng-controller="AppController"  class="height">
+
+<div ui-view class="height" ng-class="{'scrollable': pageClass}"></div>
+
+<!-- build:js ./scripts/main.min.js -->	
+<script src="http://map.qq.com/api/js?v=2.exp&key=C36BZ-WNZRV-6EVPM-UD4MA-JDH45-GAB7P&callback=init"></script>
+<script src="./scripts/angular/angular.js"></script>
+<script src="./scripts/angular-ui/angular-animate.js"></script>
+<script src="./scripts/angular-ui/angular-sanitize.js"></script>
+<script src="./scripts/angular-ui/angular-ui-router.js"></script>
+<script src="./scripts/angular-ui/loading-bar.js"></script>
+<script src="./scripts/angular-ui/ngDialog.js"></script>
+<script src="./scripts/angular-ui/angular-touch.js"></script>
+<script src="./scripts/angular-ui/angular-strap.js"></script>
+<script src="./scripts/angular-ui/angular-strap.tpl.js"></script>
+<script src="./scripts/custom/moment.js"></script>
+<script src="./scripts/custom/store.js"></script>
+<script src="./scripts/custom/zepto.js"></script>
+<script src="./scripts/custom/jweixin-1.0.0.js"></script>
+<script src="./scripts/custom/wxconfig.js"></script>
+<script src="./scripts/custom/loginModule.js"></script>
+<script src="./scripts/custom/activityModule.js"></script>
+<script src="./scripts/custom/app.js"></script>
+<script src="./scripts/custom/services.js"></script>
+<script src="./scripts/custom/controllers.js"></script>
+<script src="./scripts/custom/directives.js"></script>
+<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js" type="text/ecmascript"></script>
+<!-- <script charset="utf-8" src="kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+<link rel="stylesheet" href="kindeditor/themes/default/default.css" /> -->
+<!-- endbuild -->
+</body>
+</html>

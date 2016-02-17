@@ -1,0 +1,96 @@
+
+<link href="css/user/user.css" rel="stylesheet" />
+<div ng-click="hideMore()">
+  <header>
+    <div class="team-logo animated fadeIn">
+      <img ng-src="{{user.avatar.indexOf('upaiyun')>0 ? user.avatar+'!thumb240' : user.avatar}}" ng-click="previewAvatar()">
+    </div>
+    <div class="team-name animated fadeInUp">{{user.name}}</div>
+
+  <!-- 帮助 链接 图片 需要修改 -->
+    <div class="team-help animated fadeIn">
+        <a href="#/team/{{currentCrew.domain}}?id={{_crew.domain}}">
+          <img ng-src="http://prod-img-mi-paotuan.b0.upaiyun.com/uploads/crew/41/62/416217fe5cc548ae04029f3f3ba7f288.jpg" class="logo" />
+<!--             <img ng-src="{{user.avatar.indexOf('upaiyun')>0 ? user.avatar+'!thumb240' : user.avatar}}" ng-click="previewAvatar()"> -->
+        </a>
+    </div>
+  <!-- --end-- -->
+  </header>
+  <ul class="team-number-list">
+    <li>
+      <i class="icon ion-ios-list-outline"></i>
+      <p class="num">{{summary.times}}</p>
+      <p class="text">总次数</p>
+    </li>
+    <li>
+      <a href="/app/#/user/{{currentCrew.domain}}/{{user.id}}/trackerlogs">
+        <i class="icon ion-ios-speedometer-outline"></i>
+        <p class="num">{{summary.kms}}</p>
+        <p class="text">总里程</p>
+      </a>
+    </li>
+  </ul>
+  <div class="content-box">
+    <div class="content-title"><i class="ion-android-clipboard"></i> 最近打卡</div>
+    <article class="sign-box animated fadeInUp" ng-repeat="(trackerIndex, tracker) in trackers">
+      <div class="sign-content">
+        <a href="#/detail/{{currentCrew.domain}}/{{tracker.id}}">
+          <ul class="run-data">
+            <li>
+              <strong>{{tracker.distance}}</strong>
+              <span>KM</span>
+            </li>
+            <li class="center">
+              <i class="icon ion-ios-timer-outline"></i>
+              <span>{{tracker.average}}/KM</span>
+            </li>
+            <li>
+              <i class="icon ion-ios-stopwatch-outline"></i>
+              <span>{{tracker.duration}}</span>
+            </li>
+          </ul>
+        </a>
+        <ul class="photo-list">
+          <li ng-repeat="photo in tracker.photos">
+            <a class="img" href="javascript://" ng-click="previewImage(trackerIndex, photo)">
+              <img class="animated zoomIn" ng-src="{{photo.indexOf('upaiyun')>0 ? photo+'!thumb120' : photo}}" />
+            </a>
+          </li>
+        </ul>
+        <ul class="likes clearfix" ng-show="tracker.favors.length != 0">
+          <li ng-show="$index < 8" ng-repeat="favor in tracker.favors">
+            <pt-avatar avatar="{{favor.user.avatar}}" thumb="60"></pt-avatar>
+          </li>
+          <li class="number" ng-show="tracker.favors.length > 8">{{tracker.favors.length}}</li>
+        </ul>
+      </div>
+      <div class="time">{{tracker.executed_at}}</div>
+      <div class="more" ng-show="loggedInUser.id == user.id">
+        <i class="icon-more" ng-click="showMore(tracker.id)"></i>
+        <div class="more-content" id="more_content_{{tracker.id}}">
+          <button ng-click="deleteTracker(tracker.id, $event)"> <i class="ion-trash-a"></i>删除</button>
+        </div>
+      </div>
+    </article>
+    <div class="more-box">
+      <a href="/app/#/user/{{currentCrew.domain}}/{{user.id}}/trackerlogs" ng-show="trackers.length >= 3">查看更多</a>
+      <p ng-show="trackers.length == 0">暂无打卡</p>
+    </div>
+  </div>
+  <div class="content-box content-last">
+    <div class="content-title"><i class="ion-android-people"></i> 跑团</div>
+    <article class="team-box animated fadeInUp" ng-repeat="_crew in crews">
+      <div class="team-content">
+        <a href="#/team/{{currentCrew.domain}}?id={{_crew.domain}}">
+          <img ng-src="{{_crew.logo}}" class="logo" />
+          <div class="clearfix">
+            <strong class="left">{{_crew.name}}</strong>
+            <span class="right"><i class="icon ion-ios-people"></i> {{_crew.member_count}}</span>
+          </div>
+          <p>{{_crew.desc}}</p>
+        </a>
+      </div>
+    </article>
+  </div>
+</div>
+<pt-tab-bar></pt-tab-bar>

@@ -1,0 +1,112 @@
+<style>
+  .panel-title{
+    position: relative;
+  }
+  .panel-title:after{
+   content:'\f107';
+   position: absolute;
+   top:0;
+   right:10px
+  }
+</style>
+
+<h4 ng-if="order.order_title" class="page-header" style="margin:14px 0" ng-bind="order.order_title"></h4>
+
+<div  class="container-fluid no-padding">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+  <div class="panel panel-default" ng-repeat="item in order.items">
+    <div class="panel-heading" role="tab">
+      <h4 class="panel-title">
+        <a role="button" class="btn-block" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{item.itemid}}" aria-expanded="true" ng-bind="item.item_name">
+        </a>
+      </h4>
+    </div>
+    <div id="collapse_{{item.itemid}}" class="panel-collapse collapse {{$index==0?'in':''}}"  role="tabpanel">
+      <div class="panel-body no-padding">
+         <ul class="list-unstyled text-muted">
+  			<li class="container-fluid">
+  			<div class="col-xs-8 no-padding"  ng-if="item.hotel_type">
+			<i class="fa fa-coffee main-color"></i> 
+			<span ng-bind="item.hotel_type"></span>
+			</div>
+			<div class="col-xs-8 no-padding"  ng-if="item.mileage">
+			<i class="fa fa-paper-plane-o main-color"></i> 
+			<span ng-bind="item.mileage+'KM'"></span>
+			</div>
+			
+			<div class="col-xs-4 no-padding"> 
+			<i class="fa fa-jpy main-color"></i> <span ng-bind="item.item_price+(item.item_num==1?'':('X'+item.item_num))")></span>
+			</div>
+  			</li>
+  			<li class=" container-fluid" ng-if="item.start_time">
+  			   <i class="fa fa-clock-o main-color"></i> 开始时间:{{item.start_time}}
+  			</li>
+  			<li class=" container-fluid" ng-if="item.close_time">
+  			   <i class="fa fa-history main-color"></i> 关门时间:{{item.close_time}}
+  			</li>
+  			
+  			<li class=" container-fluid">
+			<div class="col-xs-8 no-padding" ng-if="item.address">
+			<i class="fa fa-map-marker main-color"></i> &nbsp;<span ng-bind="item.address"></span>
+			</div>
+			<div class="col-xs-4 no-padding" ng-if="item.distance" ng-bind="'距起点:'+item.distance+'m'"> 
+			</div>
+			</li>
+			  <li class="container-fluid" ng-if="item.item_time">
+  				<i class="fa fa-clock-o main-color"></i> <span ng-bind="item.item_time"></span>
+  			</li>
+  		   <li class="container-fluid" ng-if="item.cell">
+  				<i class="fa fa-phone main-color"></i> <span ng-bind="item.cell"></span>
+  			</li>
+  			  <li class="container-fluid" ng-if="!item.is_reg">
+  				<hr class="dotted">
+  			</li>
+  			  <li class="container-fluid" ng-if="!item.is_reg">
+  				<i class="fa fa-user main-color"></i> {{item.passport_name}}
+  			</li>
+  			<li class="container-fluid" ng-if="!item.is_reg">
+  				<i class="fa fa-mobile main-color" style="font-size:18px"></i> {{item.user_cell}}
+  			</li>
+  			<li class="container-fluid" ng-if="item.is_reg">
+  				<a class="btn btn-block btn-primary" ng-href="#/race/registerinfo?channel_id={{item.channelid}}">报名信息</a>
+  			</li>
+		</ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="col-xs-12" style="min-height:50px">
+</div>
+<div class=" no-margin text-center footer no-padding">
+			<label ng-if="order.done" class="footer-text-label">已完成</label>
+			<label ng-if="order.need_pay" class="footer-text-label" ng-bind="'￥ '+order.amount">123</label>
+			<label ng-if="order.cancel" class="footer-text-label">已取消</label>
+			<label ng-if="order.delete" class="footer-text-label">已删除</label>
+			<div class="pull-right" style="display: inline-block;">
+								<button
+								    ng-if="order.need_pay"
+									class="btn btn-primary footer-btn-plain" data-loading-text="取消中..." 
+									ng-click="cancelOrder()" id="cancel_reg_btn"
+									autocomplete="off">取消</button>
+									
+								<button
+								    ng-if="order.need_pay"
+									class="btn btn-primary footer-btn-plain" data-loading-text="报名中..."
+									ng-click="pay()" id="reg_btn"
+									autocomplete="off">支付</button>
+						   </div>
+</div>
+</div>
+<form ng-if="order.need_pay" action="/wxpay/index?showwxpaytitle=1" style="display: none" method="post" id="payForm">
+    <input type="text" name="openid" value="{{openid}}">
+    <input type="text" name="uid" value="{{order.uid}}">
+    <input type="text" name="goodDesc" value="{{order.order_title}}"  id="gd">
+    <input type="text" name="orderid" id="orderid" value="{{order.orderid}}">
+    <input type="text" name="total_fee" value="{{order.actual_payment*100}}"  id="tf">
+    <input type="text" name="hash" id="hash" value="{{hash}}">
+    <input type="text" name="expire_time" value="{{order.expire_time}}">
+ </form>
+

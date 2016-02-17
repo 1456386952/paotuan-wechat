@@ -1,0 +1,91 @@
+<section class="search section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="index.activity"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">跑团助手</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+						<i class="fa fa-ellipsis-v" ng-click="isTopNav=!isTopNav" ng-show="exportemailbtnflag"></i>
+						<ul class="top-nav" ng-class="{active: isTopNav}" ng-if="is_admin||isActer">
+							<li ng-click='exportemail()'><i class="fa fa-envelope-o"></i></i>导出邮箱</li>
+						</ul>
+						<div class="top-nav-overlay" ng-class="{active: isTopNav}" ng-click="closeFn()" ng-if="is_admin||isActer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container search-main">
+		<form name="searchForm" ng-submit="submitForm(searchForm.$valid)" novalidate>
+			<div>
+				<input type="text" ng-focus="onfocus()" class="search-text" placeholder="请输入您想查找的活动名称" name="search" ng-model="name" required>
+				<button class="searchbtn" type="submit" ng-disabled="searchForm.$invalid" ng-click="searchByName()">搜索</button>
+			</div>
+		</form>
+		<div class="search-more-condition" ng-show="moredisplayflag">
+			<h5>更多搜索条件</h5>
+			<div class="row">
+				<div class="col-xs-4">
+					<a class="btn btn-default search-more-condition-btn" role="button" ng-click="searchAllActivity('all')">全部</a>
+				</div>
+				<div class="col-xs-4">
+					<a class="btn btn-default search-more-condition-btn" role="button" ng-click="searchAllActivity('incheck')">正在报名</a>
+				</div>
+				<div class="col-xs-4">
+					<a class="btn btn-default search-more-condition-btn" role="button" ng-click="searchAllActivity('inregister')">正在签到</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<a class="btn btn-default search-more-condition-btn" role="button" ng-click="searchAllActivity('nostart')">尚未开始</a>
+				</div>
+				<div class="col-xs-4">
+					<a class="btn btn-default search-more-condition-btn" role="button" ng-click="searchAllActivity('inend')">已结束</a>
+				</div>
+				<div class="col-xs-4">
+					<a class="btn btn-default search-more-condition-btn" role="button" ng-click="searchAllActivity('iscancel')">已取消</a>
+				</div>
+			</div>
+		</div>
+		<div ng-show="searchbyadddisplayflag">
+			<h5>按活动地址搜索</h5>
+			<div class="col-xs-12 search-add">
+				<ul>
+					<li  ng-repeat="add_info in addInfoList">
+						<a class="btn btn-default search-more-condition-btn" role="button" ng-click="searchByAdd({{add_info.id}})">{{add_info.location}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- 搜索全部 -->
+		<!-- <section  ng-if="searchByAllflag"  class="activity section" ng-include="'./tpl/index.activity.html'"></section> -->
+		<!-- 按地址 名称 普通条件搜索后跑团显示 -->
+		<section class="activity section margin-top-7px">
+			<div ng-if="searchByNameflag" class="act-list active">
+				<ul>
+					<li class="margin-bottom-10" ng-repeat="item in activityList | orderBy: 'check_time'" ng-click="actInfo(item, item.act_id, item.type)">
+						<dl class="activity-list dl-horizontal">
+							<dt>
+								<a><img ng-src="{{item.act_image}}" alt="" class="img-responsive"></a>
+							</dt>
+							<dd>
+								<div class="text">
+									<span class="regular" ng-if="item.recurring_type&&item.recurring_type=='1'">[定期]</span>
+									<span class="title">{{item.act_title}}</span>
+									<span class="badge" ng-if="item.register_fee&&item.register_fee!='0.00'">s</span>
+								</div>
+								<div class="number"><i class="fa fa-user"></i>{{item.members}}人</div>
+								<div class="time">{{item.check_time}}</div>
+							</dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</div>
+</section>

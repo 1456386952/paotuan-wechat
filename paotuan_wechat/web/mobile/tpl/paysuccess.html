@@ -1,0 +1,51 @@
+<section class="section paysuccess">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="index.activity"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">订单详细</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-align-center">
+		<div class="paylogo_bg">
+			<img class="paylogo" src="images/paysuccess.png">
+		</div>
+	</div>
+	<div class="bg-wight padding-bottom-7px margin-top-10px">
+		<div class="container font-size-15px">
+			<img class="margin-top-10px margin-bottom-10px" src="images/icon-project.png">
+			<span>{{act_title}}</span>
+		</div>
+		<hr class="margin-top-bottom-5px">
+		<div class="container margin-left-55px">
+			<ul ng-repeat="item in reg_info">
+				<lable>{{item.project_name}}</lable>
+				<lable class="float-right">￥ <span>{{item.price}}</span></lable>
+				<hr class="margin-top-bottom-7px">
+			</ul>
+			<lable class="float-right">总价：￥ <span>{{total}}</span></lable>
+		</div>
+	</div>
+	</div>
+<!-- 	<div class="container bg-wight margin-top-10px padding-top-bottom-10px">
+		<ul>
+			<li ng-repeat="item in user_info">
+				<span>{{item.title}}</span>：
+				<span>{{item.value}}</span>
+			</li>
+		</ul>
+	</div> -->
+	<div class="text-center margin-top-10px">
+		<button type="button" class="button" ui-sref="activityDetail({act_id: actId})">返回活动页</button>
+		<button type="button" class="button" ui-sref="index.activity">进入我的活动列表</button>
+	</div>
+</sectiom>

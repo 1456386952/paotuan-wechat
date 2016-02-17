@@ -1,0 +1,40 @@
+
+<footer class="tabbar-content">
+  <ul class="tabbar-list" ng-show="loggedInUser != null">
+    <li>
+      <a href="#/team/{{currentCrew.domain}}">
+        <i class="icon ion-ios-people"></i>
+        <p>跑团</p>
+      </a>
+    </li>
+    <li>
+      <a ng-show="isInCrew" href="#/workout/{{currentCrew.domain}}" class="daka">
+        <i class="icon ion-android-clipboard"></i>
+        <p>打卡</p>
+      </a>
+
+      <a ng-hide="isInCrew" ng-click="joinCrew(currentCrew.domain);" class="daka">
+        <i class="icon ion-android-clipboard"></i>
+        <p>加入</p>
+      </a>
+    </li>
+    <li>
+      <a href="#/user/{{currentCrew.domain}}/{{loggedInUser.id}}">
+        <i class="icon ion-android-contact"></i>
+        <p>我的</p>
+      </a>
+      <!-- <a ng-show="loggedInUser == null" ng-click="login(currentCrew.domain)">
+        <i class="icon ion-android-contact"></i>
+        <p>登录</p>
+      </a> -->
+    </li>
+  </ul>
+  <ul class="tabbar-list" ng-show="loggedInUser == null">
+    <li class="login">
+      <a ng-click="login(currentCrew.domain)">
+        <i class="icon ion-android-contact"></i>
+        <span>打卡</span>
+      </a>
+    </li>
+  </ul>
+</footer>

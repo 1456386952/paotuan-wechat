@@ -1,0 +1,42 @@
+
+<link href="css/team/team.css" rel="stylesheet" />
+<div data-ng-controller="TopCtrl" data-ng-init="init()">
+  <header class="header">
+    <div class="team-logo animated fadeIn">
+      <img ng-src="{{crew.logo}}">
+    </div>
+    <div class="team-name animated fadeInUp">{{crew.name}}</div>
+    <div class="team-desc animated fadeInUp">{{crew.desc}}</div>
+  </header>
+  <div class="content-box user-top-box content-last">
+    <ul class="switch-box">
+      <li ng-class="specId == 'daily' ? 'current' : ''"><a href="/maileage/#/team/{{crew.domain}}/top/daily">日</a></li>
+      <li ng-class="specId == 'weekly' ? 'current' : ''"><a href="/maileage/#/team/{{crew.domain}}/top/weekly">周</a></li>
+      <li ng-class="specId == 'monthly' ? 'current' : ''"><a href="/maileage/#/team/{{crew.domain}}/top/monthly">月</a></li>
+    </ul>
+    <article class="user-top-list" ng-repeat="top in tops">
+      <div class="top-box">
+        <i ng-class="$index <= 2 ? 'number top-number animated bounceIn' : 'number animated fadeIn'">{{$index+1}}</i> 
+        <a href="#/user/{{crew.domain}}/{{top.user.id}}" class="user-logo animated fadeIn">
+          <pt-avatar avatar="{{top.user.avatar}}" thumb="120"></pt-avatar>
+        </a>
+        <a href="#/user/{{crew.domain}}/{{top.user.id}}/trackerlogs">
+          <div class="top clearfix">
+            <span class="text left">{{top.user.name}}</span>
+            <span class="text right">{{top.kms | number: 2}}</span>
+          </div>
+          <div class="progress-box">
+            <div class="progress"><i style="width: {{top.pw}}%;" class="fadeInLeft animated"></i></div>
+          </div>
+        </a>
+      </div>
+    </article>
+    <div class="user-list-none" ng-show="pageLoading">
+      <p><i class="ion-load-d"></i>加载中……</p>
+    </div>
+    <div class="user-list-none" ng-show="!pageLoading && tops.length == 0">
+      <p>暂无数据</p>
+    </div>
+  </div>
+</div>
+<pt-tab-bar></pt-tab-bar>

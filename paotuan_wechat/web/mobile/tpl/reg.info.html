@@ -1,0 +1,108 @@
+<div class="xiaoi-loading" ng-if="hide">
+	<div class="i-loading">
+		<i class="fa fa-spinner fa-spin loading-spinner"></i>
+	</div>
+</div>
+
+<section id="reg-info" class="section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="activityDetail({act_id: actId})"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">报名信息</div>
+				</div>
+				<div class="col-xs-2">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <dl class="activity-list dl-horizontal margin-bottom-10">
+		<dt>
+			<a href=""><img ng-src="{{actInfo.act_image}}" alt="" class="img-responsive"></a>
+		</dt>
+		<dd>
+			<div class="text">
+				<span class="regular" ng-if="actInfo.recurring_type&&actInfo.recurring_type=='1'">[定期]</span>
+				<span class="title">{{actInfo.act_title}}</span>
+				<span class="badge" ng-if="actInfo.register_fee&&actInfo.register_fee!='0.00'"></span>
+			</div>
+			<div class="number">
+				<i class="fa fa-user"></i>{{actInfo.members}}人
+				<span ng-class="{'praise': isPraise}" ng-click="praise()"><i class="fa fa-thumbs-o-up"></i><span>{{actInfo.act_praise}}</span></span>
+			</div>
+			<div class="time">{{actInfo.check_time}}</div>
+			<div class="start-time">{{actInfo.recurring_type_time}}</div>
+		</dd>
+	</dl> -->
+	<div class="act-project margin-bottom-10">
+		<h4>{{actInfo.act_title}}</h4>
+		<div class="con">
+			<ul>
+				<li ng-repeat="item in reg_info">
+					<h5>{{item.project_name}}</h5>
+					<span class="price">￥<span>{{item.price}}</span></span>
+				</li>
+			</ul>
+		</div>
+		<div class="total">总价：￥ <span>{{total}}</span></div>
+	</div>
+	<div class="body">
+		<form name="reginfo" ng-submit="submitForm(reginfo.$valid)" id="regInfo_form">
+			<!-- <div class="form-group" ng-repeat="item in regInfo">
+				<label for="">{{item.col_title}}</label>
+				<input type="text" class="form-control" id="{{item.col_name}}" placeholder="" name="{{item.col_name}}">
+			</div> -->
+			<!--<div id="regInfo">
+
+			</div> -->
+			<div class="display-none margin-top-10px"  id="file0">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile0" file-fn="getFile0()">
+			</div>
+			<div class="display-none margin-top-10px" id="file1">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile1" file-fn="getFile1()">
+			</div>
+			<div class="display-none margin-top-10px" id="file2">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile2" file-fn="getFile2()">
+			</div>
+			<div class="display-none margin-top-10px" id="file3">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile3" file-fn="getFile3()">
+			</div>
+			<div class="display-none margin-top-10px" id="file4">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile4" file-fn="getFile4()">
+			</div>
+			<div class="display-none margin-top-10px" id="file5">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile5" file-fn="getFile5()">
+			</div>
+			<div class="display-none margin-top-10px" id="file6">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile6" file-fn="getFile6()">
+			</div>
+			<div class="display-none margin-top-10px" id="file7">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile7" file-fn="getFile7()">
+			</div>
+			<div class="display-none margin-top-10px" id="file8">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile8" file-fn="getFile8()">
+			</div>
+			<div class="display-none margin-top-10px" id="file9">
+				<label name="file"></label>
+				<input type="file" class="form-control margin-top-5px" file-model="myFile9" file-fn="getFile9()">
+			</div>
+				<button type="submit" class="btn btn-red margin-top-5px margin-top-40px" ng-disabled="reginfo.$invalid||hide">提交</button>
+				<div class="margin-top-5px">
+					<small class="color-xiaoai">*以上报名信息皆为必填项目</small>
+				</div>
+		</form>
+	</div>
+</section>

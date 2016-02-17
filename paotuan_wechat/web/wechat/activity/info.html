@@ -1,0 +1,173 @@
+﻿<style>
+  img{
+   max-width: 100%
+  }
+</style>
+<link href="/datetime/datetime.min.css" rel="stylesheet" type="text/css">
+<script src="/datetime/datetime.js" type="text/javascript"></script>
+<script src="/js/vbt.min.js" type="text/javascript"></script>
+<div ng-if="act.act_status==1">
+<div ng-show="!showReg" class="container" style="overflow-x:hidden;">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="carousel-act" class="carousel carousel-images slide" data-ride="carousel">
+                        <ol class="carousel-indicators" ng-if="hasImage&&act.imagesCount>1">
+								<li data-target="#carousel-act" ng-repeat="image in act.images"
+									data-slide-to="{{$index}}" class="{{$index==0?'active':''}}"></li>
+							</ol>
+							<div class="carousel-inner" role="listbox">
+								<div ng-repeat="image in act.images"
+									class="{{$index==0?'item active':'item'}}">
+									<img ng-src="http://xiaoi.b0.upaiyun.com/{{image+COVER}}"
+										style="width: 100%;max-height: 200px">
+								</div>
+							</div>
+                      <a ng-if="hasImage&&act.imagesCount>1" class="left carousel-control" data-slide="prev"> <span
+								class="fa fa-chevron-left"></span>
+							</a> <a ng-if="hasImage&&act.imagesCount>1" class="right carousel-control" data-slide="next"> <span
+								class="fa fa-chevron-right"></span>
+							</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            	<div class="panel panel-default">
+						<div class="panel-body">
+							<h4 class="no-margin page-header">{{act.act_title}}</h4>
+							<small>
+							<ul class="list-unstyled text-muted">
+								<li><div class="col-xs-5" style="padding:0"><i class="fa fa-calendar main-color" style="width:13px"></i> {{act.date}}</div><div class="col-xs-7 text-right" style="padding:0;"><i class="fa fa-clock-o main-color" style="width:13px"></i> {{act.act_start_time}}-{{act.act_end_time}}</div></li>
+								<li><i class="fa fa-map-marker main-color" style="width:13px"></i> {{location.name}}
+									<a href="javascript:void(0);" class="pull-right" ng-click="locationInfo()">查看地图 <i class="fa fa-angle-double-right"></i></a></li>
+								
+							     <li><i class="fa fa-user main-color"></i> {{act.owner_name}} <a  ng-if="act.owner" href="#/activity/publishSuccess?act_id={{act.act_id}}">查看发起人权限</a></li>
+							    <li ng-if="credits"><i class="fa fa-money main-color" style="width:13px"></i> <span ng-if="credits.reg&&credits.reg.credits!=0" ng-bind="'报名积分:'+credits.reg.credits"></span> <span ng-if="credits.reg&&credits.sign&&credits.reg.credits!=0&&&&credits.sign.credits!=0">/</span> <span ng-if="credits.sign&&credits.sign.credits!=0" ng-bind="'签到积分:'+credits.sign.credits"></span></li>	
+							    <li ng-if="act.register_fee>0||act.register_fee_other>0">
+							      报名费:&nbsp;&nbsp;会员￥{{act.register_fee}}<span ng-if="act.rang_limit!=1&&act.register_fee_other>0">,非会员￥{{act.register_fee_other}}</span>
+							    </li>
+							    <li ng-if="act.total_limit>0&&(act.register_fee>0||act.register_fee_other>0)">
+							       剩余名额:&nbsp;&nbsp;{{act.total_limit-act.reg_submit_num>0?act.total_limit-act.reg_submit_num:0}}
+							    </li>
+							    <li ng-if="act.total_limit>0&&act.register_fee==0&&act.register_fee_other==0">
+							       剩余名额:&nbsp;&nbsp;{{act.total_limit-act.reg_num>0?act.total_limit-act.reg_num:0}}
+							    </li>
+							     <li ng-if="act.credit_limit>0">
+							       要求积分:&nbsp;&nbsp;大于等于{{act.credit_limit}}
+							    </li>
+							</ul>
+							</small>
+							<h5 class="no-margin page-header">活动描述</h5>
+							<pre class="text-muted no-margin" id="pre_desc" style="background-color: inherit; border: none;max-height:100px;overflow: hidden;padding-top:0;padding-bottom:0"></pre>
+							 <table style="width:100%;display: none" id="pre_desc_explode">
+							  <tr><td style="width:40%"><hr></td><td align="center"><a class="btn btn-link" ng-click="explode()">展开 <i class="fa fa-chevron-down"></i></a></td><td style="width:40%"><hr></td></tr>
+							 </table>
+							<div>
+							
+							<h5 class="no-margin-bottom">报名/签到信息&nbsp;&nbsp;<small><span>已报名<font style="color:red">{{act.reg_num}}</font>人,</span><span>已签到<font style="color:red">{{act.sign_num}}</font>人</span></small></h5>
+                             <small>
+         <table ng-if="act.reg_num>0||act.sign_num>0" class="table">
+		  <thead>
+		    <tr>
+		     <th colspan="2"><i class="fa fa-users"></i> 跑友</th>
+		     <th><img src="/image/paotuanzhuce/register.png" style="width:14px;height:14px"> 报名</th>
+		     <th><img src="/image/paotuanzhuce/checkin.png" style="width:14px;height:14px"> 签到</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		   <tr ng-repeat="user in users" >
+		   <td style="width:30px"><img ng-src="{{user.userInfo.user_face}}" class="thumb-circle" style="width:30px;height:30px"></td>
+		    <td  style="line-height:30px;height:30px"><span class="text-truncate" style="max-width:8rem"  ng-bind="user.userInfo.nick_name"></span></td>
+		     <td style="line-height:30px;height:30px"><i ng-if="user.isreg" class="fa fa-check" style="color: #0099da"></i></td>
+		     <td  style="line-height:30px;height:30px"><i ng-if="user.ischeckin" class="fa fa-check" style="color: #0099da"></i></td>
+		   </tr>
+		  </tbody>
+		</table>
+</small>
+						</div>
+					</div>
+				</div>
+        </div>
+    </div>
+</div> 
+<div ng-show="showReg" class="container-fluid animated fadeInUp"> 
+<form   role="form" id="regForm" method="post">
+<input type="hidden" name="ActivityUser[act_id]" value="{{act.act_id}}">
+   <div ng-repeat="conf in configs" on-form-repeat-finish-render >
+    <div class="form-group" ng-if="conf.visible"  >  
+         <label for="{{conf.col_name}}" ng-bind="conf.col_title"></label><span ng-if="conf.optional" class="i-red-12"> *</span>
+         <select  ng-if="conf.col_type==2" id="{{conf.col_name}}"  name="ActivityUser[{{conf.col_name}}]" class="form-control">
+         </select>
+         <input ng-if="conf.col_type==6"  type="email" isRequired="{{conf.optional}}"  value="{{conf.member_info}}" check-type="mail"  type="text"  class="form-control" id="{{conf.col_name}}" name="ActivityUser[{{conf.col_name}}]" >
+        <input ng-if="conf.col_type==1"   isRequired="{{conf.optional}}" type="text"    value="{{conf.member_info}}"   class="form-control" id="{{conf.col_name}}" name="ActivityUser[{{conf.col_name}}]" >
+         <input ng-if="conf.col_type==3" type="text" isRequired="{{conf.optional}}"  value="{{conf.member_info}}" date-type="date" date-max="now" readonly="readonly" class="form-control" id="{{conf.col_name}}" name="ActivityUser[{{conf.col_name}}]"  >
+         <input ng-if="conf.col_type==4" type="text" isRequired="{{conf.optional}}"  value="{{conf.member_info}}" date-type="time" date-max="now"  readonly="readonly" class="form-control" id="{{conf.col_name}}" name="ActivityUser[{{conf.col_name}}]"  >
+  
+         <input ng-if="conf.col_type==7" type="number" isRequired="{{conf.optional}}" value="{{conf.member_info}}"  check-type="number" class="form-control" id="{{conf.col_name}}" name="ActivityUser[{{conf.col_name}}]"  >
+        <input ng-if="conf.col_type==5" type="hidden"  name="ActivityUser[{{conf.col_name}}]"  value="{{conf.member_info}}"  id="{{conf.col_name}}_value"  >
+        <input ng-if="conf.col_type==5" type="file" isRequired="{{conf.optional&&!conf.value}}"   class="form-control" id="{{conf.col_name}}" name="file[]">
+        
+         <img class="upload-pre" ng-if="conf.col_type==5&&conf.value" isRequired="{{conf.optional}}"  ng-src="{{STATIC_IMG_PRE}}/{{conf.value}}!80X80" style="width:80px;margin-top:4px" onerror="this.style.display='none'" >
+       </div>
+    </div>
+</form>
+</div> 
+<div style="height:44px"> 
+</div>
+			<div class=" no-margin text-center footer no-padding">
+			<label ng-if="act.isReg&&!act.needPay" class="footer-text-label">已报名</label>
+			<label ng-if="!act.isReg&&act.reg_end&&!act.check_start&&!act.isEnd" class="footer-text-label">报名截止</label>
+			<label ng-if="act.isReg&&act.isCheck" class="footer-text-label">&nbsp;|&nbsp;已签到</label>
+			<label ng-if="!act.isReg&&act.isCheck" class="footer-text-label">已签到</label>
+			<label ng-if="act.needPay" class="footer-text-label">￥{{order.actual_payment}}</label>
+			<label ng-if="act.isEnd" class="footer-text-label">&nbsp;|&nbsp;已结束</label>
+								<div class="pull-right" style="display: inline-block;">
+								<a ng-if="act.needJoin"
+									class="btn btn-primary footer-btn-plain btn-lg" ng-href="/wechat/#/clubs/register?club_eng={{club.club_eng}}">加入</a>
+								<button
+									ng-if="act.canRegCancel"
+									class="btn btn-primary footer-
+									btn-plain" data-loading-text="取消中..." 
+									ng-click="cancelReg()" id="cancel_reg_btn"
+									autocomplete="off">取消报名</button>
+									
+								<button
+									ng-if="act.canReg&&!act.needJoin"
+									class="btn btn-primary footer-btn-plain" data-loading-text="报名中..."
+									ng-click="reg()" id="reg_btn"
+									autocomplete="off">报名</button>
+								<button
+									ng-if="act.needPay&&!act.canReg&&!act.canCheck&&!act.isEnd"
+									class="btn btn-primary footer-btn-plain btn-lg"
+									ng-click="pay()"
+									autocomplete="off">支付</button>
+									
+									 <button ng-if="act.canCheck&&!act.isCheck" 
+									class="btn btn-primary footer-btn-plain btn-lg" id="regBtn" data-loading-text="签到中..."
+									 ng-click="checkin()">签到</button>
+									 
+									</div>
+							</div>
+</div>
+<div ng-if="act.act_status==0">
+<div  class="container" style="height:300px;background-image: url('/image/paotuanzhuce/act_cancel.jpg');background-position: center;background-size:100% 300px ">
+</div>
+<div class="container text-center" style="padding:44px 44px">
+ <a class="btn btn-info btn-block" ng-href="/wechat/#/activity/list?club_eng={{club.club_eng}}">返回活动列表</a>
+</div>
+</div>
+
+<form ng-if="act.needPay" action="/wxpay/index?showwxpaytitle=1" style="display: none" method="post" id="payForm">
+    <input type="text" name="openid" value="{{openid}}">
+    <input type="text" name="uid" value="{{order.uid}}">
+    <input type="text" name="goodDesc" value="{{order.order_title}}"  id="gd">
+    <input type="text" name="orderid" id="orderid" value="{{order.orderid}}">
+    <input type="text" name="total_fee" value="{{order.actual_payment*100}}"  id="tf">
+    <input type="text" name="attach" value=""  id="attach">
+    <input type="text" name="paytype" value="club_act_fee">
+    <input type="text" name="hash" id="hash" value="">
+    <input type="text" name="expire_time" value="{{order.expire_time}}">
+ </form>
+

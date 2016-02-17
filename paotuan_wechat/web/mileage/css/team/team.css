@@ -1,0 +1,94 @@
+body{background: #eee;}
+.header{background: url(/mileage/img/header_01.jpg) center 0 no-repeat; background-size: 100%; padding: 20px; text-align: center; min-height: 150px;}
+.team-logo{width: 80px; height: 80px; margin: 0 auto;}
+.team-logo img{width: 80px; height: 80px; border-radius: 50%;}
+.team-name{font-size: 20px; color: #fff; text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); margin-top: 10px;}
+.team-desc{font-size: 12px; color: #eee; text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); margin-top: 10px; line-height: 14px;}
+.team-daka{width: 60px; height: 60px; margin: 0 auto;border-radius: 50%;}
+/*.team-daka img{width: 60px; height: 60px; border-radius: 50%;}*/
+
+.team-number-list{ width:100%; display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box; padding: 10px 0; background: #FFF; box-shadow: 0 1px 5px rgba(0,0,0,0.7) inset;}
+.team-number-list li{-webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; text-align: center;}
+.team-number-list li:first-child{border-right: 1px #ddd solid;}
+.team-number-list li a{text-decoration: none; display: block;}
+.team-number-list li .icon{color: #cb352b; font-size: 26px; display: block;}
+.team-number-list li .num{color: #333; font-size: 24px; line-height: 24px; min-height: 24px; font-family: 'Oswald', sans-serif;}
+.team-number-list li .text{color: #a0a0a0; font-size: 10px;}
+
+.content-box{background: #eee; box-shadow: 0 2px 3px rgba(221,221,221,0.8) inset; padding: 15px 10px;}
+.content-box .content-title{color: #cb352b; font-size: 14px;}
+.content-box .content-title a{text-decoration: none; color: #666;}
+.content-box .tab-ul{float: right;}
+.content-box .tab-ul li{width: 40px; text-align: center; line-height: 18px; float: left; border-right: 1px #ccc solid; color: #999;}
+.content-box .tab-ul li.current{color: #cb352b;}
+.content-box .tab-ul li:last-child{border-right: 0;}
+.content-last{padding-bottom: 60px;}
+.content-box .chart-content{height: 240px; text-align: center; color: #666; display: block; text-decoration: none;}
+.content-box .more-box{height: 30px; line-height: 30px; text-align: center; color: #666;}
+.content-box .more-box a{text-decoration: none; color: #626262; display: block;}
+
+.user-run-box{position: relative;}
+.user-run-box .user-run-list{margin: 7px 0 7px 53px; position: relative; }
+.user-run-box .user-run-list a{text-decoration: none; color: #a0a0a0;}
+.user-run-box .user-run-list .user-logo{width: 50px; position: absolute; left: -66px; top: 5px;}
+.user-run-box .user-run-list .user-logo img{width: 50px; height: 50px; border-radius: 50%;}
+.user-run-box .user-run-list .run-box{background: #fff; margin-left: 15px; position: relative; padding: 2px 5px;}
+.user-run-box .user-run-list .run-box:before{content:""; position: absolute; top: 22px; left: -20px; width: 0; height: 0; border-width: 8px; border-style: solid; border-color: transparent #fff transparent transparent; transform: scaleX(1.7); -webkit-transform: scaleX(1.7); -moz-transform: scaleX(1.7); -o-transform: scaleX(1.7); -ms-transform: scaleX(1.7);}
+.user-run-box .user-run-list .run-box .text{color: #a0a0a0; font-size: 10px;}
+.user-run-box .user-run-list .run-box .run-data{margin-top: 10px; width:100%; display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box;}
+.user-run-box .user-run-list .run-box .run-data li{-webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; vertical-align: bottom; color: #a0a0a0;}
+.user-run-box .user-run-list .run-box .run-data li:last-child{text-align: right;}
+.user-run-box .user-run-list .run-box .run-data li.center{text-align: center;}
+.user-run-box .user-run-list .run-box .run-data li:first-child{ color: #626262;}
+.user-run-box .user-run-list .run-box .run-data li strong{font-size: 18px; font-family: 'Oswald', sans-serif;}
+.user-run-box .user-run-list-none{text-align: center; padding-top: 100px; color: #666;}
+.user-run-box .user-run-list-none i{font-size: 16px;}
+.user-run-box .photos{ padding: 5px 0;}
+.user-run-box .photos li{float: left; width: 21px; height: 21px; margin: 0 2px;}
+.user-run-box .photos li:first-child{margin-left: 0;}
+.user-run-box .photos li:last-child{margin-right: 0;}
+.user-run-box .photos li img{ width: 21px; height: 21px;}
+.user-run-box .likes{border-top: 1px #f1f1f1 solid; padding: 5px 0;}
+.user-run-box .likes li{float: left; width: 20px; height: 20px; margin: 0 2px; text-align: center;}
+.user-run-box .likes li:first-child{margin-left: 0;}
+.user-run-box .likes li img{width: 20px; height: 20px; border-radius: 50%;}
+.user-run-box .likes li.number{border-radius: 1px; height: 16px; line-height: 18px; width: 25px; margin-top: 2px; background-color: #EEE; color: #999; float: right;}
+.user-run-box .more{ height: 18px; line-height: 18px; position: absolute; bottom: 5px; right: 5px; color: #a0a0a0;}
+.user-run-box .more span{margin-left: 3px;}
+
+/* 用户列表 */
+.user-list{text-align: center;}
+.user-list li{display: inline-block; width: 50px; text-align: center; margin: 0 10px 10px;}
+/*.user-list li{float: left; width: 50px; text-align: center; margin: 0 10px 10px;}*/
+/*.user-list{display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box;}*/
+/*.user-list li{-webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; text-align: center;}*/
+.user-list li a{text-decoration: none; color: #a0a0a0;}
+.user-list li img{width: 50px; height: 50px; border-radius: 50%;}
+.user-list li p{line-height: 22px; margin-top: 2px;}
+.user-list-none{text-align: center; padding-top: 100px; color: #666;}
+.user-list-none i{font-size: 16px;}
+
+
+/* 排行榜列表 */
+.switch-box{display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box; padding: 0 10px 10px;}
+.switch-box li{-webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; text-align: center; height: 26px; line-height: 26px; background-color: #ddd; border-right: 1px #EEE solid; color: #666;}
+.switch-box li:first-child{border-radius: 5px 0 0 5px;}
+.switch-box li:last-child{border-right: 0; border-radius: 0 5px 5px 0;}
+.switch-box li.current{ box-shadow: 0 1px 10px rgba(100,100,100,0.3) inset; background-color: #ff733a; color: #FFF;}
+.switch-box li a{display: block; color: #666; text-decoration: none;}
+.switch-box li.current a{color: #FFF;}
+
+.user-top-box{position: relative;}
+.user-top-box .user-top-list{padding: 7px 0 7px 80px; margin: 0 10px; position: relative; border-bottom: 1px #e1e1e1 solid; color: #a0a0a0;}
+.user-top-box .user-top-list:last-child{border: none;}
+.user-top-box .user-top-list a{text-decoration: none; color: #a0a0a0;}
+.user-top-box .user-top-list .user-logo{width: 50px; position: absolute; left: -55px; top: 5px;}
+.user-top-box .user-top-list .user-logo img{width: 50px; height: 50px; border-radius: 50%;}
+.user-top-box .user-top-list .number{width: 30px; line-height: 50px; position: absolute; left: -90px; top: 5px; font-size: 22px; color: #666; text-align: center;}
+.user-top-box .user-top-list .top-number{color: #cb352b;}
+.user-top-box .user-top-list .top-box{position: relative; padding: 2px 5px;}
+.user-top-box .user-top-list .top{margin-top: 12px;}
+
+.progress-box{padding: 2px 0 20px;}
+.progress-box .progress{width: 100%; height: 4px; background-color: #ddd; border-radius: 2px; overflow: hidden;}
+.progress-box .progress i{height: 4px; background-color: #ff733a; display: block;}

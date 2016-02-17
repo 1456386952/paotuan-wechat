@@ -1,0 +1,45 @@
+<section id="runner-info" class="section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ng-click="back()"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">跑友资料</div>
+				</div>
+				<div class="col-xs-2">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="head">
+		<div class="info container-fluid">
+			<div class="row">
+				<div class="col-xs-6">
+					<a href="" class="image"><img ng-src="{{userInfo.user_face}}" alt="" class="img-responsive"></a>
+				</div>
+				<div class="col-xs-6">
+					<div class="text">
+						<div class="name"><span>{{userInfo.nick_name}}</span><i class="icon-sex"></i></div>
+						<div class="address">{{userInfo.pname}} {{userInfo.cname}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="body">
+		<ul ng-repeat="info in runnerInfo">
+			<li class="clearfix">
+				<div class="left text-left">
+					{{info.title}}
+				</div>
+				<div class="right text-right">
+					<span ng-if="!info.image">{{info.value}}</span>
+					<a ng-href="{{info.image}}"><img ng-if="info.image" ng-src="{{info.image}}" alt="" width="36" height="36"></a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</section>

@@ -1,0 +1,42 @@
+<div class="topBar">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+				<i class="fa fa-chevron-left" ng-click="back()"></i>
+			</div>
+			<div class="col-xs-8">
+				<div class="title text-center">发送通知</div>
+			</div>
+			<div class="col-xs-2">
+				
+			</div>
+		</div>
+	</div>
+</div>
+<section id="send-message" class="section">
+	<form name="sendmsg" ng-submit="submitForm(sendmsg.$valid)" novalidate>
+		<div class="form-group">
+			<h4>短信推送 <span>(剩5320条)</span></h4>
+			<p>仅限认证跑团</p>
+		</div>
+		<div class="form-group">
+			<textarea class="form-control" rows="6" name="txt" textarea-title="{{msg.title}}" placeholder="输入你想发送的短信内容" ng-model="msg.txt" ng-change="checkText()" required></textarea>
+			<span class="num">{{msg.txt?msg.txt.length:0}}/50</span>
+		</div>
+		<div class="radio">
+			<ul>
+				<li>
+					<label class="">
+						<input type="radio" value="" name="reg" ng-model="msg.radio" ng-value="0" required> 已报名的跑友({{isreg?isreg.length:0}}人)
+					</label>
+				</li>
+				<li>
+					<label class="">
+						<input type="radio" value="" name="sign" ng-model="msg.radio" ng-value="1" required> 已签到的跑友({{ischeckin?ischeckin.length:0}}人)
+					</label>
+				</li>
+			</ul>
+		</div>
+		<button type="submit" class="btn btn-red btn-sendmsg" ng-disabled="sendmsg.$invalid || hide">发送</button>
+	</form>
+</section>

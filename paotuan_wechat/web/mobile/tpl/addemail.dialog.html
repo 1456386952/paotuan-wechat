@@ -1,0 +1,22 @@
+<div class="addemail">
+	<form class="form-horizontal" name="addemail" ng-submit="submitForm(addemail.$valid)" novalidate>
+		<div class="form-group">
+			<label for="" class="col-sm-2 control-label hidden">Email</label>
+			<div class="col-sm-10">
+				<input type="email" class="form-control" id="" name="useremail" placeholder="请输入收件人的邮箱" ng-model="user.email" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="" class="col-sm-2 control-label hidden">Name</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="" name="username" placeholder="请输入收件人的姓名" ng-model="user.name" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="button" class="btn btn-cancel" ng-click="closeThisDialog()">取消</button>
+				<button type="submit" class="btn btn-add" ng-disabled="addemail.$invalid || hide">好的</button>
+			</div>
+		</div>
+	</form>
+</div>

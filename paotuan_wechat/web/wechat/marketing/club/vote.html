@@ -1,0 +1,64 @@
+<link href="marketing/marketing.css"  rel="stylesheet">
+<div id="marketing_container" style="background-image: url('/image/marketing/bg.png');background-size:cover;background-repeat: no-repeat; ">
+<div class="container-fluid " style="position: relative;">
+<h3 class="text-center"><img src="/image/marketing/clubs_header.png" style="height:30px"></h3>
+<div class="col-xs-12 no-padding">
+<h5  style="color:#fff;">每人只有一次助力心爱跑团的机会，一次最多助力3个跑团哦!</h5>
+</div>
+<button ng-if="can_vote&&vote_sum>0" class="btn btn-default no-padding no-border " ng-click="vote();" style="position: absolute;width:50px;top:15px;right:5px"><img src="/image/marketing/can_vote.png"  ></button>
+<button ng-if="!can_vote||vote_sum==0" class="btn btn-default no-padding no-border " style="position: absolute;width:50px;top:15px;right:5px"><img src="/image/marketing/cannot_vote.png"  ></button>
+<div class="col-xs-12 no-padding text-center" ng-if="reg_length==0">
+<small  class="text-center" style="color:#fff">暂无报名的跑团</small>
+</div>
+<div class="col-xs-6 col-sm-4 col-md-2" ng-repeat="rc in regClubs" style="padding:4px;">
+ <a ng-click="select(rc);" class="btn btn-default container-fluid no-border " style="position:relative;background-color:transparent;background-image: url('/image/marketing/club_bg.png');background-size:100% 65px;background-repeat: no-repeat;height:65px;line-height:65px;padding:4px 4px 0 8px;width:100% ">
+     <div class="col-xs-5 no-padding text-left" style="line-height:54px;width:50px">
+      <img ng-if="rc.club_logo"
+			ng-src="{{STATIC_IMG_PRE}}/{{rc.club_logo}}!m.pre" class="thumb-circle" style="width:45px;height:45px">
+       <img ng-if="!rc.club_logo"
+			ng-src="/image/club_default.png"  class="thumb-circle" style="width:45px;height:45px">
+     </div>
+      <div class="col-xs-7  text-left no-padding">
+       <div class="container-fluid no-padding">
+         <div class="col-xs-12  text-left no-padding list-item-title text-truncate marketing-font-color" style="height:24px;line-height: 24px">
+          {{rc.club_name}}
+         </div>
+          <div class="col-xs-12  text-left no-padding" style="height:14px;line-height: 14px">
+            <small class="marketing-font-color">
+           <i class="fa fa-users"></i> {{rc.member_sum}}人
+         </small>
+         </div>
+          <div class="col-xs-12  text-left no-padding" style="height:19px;line-height: 19px">
+            <small class="marketing-font-color text-truncate">
+           {{rc.club_slogan}}
+         </small>
+         </div>
+         </div>
+      </div>
+      <div ng-if="rc.selected" style="height: 100%;width: 100%;background-color: rgba(255,255,255,.5);height: 65px;position: absolute;top: 0;left: 0;z-index: 10;border-radius:4px;background-image:url('/image/marketing/check.png');background-position: bottom right;background-repeat: no-repeat;background-size:30px  ">
+        
+      </div>
+ </a>
+</div>
+
+</div>
+
+<div class="container-fluid text-center" style="margin-bottom: 40px">
+<pre id="rule_pre" class="text-left" style="color:#fff;background-color: transparent;border: none;padding-left:0"></pre>
+</div>
+</div>
+<div style="position: fixed;bottom: 0;background-color: rgba(0,0,0,.5);width: 100%;text-align: center">
+<a ng-if="can_vote&&vote_sum>0" class="btn btn-default no-padding no-border " ng-click="vote();" style="background-color:transparent;border-radius:8px ">
+  <img src="/image/marketing/vote_now.png">
+</a>
+<a ng-if="!can_vote||vote_sum==0" class="btn btn-default no-padding no-border " style="background-color:transparent;border-radius:8px ">
+  <img src="/image/marketing/vote_now_disabled.png">
+</a>
+</div>
+
+
+
+
+
+
+                              

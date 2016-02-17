@@ -1,0 +1,79 @@
+<form name="bulid" ng-submit="submitForm(bulid.$valid)" novalidate>
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="paotuanlist"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">创建跑团</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+						<button type="submit" class="btn btn-one" ng-disabled="bulid.$invalid">创建</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<section class="bulid">
+	<div class="container">
+		<div class="bulid-main">
+			<div>
+				<div class="row-logo">
+					<img src="images/title-name.png">
+				</div>
+				<div class="row-container">
+					<input type="text" class="text-noborder width-85" placeholder="好名字更易记得住" name="name" ng-model="paotuanInfo.name" required>
+				</div>
+			</div>
+			<hr>
+			<div>
+				<div class="row-logo">
+					<img src="images/img-logo.png">
+				</div>
+				<div class="row-container">
+					<img class="logo" src="images/upload-logo.png"><br>
+					<span><label class="">跑团logo</label></span>
+					<img class="preview-logo" ng-src="{{imageSrc}}" id="act_image" ng-show="imageSrc">
+					<input class="input-file-logo" type="file" name="act_image" file-model="myFile" file-fn="getFile()">
+					
+				</div>
+				<br>
+				<div class="row-logo">
+					<img src="images/img-logo.png">
+				</div>
+				<div class="row-container">
+					<img class="logo-bg"  src="images/upload-logo2.png"><br>
+					<span><label>跑团背景图(显示比例1:3)</label></span>
+					<img class="preview-logo_bg" ng-src="{{imageSrcbg}}" id="imagebg" ng-show="imageSrcbg">
+					<input class="input-file-logo-bg" type="file" name="imagebg" file-model="myFilebg" file-fn="getfile2()">
+					
+				</div>
+			</div>
+			<hr>
+			<div>
+				<div class="row-logo">
+					<img src="images/map-logo.png">
+				</div>
+				<div class="row-container">
+					<input type="text" class="text-noborder width-85" placeholder="跑团地址" name="add" ng-model="paotuanInfo.add" required>
+				</div>
+			</div>
+			<hr>
+			<div>
+				<div class="row-logo">
+					<img src="images/title-name.png">
+				</div>
+				<div class="row-container">
+					详细描述一下你的跑团
+				</div>
+			</div>
+			<div style="margin-left: 8%;" class="description">
+				<textarea rows="3" cols="35" class="text-noborder"  name="info" ng-model="paotuanInfo.info" required>
+				</textarea>
+			</div>
+		</div>
+	</div>
+	
+</form>

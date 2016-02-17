@@ -1,0 +1,92 @@
+<div class="top thumbnail">
+	<img ng-if="club.club_bgimage" ng-src="http://xiaoi.b0.upaiyun.com/{{club.club_bgimage}}{{COVER}}"  onerror="this.src='/image/paotuanzhuce/top.png'"/>
+	<img ng-if="!club.club_bgimage" ng-src="/image/paotuanzhuce/top.png"/>
+	<h5 class="thumbnail-title" style="display: {{club.slogan_display}}" ng-bind="club.club_slogan"></h5>
+    <a ng-if="!member" ng-href="/wechat/#/clubs/register?club_eng={{club.club_eng}}" style="position: fixed;top: 110px;right:0;z-index:111"><img ng-src="{{STATIC_HOSTNAME}}/image/paotuanzhuce/join.png" style="height:30px"></a>
+</div>
+<div class="container-fluid  text-center" style="margin-top:20px;background-color: transparent;">
+	<div ng-if="showwalk" class="col-xs-4 col-sm-4 col-md-4 animated fadeInUp animation-delay-1">
+		<a class="btn btn-default no-padding no-border home-function-btn" ng-href="/wechat/#/clubs/walks?club_eng={{club.club_eng}}">
+			<img src="/image/paotuanzhuce/walk.png" class="thumb-circle">
+			<br>
+			行走
+		</a>
+	</div>
+	<div class="col-xs-4 col-sm-4 col-md-4 animated fadeInUp animation-delay-1">
+		<a class="btn btn-default no-padding no-border home-function-btn" ng-href="/wechat/#/clubs/mileages?club_eng={{club.club_eng}}">
+			<img src="/image/paotuanzhuce/mileage.png" class="thumb-circle">
+			<br>
+			跑量
+		</a>
+	</div>
+	<div class="col-xs-4 col-sm-4  col-md-4 animated fadeInUp animation-delay-2">
+		<a ng-click="allMembers();" class="btn btn-default no-padding no-border home-function-btn" ><span ng-if="newMembersCount > 0" class="badge badge-circle badge-red" style="position: absolute;top:-4px;left:34px;background-color: red;color:#fff" ng-bind="newMembersCount"></span>
+			<img src="/image/paotuanzhuce/members.png" class="thumb-circle">
+			<br>
+			会员
+		</a>
+	</div> 
+	<div class="col-xs-4 col-sm-4 col-md-4 animated fadeInUp animation-delay-3">
+		<a class="btn btn-default no-padding no-border home-function-btn" ng-click="actList();"><span ng-if="newActCount > 0" class="badge badge-circle" style="position: absolute;top:-4px;left:34px;background-color: red;color:#fff" ng-bind="newActCount"></span>
+			<img src="/image/paotuanzhuce/act.png" class="thumb-circle">
+			<br>
+			活动
+		</a>
+	</div> 
+	<div class="col-xs-4 col-sm-4 col-md-4 animated fadeInUp animation-delay-4">
+		<a class="btn btn-default no-padding no-border home-function-btn" ng-click="newAct();">
+			<img src="/image/paotuanzhuce/new_act.png" class="thumb-circle"> 
+			<br>
+			发起活动
+		</a>
+	</div>
+	<div class="col-xs-4 col-sm-4 col-md-4 animated fadeInUp animation-delay-5">
+		<a class="btn btn-default no-padding no-border home-function-btn"  href="/wechat/#/activity/checkin">
+			<img src="/image/paotuanzhuce/sign.png" class="thumb-circle"> 
+			<br>
+			报名签到
+		</a>
+	</div>
+	<div class="col-xs-4 col-sm-4 col-md-4 animated fadeInUp animation-delay-6">
+		<a class="btn btn-default no-padding no-border home-function-btn" href="/wechat/#/runner/sign">
+			<img src="/image/paotuanzhuce/mileage_sign.png" class="thumb-circle"> 
+			<br>
+			跑量打卡
+		</a>
+	</div>
+</div>
+<div class="container  text-center" >
+	<div class="col-md-4 no-padding">
+		<div class="content-box box-default  animated fadeInUp animation-delay-7" style="padding:0;margin-top:14px">
+			<h5 class="content-box-title no-margin  text-left " style="padding:4px">公告</h5>
+			<p ng-if="anns.count <= 0">暂无公告</p>
+			<div ng-if="anns.count > 0" id="carousel-announce" class="carousel carousel-images slide" data-ride="carousel" style="min-height:200px" >
+				<ol ng-if="anns.count > 1" class="carousel-indicators">
+					<li data-target="#carousel-announce" ng-repeat="ann in anns" data-slide-to="{{$index}}" class="{{$index==0?'active':''}}"></li>
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<div ng-repeat="ann in anns"  on-repeat-finish-render-filters class="{{$index==0?'item active':'item'}}">
+						<a ng-href="/wechat/#/clubs/anninfo?id={{ann.id}}" style="height:200px">
+							<img ng-src="http://xiaoi.b0.upaiyun.com/{{ann.coverurl}}{{COVER}}" style="width: 100%;height: 200px">
+						</a>
+						<h5 class="carousel-caption thumbnail-title text-left  no-padding no-margin" style="position:absolute;top:176px;height:24px;line-height:24px;text-align: left;" ng-bind="ann.subject"></h5>
+						<div class="caption text-muted text-left no-margin-p" style="padding:0 4px 4px 4px">
+							<table style="width:100%">
+								<tr>
+									<td><i class="fa fa-columns">  <span  ng-bind="ann.views"></span></i></td>
+									<td align="right"> <span class="pull-right" ng-bind="ann.create_time"></span></td>
+								</tr>
+							</table>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+				<a ng-if="anns.count > 1" class="left carousel-control" data-slide="prev"> <span class="fa fa-chevron-left"></span></a> 
+				<a ng-if="anns.count > 1" class="right carousel-control" data-slide="next"> <span class="fa fa-chevron-right"></span></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

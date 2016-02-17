@@ -1,0 +1,25 @@
+<form name="joinproject" ng-submit="submitForm(joinproject.$valid)" novalidate>
+	<div class="form-group" ng-if="!default">
+		<h4>选择想报名的活动项目</h4>
+	</div>
+	<div class="form-group" ng-if="default">
+		<h4>是否报名此活动?</h4>
+	</div>
+	<div class="checkbox" ng-if="!default">
+		<ul>
+			<li ng-repeat="item in project" ng-class="{'disabled': item.show==0}">
+				<label class="">
+					<input type="checkbox" value="{{item.project_name}}" name="projectName" ng-disabled="item.show==0">
+					<span>{{item.project_name==0?'默认':item.project_name}}</span>
+				</label>
+				<span class="price" ng-if="item.price!=0">￥<span>{{item.price}}</span></span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="button" class="btn btn-cancel" ng-click="closeThisDialog()">取消</button>
+			<button type="submit" class="btn btn-add" ng-disabled="joinproject.$invalid">加入</button>
+		</div>
+	</div>
+</form>

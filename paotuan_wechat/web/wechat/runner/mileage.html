@@ -1,0 +1,93 @@
+
+<div class="container-fluid no-padding" ng-if="mileageBase.count > 0">
+	<div class="col-md-4 animated fadeInUp animation-delay-1" style="padding:14px 4px 0 4px">
+		<div class="panel panel-default no-margin">
+			<div class="panel-body no-padding">
+				<ul class="nav nav-tabs">
+					<li role="presentation" id="year"><a ng-click="getChartData('year')" style="border-left:0;">年</a></li>
+					<li role="presentation"  id="month"><a ng-click="getChartData('month')">月</a></li>
+					<li role="presentation" id="week"><a ng-click="getChartData('week')" >周</a></li>
+					<li role="presentation" id="seven" class="active"><a ng-click="getChartData('seven')" >日</a></li>
+				</ul>
+				<div id="mileage_chart" style="height:200px;width:100%;margin-top: 4px"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4 animated fadeInUp animation-delay-4" style="padding:0 4px">
+		<!--  
+		<table class="table table-bordered text-center no-margin" style="border: none">
+			<tr>
+				<td style="border-left: 0;border-right: 0;border-top:0"  width="25%" align="right">
+				<img src="/image/paotuanzhuce/mileage_check.png" style="width:30px">
+				</td>
+				<td style="border-left: 0;border-top:0"  width="25%" align="left"><h5 style="margin:10px 0 0" >
+				{{mileageBase.count}}<small>次</small></h5></td>
+				<td style="border-left: 0;border-right: 0;border-top:0"  width="25%" align="right">
+				<img src="/image/paotuanzhuce/paoliang.png" style="width:30px">
+				</td>
+				<td style="border-right:0;border-left: 0;;border-top:0"  width="25%" align="left">
+				<h5  style="margin:10px 0 0">
+				 {{mileageBase.mileage}}<small>KM</small>
+				 </h5>
+				 </td>
+			</tr>
+		</table>
+		-->
+		<div class="list-group no-padding list-no-topborder"  style="padding:4px;" infinite-scroll="loadMore()" id="recentMileages">
+			<div class="list-group-item  container-fluid no-border-side"  style="padding:14px 4px 4px 4px;" >
+				<div class="col-xs-8 text-truncate no-padding" style="margin:4px 0 4px 0">
+					<img src="/image/paotuanzhuce/mileage_sum_20.png"> 
+					<button ng-if="mileageBase.month_target > 0" class="btn btn-default no-border no-padding" style="position: absolute;top:9px;left:24px;line-height: 14px" ng-click="edit_target();">本月目标跑量{{mileageBase.month_target}}KM <i class="fa fa-pencil main-color"></i></button>
+					<button ng-if="mileageBase.month_target == 0" class="btn btn-default no-border no-padding" style="position: absolute;top:9px;left:24px;color: red;line-height: 14px" ng-click="edit_target();">本月目标跑量还未设置 <i class="fa fa-pencil main-color"></i></button>
+				</div>
+				<div class="col-xs-4 text-truncate no-padding" style="margin:4px 0 4px 0">
+					<img src="/image/paotuanzhuce/mileage_count_20.png"> <span style="position: absolute;top:9px;left:24px;line-height: 14px">已打卡{{mileageBase.count}}次</span>
+				</div>
+
+				<div class="col-xs-12 no-padding" style="margin-top:8px">
+					<img style="position: relative;" src="/image/paotuanzhuce/run.gif" id="run_img">
+				</div>
+				<div class="col-xs-12 no-padding" style="background-color:gray;">
+					<div id="run_line" style="background-color:#02c66c;width:0px;height:4px"></div>
+				</div>
+				<div class="col-xs-12 no-padding">
+					<span id="run_num" style="min-width:40px;text-align: right;">{{mileageBase.curren_month}}KM</span>
+				</div>
+			</div>
+			<h5><i class="fa fa fa-pencil-square-o main-color"></i> 最近打卡</h5>
+
+			<a ng-href="/runners/mileageinfo/{{m.id}}" ng-if="m != null" class="list-group-item animated fadeInUp animation-delay-{{m.delay}}" ng-repeat="m in mileages" on-repeat-finish-render-filters  style="border-left:none;border-right:none;padding:4px 0 0 0;position: relative;line-height:54px">
+				<img ng-if="m.albums" class="media-object pull-left" ng-src="{{m.albums}}" style="width: 50px; height: 50px;position: absolute;left: 4px">
+				<img ng-if="!m.albums" class="media-object pull-left" ng-src="/image/paotuanzhuce/list-default-pic.jpg"  style="width: 50px; height:50px;position: absolute;left: 4px">
+				<div class="container-fluid" style="padding-left:60px;padding-right:0;display:block;line-hieght:54px;height:54px;display: inline-block;width: 100%;vertical-align: middle;">
+					<div class="col-xs-4 text-truncate no-padding" style="line-height: 24px;height:24px">
+						<label class="no-margin" style="padding">{{m.mileage}}km</label>
+					</div>
+					<div class="col-xs-4 text-truncate" style="line-height: 24px;height:24px;">
+						<small ng-if="m.pace" class="text-truncate text-muted" ><i class="fa fa-clock-o"></i> {{m.pace}}</small>
+					</div>
+					<div class="col-xs-4" style="line-height: 24px;height:24px;">
+						<small ng-if="m.format_duration" class="text-muted text-truncate">
+							<i class="fa fa-history"></i> {{m.format_duration}}
+						</small>
+					</div>
+					<div class="col-xs-9 no-padding" style="line-height: 28px;height:28">
+						<small class="text-muted">{{m.mileage_date}}</small> 
+					</div>
+					<div ng-if="m.canDelete" class="col-xs-3 no-padding" style="line-height: 20px">
+						<button ng-click="deleteMileage(m.id, m.mileage)" class="btn btn-default no-border" style="background-color: transparent;"> <i class="fa fa-trash-o"></i> 删除</button>
+					</div>
+				</div>
+				<img ng-if="m.from == 2" src="/image/bind/codoon.png" style="position: absolute;top:0;width: 15px;left:45px">
+				<img ng-if="m.from == 4" src="/image/bind/edoon.png" style="position: absolute;top:0;width: 15px;left:45px">
+			</a>
+			<div style="width: 100%;height:20px;text-align: center;background-image: url('/artificial-reason-1.4.3/img/preload.gif');background-position: center;background-repeat: no-repeat;background-size:20px;display: none" id="loadingEl">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid no-padding text-center" ng-if="mileageBase.count == 0">
+	暂无打卡记录
+</div>
+

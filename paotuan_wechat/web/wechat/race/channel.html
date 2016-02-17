@@ -1,0 +1,436 @@
+<link href="/bootstrap-slider/bootstrap-slider.min.css" rel="stylesheet">
+<style>
+.list-group-item.container-fluid{
+  padding:4px
+}
+.selected:after{
+  content:"\f00c";
+  position: absolute;
+  top: 4px;
+  color:#02c66c;
+  right:4px;
+  font-size: 24px
+}
+</style>
+
+<div style="position: relative;">
+<div ng-show="index">
+<div class="top thumbnail">
+	<img ng-if="act.act_img" ng-src="{{STATIC_IMG_PRE}}/{{act.act_img}}{{COVER}}"  onerror="this.src='/image/paotuanzhuce/top.png'"/>
+	<img ng-if="!act.act_img" ng-src="/image/paotuanzhuce/top.png"/>
+</div>
+<div class="container-fluid" style="padding:4px">
+
+							<h4 class="page-header" ng-bind="act.act_name" style="margin:14px 0"></h4>
+							<small>
+							<ul class="list-unstyled text-muted">
+								<li><div class="col-xs-6 no-padding"><i class="fa fa-map-marker main-color"></i> 地点:<span ng-bind="act.country+' · '+act.city"></span></div><div class="col-xs-6 text-right"><i class="fa fa-clock-o main-color" style="width:13px"></i> 时间:<span ng-bind="act.act_day"></span></div></li>
+							</ul>
+							</small>
+</div>
+   <div ng-if="loading" class="container-fluid text-center">
+     <i class="fa fa-spinner fa-spin"></i>
+   </div>
+    <div ng-if="regs" class="col-xs-12 col-lg-3"  style="padding:4px">
+     <div class="panel panel-default no-margin"">
+  <div class="panel-body no-padding">
+  <h5>&nbsp;<i class="fa  fa-pencil-square-o main-color"></i> 比赛报名</h5>
+  <div class="list-group no-border-side">
+   <a ng-click="info(0,reg)" ng-class="{true:'selected'}[reg.selected]"  class="list-group-item container-fluid {{reg.sell_out||reg.is_end?'disabled':''}}" ng-repeat="reg in regs" style="line-height:42px;height:50px">
+    <div class="col-xs-8">
+    <h4 class="list-group-item-heading text-truncate" ng-bind="reg.item_name"></h4>
+    <p class="list-group-item-text text-muted" ng-bind="'名额:'+reg.num_text"></p>
+   </div>
+     <div class="col-xs-4 no-padding"  style="line-height:42px">
+     <i class="fa fa-cny"></i>{{reg.item_price}}
+   </div>
+  </a>
+</div>
+    </div>
+    </div>
+    </div>
+    
+  <div ng-if="hotels" class="col-xs-12 col-lg-3" style="padding:4px">
+     <div class="panel panel-default no-margin">
+  <div class="panel-body no-padding">
+  <h5>&nbsp;<i class="fa  fa-building-o main-color"></i> 酒店住宿</h5>
+    <div class="list-group no-border-side">
+   <a ng-click="info(1,hotel)"  ng-class="{true:'selected'}[hotel.selected]"  class="list-group-item container-fluid " ng-repeat="hotel in hotels" style="line-height:60px;height:70px">
+    <div class="col-xs-2 no-padding item-logo-60" style="line-height:60px">
+    <img ng-if="hotel.item_pic_url" ng-src="{{STATIC_IMG_PRE}}/{{hotel.item_pic_url}}!mid">
+    <img ng-if="!hotel.item_pic_url" ng-src="/image/hotel_default.png">
+   </div> 
+    <div class="col-xs-6 item-logo-60-text-3" >
+    <h5 class="list-group-item-heading text-truncate" ng-bind="hotel.item_name"></h5>
+    <p class="list-group-item-text text-muted" ng-bind="hotel.hotel_type+'(数量:'+hotel.num_text+')'"></p>
+    <p class="list-group-item-text text-muted" ng-bind="'距起点:'+(hotel.distance<300?'<300':hotel.distance)+'m'"></p>
+   </div>
+    <div class="col-xs-4 item-logo-60-text-3  no-padding">
+     <i class="fa fa-cny"></i>{{hotel.item_price}}
+   </div>
+  </a>
+</div>
+    </div>
+    </div>
+    </div>
+    
+     <div ng-if="traffic" class="col-xs-12 col-lg-3" style="padding:4px">
+     <div class="panel panel-default no-margin">
+  <div class="panel-body no-padding">
+  <h5>&nbsp;<i class="fa  fa-car main-color"></i> 交通出行</h5>
+   <div class="list-group no-border-side">
+   <a ng-click="info(2,tr)"  class="list-group-item container-fluid" ng-class="{true:'selected'}[tr.selected]" ng-repeat="tr in traffic" style="line-height:60px;height:70px">
+    <div class="col-xs-2 no-padding item-logo-60" style="line-height:60px;">
+    <img ng-if="tr.item_pic_url" ng-src="{{STATIC_IMG_PRE}}/{{tr.item_pic_url}}!mid">
+    <img ng-if="!tr.item_pic_url" ng-src="/image/traffic_default.png">
+   </div> 
+    <div class="col-xs-6 item-logo-60-text-2">
+     <h5 class="list-group-item-heading text-truncate" ng-bind="tr.item_name"></h5>
+    <p class="list-group-item-text text-muted" ng-bind="'数量:'+tr.num_text"></p>
+   </div>
+     <div class="col-xs-4 item-logo-60-text-2  no-padding" >
+     <i class="fa fa-cny"></i>{{tr.item_price}}
+   </div>
+  </a>
+</div>
+    </div>
+    </div>
+    </div>
+    
+    <div ng-if="other" class="col-xs-12 col-lg-3" style="padding:4px">
+     <div class="panel panel-default no-margin">
+  <div class="panel-body no-padding">
+  <h5>&nbsp; 其他</h5>
+   <div class="list-group no-border-side">
+   <a ng-click="info(3,ot)"  class="list-group-item container-fluid" ng-class="{true:'selected'}[ot.selected]" ng-repeat="ot in other" style="line-height:60px;height:70px">
+   <div class="col-xs-2 no-padding item-logo-60">
+    <img ng-if="ot.item_pic_url" ng-src="{{STATIC_IMG_PRE}}/{{ot.item_pic_url}}!mid">
+    <img ng-if="!ot.item_pic_url" ng-src="/image/traffic1.jpg">
+   </div> 
+    <div class="col-xs-7 item-logo-60-text-2">
+     <h5 class="list-group-item-heading text-truncate" ng-bind="ot.item_name"></h5>
+    <p class="list-group-item-text text-muted" ng-bind="'数量:'+ot.num_text"></p>
+   </div>
+     <div class="col-xs-3 item-logo-60-text-2  no-padding">
+     <i class="fa fa-cny"></i>{{ot.item_price}}
+   </div>
+  </a>
+    </div>
+    </div>
+    </div>
+</div>
+
+</div>
+
+<div  class="container-fluid no-padding" ng-show="hotel_info" style="background-color: #fff">
+   <div class="top thumbnail">
+	 <img ng-if="hotel.item_pic_url" ng-src="{{STATIC_IMG_PRE}}/{{hotel.item_pic_url}}{{COVER}}">
+      <img ng-if="!hotel.item_pic_url" ng-src="/image/traffic1.jpg">
+   </div>
+   <div  class="container-fluid" style="padding:4px">
+   		<h4 class="page-header" ng-bind="hotel.item_name" style="margin:14px 0"></h4>
+			<ul class="list-unstyled text-muted">
+			<li class=" container-fluid">
+			 <span ng-bind="'剩余数量:'+hotel.num_text"></span>
+			</li>
+			<li class=" container-fluid">
+			<div class="col-xs-6 no-padding">
+			<i class="fa fa-coffee main-color"></i> <span ng-bind="hotel.hotel_type"></span>
+			</div>
+			<div class="col-xs-6"> 
+			<i class="fa fa-jpy main-color"></i> <span ng-bind="hotel.item_price"></span>
+			</div>
+			</li>
+			<li class=" container-fluid">
+			<div class="col-xs-6 no-padding">
+			<i class="fa fa-map-marker main-color"></i> &nbsp;<span ng-bind="hotel.address"></span>
+			</div>
+			<div class="col-xs-6" ng-bind="'距起点:'+hotel.distance+'m'"> 
+			</div>
+			</li>
+			<li class=" container-fluid">
+			<i class="fa fa-phone main-color"></i> <span ng-bind="hotel.cell"></span>
+			</li>
+			<li class=" container-fluid">
+			  <pre ng-bind="info_item.item_desc" class="text-muted no-border">
+			  
+			  </pre>
+			</li>
+			<li class="container-fluid clearfix" ng-if="!info_item.sell_out&&!info_item.is_end">
+			 <table>
+			  <tr>
+			   <td>数量:<td>
+			   <td style="padding-left:14px;"><input ng-slide="info_item.num" style="width:120px" id="hotel_num"  type="text" data-slider-min="1" data-slider-step="1" data-slider-value="1"/><span id="hotel_num_dis" style="margin-left:10px">1</span><td>
+			   <td align="left"> <small ng-if="hotel.set_per_order_num>0" ng-bind="'(每单限购'+hotel.set_per_order_num+')'"></small><td>
+			  </tr>
+			 </table>
+			</li>
+			</ul>
+	</div>
+</div>
+
+<div  class="container-fluid no-padding" ng-show="traffic_info" style="background-color: #fff">
+   <div class="top thumbnail">
+	 <img ng-if="info_item.item_pic_url" ng-src="{{STATIC_IMG_PRE}}/{{info_item.item_pic_url}}{{COVER}}">
+      <img ng-if="!info_item.item_pic_url" ng-src="/image/traffic1.jpg">
+   </div>
+    <div  class="container-fluid" style="padding:4px">
+   		<h4 class="page-header" ng-bind="info_item.item_name" style="margin:14px 0"></h4>
+			<ul class="list-unstyled text-muted">
+			<li class=" container-fluid">
+			 <span ng-bind="'剩余数量:'+info_item.num_text"></span>
+			</li>
+			<li class=" container-fluid">
+			<i class="fa fa-jpy main-color"></i> <span ng-bind="info_item.item_price"></span>
+			</li>
+			<li class=" container-fluid">
+			<i class="fa fa-map-marker main-color"></i> &nbsp;<span ng-bind="info_item.address"></span>
+			</li>
+			<li class=" container-fluid">
+			<i class="fa fa-clock-o main-color"></i> <span ng-bind="info_item.item_time"></span>
+			</li>
+			<li class=" container-fluid">
+			<i class="fa fa-phone main-color"></i> <span ng-bind="info_item.cell"></span>
+			</li>
+			<li class=" container-fluid">
+			  <pre ng-bind="info_item.item_desc" class="text-muted no-border">
+			  
+			  </pre>
+			</li>
+			<li class="container-fluid clearfix" ng-if="!info_item.sell_out&&!info_item.is_end">
+			 <table>
+			  <tr>
+			   <td>数量:<td>
+			   <td style="padding-left:14px;"><input ng-slide="info_item.num" style="width:150px" id="traffic_num"  type="text" data-slider-min="1" data-slider-step="1" data-slider-value="1"/><td>
+			   <td align="left"> <small ng-if="info_item.set_per_order_num>0" ng-bind="'(每单限购'+info_item.set_per_order_num+')'"></small><td>
+			  </tr>
+			 </table>
+			</li>
+			</ul>
+	</div>
+</div>
+
+
+<div  class="container-fluid no-padding" ng-show="other_info" style="background-color: #fff">
+   <div class="top thumbnail">
+	 <img ng-if="ot.item_pic_url" ng-src="{{STATIC_IMG_PRE}}/{{ot.item_pic_url}}{{COVER}}">
+      <img ng-if="!ot.item_pic_url" ng-src="/image/traffic1.jpg">
+   </div>
+    <div  class="container-fluid" style="padding:4px">
+   		<h4 class="page-header" ng-bind="info_item.item_name" style="margin:14px 0"></h4>
+			<ul class="list-unstyled text-muted">
+			<li class=" container-fluid">
+			 <span ng-bind="'剩余数量:'+info_item.num_text"></span>
+			</li>
+			<li class=" container-fluid">
+			<i class="fa fa-jpy main-color"></i> <span ng-bind="info_item.item_price"></span>
+			</li>
+			<li class=" container-fluid">
+			  <pre ng-bind="info_item.item_desc" class="text-muted no-border">
+			  
+			  </pre>
+			</li>
+			<li class="container-fluid clearfix" ng-if="!info_item.sell_out&&!info_item.is_end">
+			 <table>
+			  <tr>
+			   <td>数量:<td>
+			   <td style="padding-left:14px;"><input ng-slide="info_item.num" style="width:150px" id="other_num"  type="text" data-slider-min="1" data-slider-step="1" data-slider-value="1"/><td>
+			   <td align="left"> <small ng-if="info_item.set_per_order_num>0" ng-bind="'(每单限购'+info_item.set_per_order_num+')'"></small><td>
+			  </tr>
+			 </table>
+			</li>
+			</ul>
+	</div>
+</div>
+ <button ng-if="needBack" ng-click="back()" class="btn btn-default no-border border-circle" style="background-color: rgba(0,0,0,.5);padding:4px 7px;position:fixed;top:14px;left:14px"><i class="fa fa-arrow-left" style="color:#fff"></i></button>
+</div>
+
+<div class="col-xs-12" ng-show="showReg" style="padding:4px">
+ <h4 class="page-header no-margin no-padding"><button ng-click="back()" class="btn btn-default btn-lg main-color no-border" style="background-color: transparent;padding:4px 8px;"><i class="fa fa-arrow-left"></i></button>报名信息</h4> 
+  <form  role="form" id="regForm" method="post" ng-vbt>
+ <div class="form-group">
+                <label  for="name"  style="text-align: left">姓名:<span class="i-red-12"> *</span></label>
+            <input id="name" check-type="required" class="form-control"   name="Register[passport_name]" ng-model= "register.passport_name"  placeholder="请填写您的姓名！" type="text">
+        </div>
+        <div class="form-group">
+                <label for="cell"> 手机:<span class="i-red-12"> *</span>
+                </label>
+                  <input type="hidden" ng-model="register.user_cell1">
+                    <input check-type="required mobile" maxlength="11" type="tel" name="Register[user_cell]" ng-model="register.user_cell"  class="form-control" placeholder="请填写您的手机号码！">                                                    
+               </div>
+    
+    <div class="form-group">
+                <label> 性别:<span class="i-red-12"> *</span></label><br>
+                <select ng-selected="register.user_gender" name="Register[user_gender]" class="form-control">
+                <option value="1" >男</option>
+                 <option value="2">女</option>
+                </select>
+      </div>
+       <div class="form-group">
+                <label  for="nationality">国籍
+                  <span class="i-red-12"> *</span>
+                </label>
+                    <input check-type="required" class="form-control" id="nationality" name="Register[nationality]" ng-model="register.nationality" placeholder="请填写您的国籍！" type="text">
+            </div>
+             <div class="form-group">
+                <label  for="birthday">出生日期(如1985-01-01)<span class="i-red-12"> *</span></label>
+                <input check-type="required"   type="text" date-component date-type="date" date-max="now" readonly="readonly"  class="form-control" id="birthday" name="Register[birthday]" ng-model="register.birthday"  placeholder="请选择您的生日">
+            </div>
+          
+             <div class="form-group">
+                <label  for="id_type">证件类型
+                  <span class="i-red-12"> *</span>
+                </label>
+                 <select ng-selected="register.id_type" id="id_type" name="Register[id_type]" class="form-control">
+                        <option value="1" >身份证</option>
+                        <option value="2" >护照</option>
+                        <option value="3" >台胞证</option>
+                        <option value="4" >港澳通行证</option>
+                        <option value="0" >其它</option>
+                    </select>
+            </div>
+            
+            <div class="form-group">
+                <label  for="id_number">证件号码
+                  <span class="i-red-12"> *</span>
+                </label>
+                 <input check-type="required"  class="form-control" id="id_number" name="Register[id_number]" ng-model="register.id_number" placeholder="请填写您的身份证号码！" type="text">
+            </div>
+              
+            <div class="form-group">
+             <label for="id_copy">身份证复印件正面<span class="i-red-12"> *</span></label>
+               <input type="hidden"  name="Register[id_copy]" id="id_copy_value"  value="{{register.id_copy}}">
+                <input ng-fileupload check-type="{{!register.id_copy?'required':''}}"  type="file"  name="file" id="id_copy"  accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+                 <img  class="upload-pre"  ng-if="register.id_copy" alt="" ng-src="{{register.id_copy+'!mid'}}" id="id_copy_pre" style="width:50px;height:50px;margin-top:4px" onerror="this.style.display='none'" >
+            </div>
+             <div class="form-group" id="id_copy_back_div">
+               <label for="id_copy_back">身份证复印件反面</label>
+                <input type="hidden"  name="Register[id_copy_back]"  id="id_copy_back_value" value="{{register.id_copy_back}}">
+                <input ng-fileupload  type="file" name="file" id="id_copy_back"  accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp" >
+                  <img class="upload-pre" ng-if="register.id_copy_back" alt="" ng-src="{{register.id_copy_back+'!mid'}}" id="id_copy_back_pre" style="width:50px;height:50px;margin-top:4px" onerror="this.style.display='none'" >
+            </div>
+             <div class="form-group">
+                <label  for="user_email">邮箱
+                  <span class="i-red-12"> *</span>
+                </label>
+                 <input check-type="required mail" class="form-control" id="user_email" name="Register[user_email]" ng-model="register.user_email"  placeholder="请填写您的邮箱！" type="email">
+            </div>
+            <div class="form-group">
+                <label  for="address">通讯地址
+                  <span class="i-red-12"> *</span>
+                </label>
+                 <input check-type="required" class="form-control" id="address" name="Register[address]" placeholder="请填写您的通讯地址" ng-model="register.address" type="text">
+            </div>
+             <div class="form-group">
+                <label  for="emerge_name">紧急联系人
+                  <span class="i-red-12"> *</span>
+                </label>
+                 <input check-type="required" class="form-control" id="emerge_name" name="Register[emerge_name]" placeholder="紧急联系人姓名" ng-model="register.emerge_name" type="text">
+            </div>
+             <div class="form-group">
+                <label  for="emerge_ship">关系
+                  <span class="i-red-12"> *</span>
+                </label>
+                 <input check-type="required" class="form-control" id="emerge_ship" name="Register[emerge_ship]"  placeholder="关系" ng-model="register.emerge_ship" type="text">
+            </div>
+             <div class="form-group">
+                <label  for="emerge_cell">联系方式
+                  <span class="i-red-12"> *</span>
+                </label>
+                 <input check-type="required" class="form-control" id="emerge_cell" name="Register[emerge_cell]"  placeholder="联系方式" ng-model="register.emerge_cell" type="text">
+            </div>
+            <div class="form-group">
+                <label for="tshirt_size">
+                                                               上衣尺码:<span class="i-red-12"> *</span>
+                </label>
+                    <select ng-selected="register.tshirt_size"  name="Register[tshirt_size]" id="tshirt_size" class="form-control">
+                        <option  value="XS">XS</option>
+                        <option  value="S">S</option>
+                        <option value="M" >M</option>
+                        <option  value="L">L</option>
+                        <option  value="XL" >XL</option>
+                        <option  value="XXL" >XXL</option>
+                        <option  value="XXXL" >XXXL</option>
+                    </select>
+            </div>
+            
+              <div class="form-group">
+                <label  for="medical_history">既往病史
+                </label>
+                 <textarea class="form-control" id="medical_history" name="Register[medical_history]" placeholder="请填写既往病史" ng-bind="register.medical_history"></textarea>
+            </div>
+            
+             <div class="form-group">
+              <label for="medical_report"> 体检证明</label>
+                <input type="hidden"  name="Register[medical_report]"  id="medical_report_value" value="{{register.medical_report}}">
+                <input ng-fileupload type="file"  name="file" id="medical_report"  accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp" >
+                 <img ng-if="register.medical_report" alt="" ng-src="{{register.medical_report+'!mid'}}" class="upload-pre" style="width:50px;height:50px;margin-top:4px"  onerror="this.style.display='none'" >
+            </div>
+          
+            <div class="form-group">
+             <label for="certs">完赛证明</label>
+                 <input  type="hidden"  name="Register[certs]"  id="certs_value" value="{{register.certs_text}}">
+                 <input ng-fileupload='{"replaceFileInput":false}'  type="file"   name="file[]" id="certs" style="height:30px" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp" multiple="multiple">
+            <div class="container-fluid upload-pre no-padding">
+        			<div class="col-xs-3 col-sm-3 col-md-2 col-lg-1 no-padding text-center" ng-repeat="c in register.certs" style="margin-top:4px;float:left">
+        			<img class="upload-pre" ng-src="{{c.paper_url+'!mid'}}" data-pre="{{c.paper_url}}" style="max-width:70px;display:inline-block"/></div>
+                 </div>
+            </div>
+            
+             <div class="form-group">
+             <label for="remark">备注</label><br>
+                <textarea rows="" cols="" name="Register[remark]" ng-bind="register.remark" class="form-control">
+                      
+                </textarea>
+            </div>
+</form>
+
+</div>
+<div class="col-xs-12" ng-show="contact_info&&!info_item.sell_out&&!info_item.is_end" style="background-color: #fff">
+<h4 class="page-header" style="margin:14px 0">联系人</h4>
+			<form ng-vbt id="contact_info">
+			   <div class="form-group">
+                <label for="contract_name">姓名:<span class="i-red-12"> *</span>
+                </label>
+                    <input check-type="required" ng-readonly="info_item.selected" type="text" id="contact_info_name" name="contact_info_name" ng-model="info_item.passport_name"  class="form-control" placeholder="请填写您的姓名！">                                                    
+               </div>
+               <div class="form-group">
+                <label for="cell"> 手机:<span class="i-red-12"> *</span>
+                </label>
+                    <input check-type="required mobile" ng-readonly="info_item.selected" maxlength="11" type="tel" id="contact_info_cell" name="contact_info_cell" ng-model="info_item.user_cell"  class="form-control" placeholder="请填写您的手机号码！">                                                    
+               </div>
+			</form>
+</div>
+
+<div class="col-xs-12" style="min-height:50px">
+</div>
+<div class=" no-margin text-center footer no-padding" ng-if="index||!needBack">
+			<label ng-if="registerData&&registerData.is_reg" class="footer-text-label">已报名</label>
+			<label ng-if="!registerData||!registerData.is_reg||registerData.needPay" class="footer-text-label" ng-bind="'￥ '+amount"></label>
+			<label ng-if="channel_status.end" class="footer-text-label">&nbsp;|&nbsp;已结束</label>
+								<div class="pull-right" style="display: inline-block;">
+								<button
+									ng-if="registerData.is_submit&&!registerData.is_reg"
+									class="btn btn-primary footer-btn-plain" data-loading-text="取消中..." 
+									ng-click="cancelReg()" id="cancel_reg_btn"
+									autocomplete="off">取消报名</button>
+									
+								<button style="position: relative;"
+									ng-if="channel_status.start&&!channel_status.end"
+									class="btn btn-primary footer-btn-plain"
+									ng-click="reg()" id="reg_btn"
+									autocomplete="off" ng-disabled="items_length<=0">提交
+									<span ng-if="items_length>0" class="badge">{{items_length}}</span>
+									</button>
+									</div>
+</div>
+<div class="container-fluid no-margin text-center footer no-padding" style="background-color: none;position: fixed;bottom:0px;width:100%" ng-if="is_info&&!channel_status.end&&channel_status.start">
+<a ng-if="info_item&&info_item.selected" class="btn btn-default btn-block no-radius no-border btn-lg" style="background-color:gray;color: white" ng-click="itemCancel(info_item)">取消</a>
+<a ng-if="info_item" ng-disabled="info_item.sell_out||info_item.is_end" class="btn btn-primary btn-block no-radius no-border btn-lg" ng-click="itemSelected(info_item)">预定</a>
+</div>
+
+<button ng-if="hasOrder>0&&index" ng-click="orders()" class="btn btn-primary no-border border-circle" style="position: fixed;bottom:60px;right:14px;background-color: rgba(0,0,0,.5);padding:4px 8px">
+  <i class="fa fa-file-text-o"></i>
+  <span ng-if="registerData.pay_count>0" class="badge badge-circle badge-red" style="position: absolute;top:-4px;right:-4px;background-color: red;color:#fff" ng-bind="registerData.pay_count"></span>
+</button>
+

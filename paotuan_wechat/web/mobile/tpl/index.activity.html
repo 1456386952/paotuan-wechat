@@ -1,0 +1,122 @@
+<!-- 暂无活动 -->
+<div class="alert text-center ng-hide" ng-show="!actlength">暂无活动!</div>
+
+<!-- 正在签到 -->
+<div class="act-list active" ng-if="incheck.length>0" ng-class="{'active': showIsincheck}">
+	<h4 ng-click="showIsincheck=!showIsincheck">正在签到({{incheck.length}})</h4>
+	<ul>
+		<li class="margin-bottom-10" ng-repeat="item in incheck | orderBy: 'check_time'" ng-click="actInfo(item, item.act_id, 'incheck')">
+			<dl class="activity-list dl-horizontal">
+				<dt>
+					<a href=""><img ng-src="{{item.act_image}}" alt="" class="img-responsive"></a>
+				</dt>
+				<dd>
+					<div class="text">
+						<span class="regular" ng-if="item.recurring_type&&item.recurring_type=='1'">[定期]</span>
+						<span class="title">{{item.act_title}}</span>
+						<span class="badge" ng-if="item.register_fee&&item.register_fee!='0.00'"></span>
+						<span class="limit" ng-if="item.rang_limit==1">限</span>
+					</div>
+					<div class="number"><i class="fa fa-user"></i>{{item.members}}人</div>
+					<div class="time">{{item.check_time}}</div>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+<!-- 正在报名 -->
+<div class="act-list active" ng-if="inregister.length>0" ng-class="{'active': showIsinreg}">
+	<h4 ng-click="showIsinreg=!showIsinreg">正在报名({{inregister.length}})</h4>
+	<ul>
+		<li class="margin-bottom-10" ng-repeat="item in inregister | orderBy: 'check_time'" ng-click="actInfo(item, item.act_id, 'inregister')">
+			<dl class="activity-list dl-horizontal">
+				<dt>
+					<a href=""><img ng-src="{{item.act_image}}" alt="" class="img-responsive"></a>
+				</dt>
+				<dd>
+					<div class="text">
+						<span class="regular" ng-if="item.recurring_type&&item.recurring_type=='1'">[定期]</span>
+						<span class="title">{{item.act_title}}</span>
+						<span class="badge" ng-if="item.register_fee&&item.register_fee!='0.00'"></span>
+						<span class="limit" ng-if="item.rang_limit==1">限</span>
+					</div>
+					<div class="number"><i class="fa fa-user"></i>{{item.members}}人</div>
+					<div class="time">{{item.check_time}}</div>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+<!-- 尚未开始 -->
+<div class="act-list active" ng-if="nostart.length>0" ng-class="{'active': showIsnostart}">
+	<h4 ng-click="showIsnostart=!showIsnostart">尚未开始({{nostart.length}})</h4>
+	<ul>
+		<li class="margin-bottom-10" ng-repeat="item in nostart | orderBy: 'check_time'" ng-click="actInfo(item, item.act_id, 'nostart')">
+			<dl class="activity-list dl-horizontal">
+				<dt>
+					<a href=""><img ng-src="{{item.act_image}}" alt="" class="img-responsive"></a>
+				</dt>
+				<dd>
+					<div class="text">
+						<span class="regular" ng-if="item.recurring_type&&item.recurring_type=='1'">[定期]</span>
+						<span class="title">{{item.act_title}}</span>
+						<span class="badge" ng-if="item.register_fee&&item.register_fee!='0.00'"></span>
+						<span class="limit" ng-if="item.rang_limit==1">限</span>
+					</div>
+					<div class="number"><i class="fa fa-user"></i>{{item.members}}人</div>
+					<div class="time">{{item.check_time}}</div>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+<!-- 已结束 -->
+<div class="act-list" ng-if="inend.length>0" ng-class="{'active': showIsend}">
+	<h4 ng-click="showIsend=!showIsend">已结束({{inend.length}})</h4>
+	<ul>
+		<li class="margin-bottom-10" ng-repeat="item in inend | orderBy: '-check_time'" ng-click="actInfo(item, item.act_id, 'inend')">
+			<dl class="activity-list dl-horizontal">
+				<dt>
+					<a href=""><img ng-src="{{item.act_image}}" alt="" class="img-responsive"></a>
+				</dt>
+				<dd>
+					<div class="text">
+						<span class="regular" ng-if="item.recurring_type&&item.recurring_type=='1'">[定期]</span>
+						<span class="title">{{item.act_title}}</span>
+						<span class="badge" ng-if="item.register_fee&&item.register_fee!='0.00'"></span>
+						<span class="limit" ng-if="item.rang_limit==1">限</span>
+					</div>
+					<div class="number"><i class="fa fa-user"></i>{{item.members}}人</div>
+					<div class="time">{{item.check_time}}</div>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+<!-- 已取消 -->
+<div class="act-list" ng-if="is_admin&&iscancel.length>0" ng-class="{'active': showIscancel}">
+	<h4 ng-click="showIscancel=!showIscancel">已取消({{iscancel.length}})</h4>
+	<ul>
+		<li class="margin-bottom-10" ng-repeat="item in iscancel | orderBy: '-check_time'" ng-click="actInfo(item, item.act_id, 'incancel')">
+			<dl class="activity-list dl-horizontal">
+				<dt>
+					<a href=""><img ng-src="{{item.act_image}}" alt="" class="img-responsive"></a>
+				</dt>
+				<dd>
+					<div class="text">
+						<span class="regular" ng-if="item.recurring_type&&item.recurring_type=='1'">[定期]</span>
+						<span class="title">{{item.act_title}}</span>
+						<span class="badge" ng-if="item.register_fee&&item.register_fee!='0.00'"></span>
+						<span class="limit" ng-if="item.rang_limit==1">限</span>
+					</div>
+					<div class="number"><i class="fa fa-user"></i>{{item.members}}人</div>
+					<div class="time">{{item.check_time}}</div>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>

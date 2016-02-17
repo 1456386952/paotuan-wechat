@@ -1,0 +1,125 @@
+<style>
+	.mileage_sum_icon:BEFORE {
+		content: url('/image/paotuanzhuce/mileage_sum_20.png')
+	}
+	.mileage_count_icon:BEFORE {
+		content: url('/image/paotuanzhuce/mileage_count_20.png')
+	}
+	.switch_rank {
+		float: right;
+		margin-right: 10px;
+	}
+	.switch_rank a:hover,.switch_rank a:focus {
+		text-decoration: none;
+	}
+</style>
+<div class="container-fluid no-padding" ng-if="club.m_count > 0">
+	<div class="col-md-4 animated fadeInUp animation-delay-1" style="padding:14px 4px 0 4px">
+		<div class="list-group no-padding list-no-topborder no-margin"  style="padding:4px;">
+			<div class="list-group-item  container-fluid no-border no-padding">
+				<div class="col-xs-6 text-truncate no-padding text-center" style="margin:4px 0 4px 0">
+					<span class="mileage_count_icon" style="font-size: 18px"> 已打卡{{club.m_count}}次</span>
+				</div>
+				<div class="col-xs-6 text-truncate no-padding text-center" style="margin:4px 0 4px 0;border-left:1px #ddd solid;">
+					<span class="mileage_sum_icon"  style="font-size: 18px"> {{club.m_total}}KM</span>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default no-margin">
+			<div class="panel-body no-padding">
+				<ul class="nav nav-tabs">
+					<li>&nbsp;<i class="fa fa-bar-chart-o main-color"></i> {{mileage_type== 'run'? '跑步':'行走'}}</li>
+					<li role="presentation" id="seven" class="active" style="float: right"><a ng-click="getChartData('seven')" style="border-right:0;">日</a></li>
+					<li role="presentation" id="week" style="float: right"><a ng-click="getChartData('week')" >周</a></li>
+					<li role="presentation"  id="month" style="float: right"><a ng-click="getChartData('month')">月</a></li>
+					<li role="presentation" id="year" style="float: right"><a ng-click="getChartData('year')">年</a></li>
+				</ul>
+				<div id="mileage_chart" style="height:200px;width:100%;margin-top: 4px"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4 animated fadeInUp animation-delay-5" style="padding:14px 4px 0 4px">
+		<div class="panel panel-default no-margin">
+			<div class="panel-body no-padding" style="position: relative;min-height: 80px;">
+				<h5>&nbsp;<i class="fa fa-trophy main-color"></i> 排行榜<span class="switch_rank"><a style="color:graytext" ng-click="switchRankView('sub', $event)">分跑团</a>&nbsp;|&nbsp;<a ng-click="switchRankView('runner', $event)">所有跑者</a></span></h5>
+				<ul class="nav nav-tabs" style="text-align: right;">
+					<li role="presentation" id="rank_year" style="float: left"><a ng-click="getRankData('year')">年</a></li>
+					<li role="presentation"  id="rank_month" style="float: left"><a ng-click="getRankData('month')">月</a></li>
+					<li role="presentation" id="rank_week" style="float: left"><a ng-click="getRankData('week')" >周</a></li>
+					<li role="presentation" id="rank_seven" class="active" style="float: left"><a ng-click="getRankData('seven')" style="border-right:0;">日</a></li>
+				</ul>
+				<div id="zw-rank" class="list-group-item  no-border-side text-center" style="border-top:none;display:none;border-bottom: none">暂无排名</div>
+				<a class="list-group-item no-border no-padding" style="height: 100%" ng-href="/wechat/#/clubs/rank?club_eng={{club.club_eng}}">
+					<table style="width: 100%;">
+						<tr ng-repeat="rank in rankList">
+							<td style="width:3rem;color:{{$index<=2?'#fe4557':'#000'}};font-size:20px;padding:8px 0 8px 0" align="center" >{{$index + 1}}</td>
+							<td ng-if="rank.user" style="width:40px;padding:8px 0 8px 0">
+								<img ng-src="{{rank.user.user_face}}"  class="thumb-circle" style="width:35px;height:35px">
+							</td>
+							<td style="padding:8px 8px 8px 0">
+								<div class="col-xs-8 text-left no-padding text-truncate">
+									{{rank.user ? rank.user.nick_name : rank.subname}}
+								</div>
+								<div class="col-xs-4 text-right text-muted no-padding-left text-truncate">
+									{{rank.mileage}}
+								</div>
+								<div class="col-xs-12 text-left no-padding" style="background-color: gray;">
+									<div style="background-color: #02c66c;width:{{rank.percent}}%;height:4px"></div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</a>
+				<div style="width: 100%;height:100%;text-align: center;display:block;position: absolute;top:30px;background-color: rgba(0,0,0,0);" id="loading_rank">
+					<i class="fa fa-spinner fa-spin"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4 animated fadeInUp animation-delay-5" style="padding:14px 4px 0 4px;margin-bottom: 4px">
+		<div class="panel panel-default no-margin">
+			<div class="panel-body no-padding">
+				<h5>&nbsp;<i class="fa  fa-calendar-o main-color"></i> 最近打卡</h5>
+				<div ng-if="recents && !recents[0]" class="list-group-item  no-border-side text-center" style="border-top:none;border-bottom: none">暂无打卡记录</div>
+				<div class="container-fluid text-muted" ng-repeat=" r in recents" style="padding:4px 8px 20px">
+					<div class="col-xs-1 text-right" style="padding:0"><img ng-src="{{r.mileage.user.user_face}}" class="thumb-circle" style="width:35px;height:35px"></div>
+					<div class="col-xs-11 no-padding-right">
+						<a class="list-group-item no-padding no-border" ng-href="/runners/mileageinfo/{{r.mileage.id}}">
+							<div class="panel panel-default no-margin no-radius" style="background-color: transparent;">
+								<div class="panel-body container-fluid " style="padding:0 4px">
+									<div class="col-xs-8 no-padding" ng-bind="r.mileage.user.nick_name">
+
+									</div>
+									<div class="col-xs-4 text-right no-padding" ng-bind="r.mileage.mileage_date">
+
+									</div>
+									<hr>
+									<div class="col-xs-2 no-padding" style="margin-bottom: 4px">
+										<img ng-if="r.mileage.albums" ng-src="{{r.mileage.albums}}" style="width:40px;height:40px">
+										<img ng-if="!r.mileage.albums" ng-src="/image/paotuanzhuce/list-default-pic.jpg" style="width:40px;height:40px">
+									</div>
+									<div class="col-xs-4 text-left no-padding" style="line-height:36px">
+										<label class="text-truncate" style="padding:0,4px">{{r.mileage.mileage}}<small>KM</small></label>
+									</div>
+									<div ng-if="r.mileage.pace" class="col-xs-3 text-left no-padding" style="line-height:36px;font-size:12px">
+										<i class="fa fa-clock-o"></i> {{r.mileage.pace}}
+									</div>
+									<div ng-if="r.mileage.format_duration" class="col-xs-3 text-left no-padding text-truncate"  style="line-height:36px;font-size:12px">
+										<i class="fa fa-history"></i> {{r.mileage.format_duration}}
+									</div>
+									<small ng-if="r.mileage.from_text" class="text-muted" style="position: absolute;bottom:-22px">来自&nbsp;{{r.mileage.from_text}}</small>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div style="width: 100%;height:20px;text-align: center;display:block" id="loading_recent">
+					<i class="fa fa-spinner fa-spin"></i>
+				</div>
+				<a ng-if="more_recent" class="btn btn-default btn-block no-border" ng-href="/wechat/#/clubs/recent?club_eng={{club.club_eng}}">查看更多</a>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,56 @@
+body{
+    margin: 0;
+    font:12px/180% Helvetica;
+}
+h1, h2, h3, h4, h5, h6, ol, dl, dt, dd, ul, li, input, button, form, p { margin: 0; padding: 0 }
+input{outline: none}
+h1, h2, h3, h4, h5, h6 { font-size: inherit }
+ul, ol { list-style: none }
+img{border:0}
+
+.left{float: left;}
+.right{float: right;}
+
+.clear{clear: both;}
+.clearfix{zoom:1;}
+.clearfix:after{content:" ";font-size:0;display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+
+/* app css stylesheet */
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+.tabbar-content{background: #cb352b; width: 100%; height: 48px; position: fixed; bottom: 0; left: 0;}
+.tabbar-content .tabbar-list{display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box; padding: 0 15px;}
+.tabbar-content .tabbar-list li{-webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; text-align: center; height: 48px; line-height: 14px;}
+.tabbar-content .tabbar-list li.login{line-height: 48px;}
+.tabbar-content .tabbar-list li.login i{font-size: 22px;}
+.tabbar-content .tabbar-list li.login span{font-size: 18px;}
+.tabbar-content .tabbar-list li a{color: #FFF; text-decoration: none;}
+.tabbar-content .tabbar-list li a.daka{width: 70px; height: 48px; padding: 11px 0; border-radius: 50%; background: #cb352b; margin: 0 auto; display: block; box-shadow: 0 0 15px rgba(0,0,0,0.25); position: relative; top: -11px;}
+.tabbar-content .tabbar-list li a i{font-size: 28px;}

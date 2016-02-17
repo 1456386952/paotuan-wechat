@@ -1,0 +1,21 @@
+   <a  ng-href="/wechat/#/clubs/register?club_eng={{club.club_eng}}" class="icon-color list-group-item">共<span ng-bind="club.total"></span>名跑友<small class="pull-right" ng-if="member">修改我的会员信息<i class="fa fa-chevron-right"></i></small></a>
+    <a ng-if="!member"   ng-href="/wechat/#/clubs/register?club_eng={{club.club_eng}}" style="position: fixed;top: 60px;right:0;z-index:111"><img src="/image/paotuanzhuce/join.png" style="height:30px"></a>
+<div class="container text-center" style="padding:8px 0 8px 0;" infinite-scroll="loadMore()">
+<div class="col-xs-3 col-sm-3 col-md-2 animated fadeInUp text-center" style="padding:0">
+   <a ng-href="/runners/userinfo/{{club.owner.uid}}" class="btn btn-default no-padding no-border home-function-btn">
+   <img src="/image/club_owner.png" style="position:absolute;right:0px;width:15px;top:-4px">
+   <img  ng-src="{{club.owner.user_face}}" class="thumb-circle no-margin">
+   </a><br>
+    <span class="text-muted" style="margin-top:4px;font-size:10px;width:70px;white-space:nowrap;overflow: hidden;text-overflow:ellipsis;display:inline-block;"><i class="fa fa-{{club.owner.gender==1?'male':'female'}}"></i> <span ng-bind="club.owner.nick_name"></span></span>
+</div>
+
+<div ng-repeat="member in members" class="col-xs-3 col-sm-3 col-md-2 animated fadeInUp animation-delay-{{member.delay}} text-center" style="padding:0">
+   <a ng-href="/runners/userinfo/{{member.uid}}" class="btn btn-default no-padding no-border home-function-btn">
+      <img ng-src="{{member.user_face}}" class="thumb-circle no-margin">
+   </a>
+<br>
+    <span class="text-muted" style="margin-top:4px;font-size:10px;width:70px;white-space:nowrap;overflow: hidden;text-overflow:ellipsis;display:inline-block;"><i class="fa fa-{{member.gender==1?'male':'female'}}"></i><span ng-bind="member.nick_name"></span></span>
+</div>
+<div style="width: 100%;height:20px;text-align: center;background-image: url('/artificial-reason-1.4.3/img/preload.gif');background-position: center;background-repeat: no-repeat;background-size:20px;position: fixed;bottom: 0px" id="loadingEl">
+</div>
+</div>

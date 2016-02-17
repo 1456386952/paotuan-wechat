@@ -1,0 +1,39 @@
+
+<div class="container-fluid no-padding"  infinite-scroll="loadMore();">
+<div class="col-md-12" style="padding:14px 4px 0 4px">
+ <div class="panel panel-default no-margin">
+  <div class="panel-body no-padding">
+ <ul class="nav nav-tabs" style="text-align: right;">
+   <li>&nbsp;<i class="fa fa-trophy main-color"></i> 排行榜</li>
+     <li role="presentation" id="rank_seven" ng-class="{true:'active'}[active=='seven']" style="float: right"><a data-toggle='tab' ng-click="getRankData('seven')" style="border-right:0;">日</a></li>
+       <li role="presentation" id="rank_week" ng-class="{true:'active'}[active=='week']" style="float: right"><a data-toggle='tab' ng-click="getRankData('week')" >周</a></li>
+         <li role="presentation"  id="rank_month" ng-class="{true:'active'}[active=='month']" style="float: right"><a data-toggle='tab' ng-click="getRankData('month')">月</a></li>
+  <li role="presentation" id="rank_year" ng-class="{true:'active'}[active=='year']" style="float: right"><a data-toggle='tab' ng-click="getRankData('year')">年</a></li>
+</ul>
+<div id="wu_rank"  class="list-group-item  no-border-side text-center" style="border-top:none;display:none">暂无排名</div>
+   <table style="width: 100%;">
+        <tr ng-repeat="rank in ranks">
+         <td style="width:3rem;color:{{$index<=2?'#fe4557':'#000'}};font-size:20px;padding:8px 0 8px 0" align="center" >{{$index+1}}</td>
+          <td style="width:40px;padding:8px 0 8px 0">
+          <img ng-src="{{rank.user.user_face}}"  class="thumb-circle" style="width:35px;height:35px">
+		 </td>
+		 <td style="padding:8px 8px 8px 0">
+		   <div class="col-xs-8 text-left no-padding text-truncate">
+		       {{rank.user.nick_name}}
+		   </div>
+		    <div class="col-xs-4 text-right text-muted no-padding-left text-truncate">
+		      {{rank.mileage}}
+		   </div>
+		    <div class="col-xs-12 text-left no-padding" style="background-color: gray;">
+		      <div style="background-color: #fe4557;width:{{rank.percent}}%;height:4px"></div>
+		   </div>
+		 </td>
+        </tr>
+      </table>
+<div style="width: 100%;height:20px;text-align: center;display: block" id="loadingEl">
+  <i class="fa fa-spinner fa-spin"></i>
+</div>
+</div>
+</div>
+</div>
+</div>

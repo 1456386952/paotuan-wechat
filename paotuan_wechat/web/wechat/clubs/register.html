@@ -1,0 +1,125 @@
+<link href="/datetime/datetime.min.css" rel="stylesheet" type="text/css">
+<script src="/datetime/datetime.js" type="text/javascript"></script>
+
+<div ng-show="config_length == 0"  class="container text-center" style="padding:24px;margin-bottom: 40px">
+	<h3>无信息填写项。</h3>
+</div>
+
+<div ng-show="config_length > 0"  class="container" style="padding:8px;margin-bottom: 40px">
+	<h5 class="page-header no-margin-top" ng-if="!member.id"><span>填写个人信息</span></h5>
+	<h5 class="page-header no-margin-top" ng-if="member.id"><span ng-if="modified">个人信息修改</span><span ng-if="!modified">个人信息</span>&nbsp;<small ng-if="member.member_status == 4 && club.member_fee > 0" >缴费日期:{{newPay.trade_time}}</small></h5>
+	<form ng-if="modified"  role="form" id="regForm" method="post" class="animated fadeInUp" ng-vbt>
+		<input type="hidden" name="ClubMember[club_id]" value="{{club.clubid}}">
+		<input type="hidden" name="id" value="{{member.id}}" id="member_id">
+		<div class="alert alert-border alert-danger" style="display:none" id="errorMsg"></div>
+		<div ng-show="!$.isEmptyObject(subs)">
+			<div class="form-group">
+				<label>所属分跑团</label>
+				<select name="ClubMember[sub_group]" class="form-control">
+					<option value="">无</option>
+					<option ng-repeat="(id,name) in subs" ng-selected="member.sub_group == id" value="{{id}}">{{name}}</option>
+				</select>
+			</div>
+		</div>
+		<div ng-repeat="conf in config" on-form-repeat-finish-render >
+			<div class="form-group" ng-if="conf.visible">
+				<label for="{{conf.col_name}}" ng-bind="conf.col_title"></label><span ng-if="conf.optional" class="i-red-12"> *</span>
+				<select  ng-if="conf.col_type == 2" id="{{conf.col_name}}" name="ClubMember[{{conf.col_name}}]" class="form-control">
+				</select>
+				<input ng-if="conf.col_type == 44 && conf.col_name == 'cell'" maxlength="11" type="tel" isRequired="{{conf.optional}}" check-type="mobile"   class="form-control" id="{{conf.col_name}}" name="ClubMember[{{conf.col_name}}]" value="{{conf.value}}" onblur="checkCell();">
+				<input ng-if="conf.col_type == 6" type="email" isRequired="{{conf.optional}}" check-type="mail"  type="text"  class="form-control" id="{{conf.col_name}}" name="ClubMember[{{conf.col_name}}]" value="{{conf.value}}" >
+				<input ng-if="conf.col_type == 1 && conf.col_name == 'nick_name'" readonly="readonly" isRequired="{{conf.optional}}" type="text" class="form-control" id="{{conf.col_name}}" value="{{conf.value}}">
+				<input ng-if="conf.col_type == 1 && conf.col_name != 'nick_name'"  isRequired="{{conf.optional}}" type="text" class="form-control" id="{{conf.col_name}}" name="ClubMember[{{conf.col_name}}]" value="{{conf.value}}">
+				<input ng-if="conf.col_type == 3" type="text" isRequired="{{conf.optional}}" date-type="date" date-max="now" readonly="readonly" class="form-control" id="{{conf.col_name}}" name="ClubMember[{{conf.col_name}}]" value="{{conf.value}}">
+				<input ng-if="conf.col_type == 7" type="number" isRequired="{{conf.optional}}" check-type="number" class="form-control" id="{{conf.col_name}}" name="ClubMember[{{conf.col_name}}]" value="{{conf.value}}">
+				<input ng-if="conf.col_type == 5" type="hidden"  name="ClubMember[{{conf.col_name}}]"  id="{{conf.col_name}}_value" value="{{conf.value}}">
+				<input ng-if="conf.col_type == 5" ng-fileupload type="file" isRequired="{{conf.optional && !conf.value}}" class="form-control" id="{{conf.col_name}}" name="file[]">
+				<img class="upload-pre" ng-if="conf.col_type == 5 && conf.value" isRequired="{{conf.optional}}"  ng-src="{{STATIC_IMG_PRE}}/{{conf.value}}!mid" data-pre="{{STATIC_IMG_PRE}}/{{conf.value}}" style="width:80px;margin-top:4px" onerror="this.style.display='none'" >
+			</div>
+			<div class="form-group"  ng-if="conf.col_name == 'cell' && conf.visible" id="reg-code_div" style="position: relative;width: 100%">
+				<input type="hidden" id="cell_old" value="{{conf.value}}">
+				<label for="reg-code">验证码</label>
+				<input type="number"  check-type="number required"  id="reg-code" name="code" placeholder="请输入验证码"  class="form-control" style="width:130px">
+				<button class="btn btn-ar btn-danger" style="position: absolute;top:30px;left:130px" id="veriCode" ng-click="getResCode();">获取验证码</button>
+			</div>
+		</div>
+	</form>
+
+	<ul ng-show="!modified" class="list-group animated fadeInUp">
+		<li class="list-group-item" ng-repeat="conf in config" ng-if="conf.visible">
+			<table style="width: 100%">
+				<tr>
+					<td ng-bind="conf.col_title" align="left" style="width:40%"></td>
+					<td align="right" style="width:55%">
+						<span ng-if="conf.col_type == 2 && value.selected == 1" ng-repeat="value in conf.col_list_values">
+							{{value.text}}
+						</span>
+						<span ng-if="conf.col_type == 5">
+							<img  ng-if="conf.value" ng-src="{{STATIC_IMG_PRE}}/{{conf.value}}!80X80" data-pre="{{STATIC_IMG_PRE}}/{{conf.value}}" style="max-width:100%;max-height: 50px" onerror="this.style.display='none'">
+						</span>
+						<span ng-if="conf.col_type != 2 && conf.col_type != 5" ng-bind="conf.value">
+						</span>
+					</td>
+				</tr>
+			</table>
+		</li>
+	</ul>
+	<form ng-if="member.member_status == 5" action="/wxpay/index?showwxpaytitle=1" style="display: none" method="post" id="payForm">
+		<input type="text" name="openid" value="{{openid}}">
+		<input type="text" name="uid" value="{{member.uid}}">
+		<input type="text" name="club_id" value="{{club.clubid}}">
+		<input type="text" name="goodDesc" value="{{club.club_name}},会费  ￥{{club.member_fee}}"  id="gd">
+		<input type="text" name="orderid" id="orderid" value="{{payment.id}}">
+		<input type="text" name="total_fee" value="{{club.member_fee * 100}}"  id="tf">
+		<input type="text" name="attach" value=""  id="attach">
+		<input type="text" name="paytype" value="club_member_fee">
+		<input type="text" name="hash" id="hash" value="">
+	</form>
+
+</div>
+<div class="footer no-padding">
+	<div class="pull-left" style="height:100%">
+		<label ng-bind="member.statusText" style="margin-top:4px;color: white;font-size: 2rem"></label>
+		<span ng-if="member.member_status == 5" class="fa fa-rmb" style="color:white;" > <span ng-bind="club.member_fee"></span></span>
+	</div>
+	<div class="pull-right" >
+		<button ng-if="modified && config_length > 0" id="btnApply" class="btn  btn-primary footer-btn-plain" data-loading-text="提交中..." ng-click="regSubmit();">提交</button>
+		<button ng-if="!modified && config_length > 0" id="btnApply" class="btn   btn-primary footer-btn-plain"  ng-click="showModify();">修改</button>
+		<button ng-if="member.member_status == 5" id="btnPay" class="btn  btn-success footer-btn-plain" data-loading-text="跳转中..." ng-click="pay();">支付</button>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function checkCell() {
+		var oldCell = $.trim($("#cell_old").val());
+		var cell = $.trim($("#cell").val());
+		if (oldCell != null && cell != null && cell != oldCell) {
+			$("#reg-code_div").show();
+			$("#reg-code").attr("check-type", "number required")
+			if ($.trim($("#reg-code").val()) == "") {
+				$("#reg-code").focus();
+			}
+		} else {
+			$("#reg-code_div").hide();
+			$("#reg-code").attr("check-type", "number")
+		}
+	}
+
+	function disableBtn(btn, text) {
+		var sec = 30;
+		$(btn).addAttr("disabled", "disabled");
+		var timer = window.setInterval(function() {
+			$(btn).addAttr("disabled", "disabled");
+			$(btn).text(text + "(" + --sec + ")");
+
+			if (sec == 0) {
+				$(btn).text(text);
+				$(btn).removeAttr("disabled");
+				window.clearInterval(timer);
+			}
+		}, 1000);
+	}
+
+
+</script>
+

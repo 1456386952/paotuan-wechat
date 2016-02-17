@@ -1,0 +1,71 @@
+<section id="activity-comment" class="section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ng-click="back()"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">
+						评论
+					</div>
+				</div>
+				<div class="col-xs-2">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="comment">
+		<div class="body">
+			<ul ng-if="comment.length>0">
+				<li ng-repeat="item in comment">
+					<dl class="comment-list dl-horizontal">
+						<dt>
+							<a href=""><img ng-src="{{item.user_face}}" alt="" class="img-responsive"></a>
+						</dt>
+						<dd>
+							<div class="name">{{item.nick_name}}</div>
+							<div class="bottom margin-bottom-10">
+								<span class="time-ago">{{item.diff}}</span>
+								<span class="delete" ng-click="delete(item)">删除</span>
+								<span class="comment-number">{{item.user_review.length}}</span>
+							</div>
+							<div class="txt">
+								<span>{{item.view}}</span>
+								<span class="show-reply" ng-class="{active: showReply}" ng-click="showReply=!showReply">
+									<i class="fa fa-chevron-right"></i>
+								</span>
+							</div>
+
+							<div class="reply" ng-show="showReply">
+								<ul>
+									<li ng-repeat="reply in item.user_review">
+										<dl class="comment-list dl-horizontal">
+											<dt>
+												<a href=""><img ng-src="{{reply.user_face}}" alt="" class="img-responsive"></a>
+											</dt>
+											<dd>
+												<div class="txt">
+													<span>{{reply.view}}</span>
+												</div>
+												<div class="bottom">
+													<span class="time-ago">{{reply.diff}}</span>
+													<span class="delete" ng-click="delete2(item, reply)">删除</span>
+													<span class="comment-number">{{reply.user_review.length}}</span>
+												</div>
+											</dd>
+										</dl>
+									</li>
+								</ul>
+							</div>
+						</dd>
+					</dl>
+				</li>
+			</ul>
+			<div class="alert" ng-if="!comment.length">
+				<p>暂无评论。</p>
+			</div>
+		</div>
+	</div>
+</section>

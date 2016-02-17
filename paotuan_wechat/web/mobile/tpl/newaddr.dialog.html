@@ -1,0 +1,9 @@
+<div class="findlocation">
+    <ul>
+        <li ng-click="newAddr();closeThisDialog()">新建活动地址</li>
+        <li ng-repeat="item in address" ng-click="selectedAddr(item);closeThisDialog()">
+            <span>{{item.location}}</span>
+            <i class="icon-delete" ng-click="delete(item, $index, $event)"></i>
+        </li>
+    </ul>
+</div>

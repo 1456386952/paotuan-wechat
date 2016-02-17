@@ -1,0 +1,199 @@
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+.act-header{
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    background-color: #FE4557;
+    text-align: center;
+    font-size: 30px;
+    color: #FFF;
+    font-weight: 700;
+}
+.act-body{
+    min-height: 600px;
+    background-color: #f5f5f5;
+    padding: 20px 30px;
+}
+.act-image{
+    margin-bottom:20px;
+    padding-bottom: 20px;
+    border-bottom: solid #FE4557 1px;
+}
+.act-name{ font-size: 18px; color: #666; }
+.act-attr{
+    margin-bottom: 5px; font-size: 14px; color: #999;
+}
+.act-intro{
+    padding-left: 20px;
+}
+.down-footer{
+    border-top: 1px solid #FFF; height: 60px; line-height: 60px;
+    background-color: rgba(0,0,0,0.4); 
+    color: #fff;
+}
+.down-button{
+    background-color: #F14557; width: 100px; height: 36px; margin: 12px 20px 0 0;
+    color: #FFF; font-weight: 700; font-size: 16px;
+}
+.site-container{
+    background: #FE4557 url(../image/site_back.png) repeat-x fixed top;
+}
+.site-body{
+    width: 100%;
+    min-height: 640px;
+    color: #FFF;
+    padding: 30px;
+}
+.site-down-btn{
+    background-color: rgba(254,77,95,1); 
+    color: #fff;
+    display: block;
+    width: 80%;
+    padding: 6px 16px;
+    font-size: 14px;
+    height: 46px;
+    border-radius: 6px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    background-image: none;
+    border: 1px solid #FF9AA4/*transparent*/;
+    font-family: inherit;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.btn-left-span{
+    display: block;
+    height: 46px;
+    width: 46px;
+    margin: 0 0 0 20%;
+    text-align: right;
+}
+.btn-right-span{
+    display: block;
+    height: 46px;
+    line-height: 32px;
+    font-size: 14px;
+    text-align: left;
+    width: 50%;
+    float: right;
+}
+.site-shouji-div{
+      width: 240px;
+      margin: 10px auto 30px auto;
+}
+.site-zi-div{
+      width: 240px;
+      margin:0 auto;
+}
+.site-check-bug{
+    width: 360px;
+    margin: 40px auto 0 auto;
+}
+@media (max-width: 767px) {
+    .site-shouji-div{
+      width: 180px;
+      margin: 10px auto 30px auto;
+    }
+    .site-zi-div{
+      width: 180px;
+      margin:0 auto;
+    }
+    .site-check-bug{
+        width: 240px;
+        margin: 40px auto 0 auto;
+    }
+}

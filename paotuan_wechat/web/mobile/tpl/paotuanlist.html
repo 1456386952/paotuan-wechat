@@ -1,0 +1,62 @@
+<div class="topBar">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+
+			</div>
+			<div class="col-xs-8">
+				<div class="title text-center">跑团列表</div>
+			</div>
+			<div class="col-xs-2">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="paotuanlist" when-scrolled="loadMore()" ng-class="{'scrollable-content': pageClass}">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 padding-right-5px" ui-sref="discovery">
+				<div class="find-bulid-paotuan padding-top-7px">
+						<img src="images/find-paotuan.png">
+					<div class="find-bulid">
+						<h3><small class="color-white">发现跑团</small></h3>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 padding-left-5px" ui-sref="bulid">
+				<div class="find-bulid-paotuan padding-top-7px" >
+					<img src="images/bulid-paotuan.png">
+					<div class="find-bulid">
+						<h3><small class="color-white">创建跑团</small></h3>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-xs-12" ng-if='!paotuanListshow'>
+				<h4>您还没有加入跑团哦 (⊙＿⊙)</h4>
+			</div>
+			<div class="col-xs-12"  ng-if='paotuanListshow'>
+				<ul>
+					<li ng-repeat="paotuan_info in paotuanListInfo" ng-click="activity(paotuan_info)">
+						<div class="paotuan margin-top-7px" img-size offset="30">
+							<img ng-src="{{paotuan_info.club_bgimage==''?'./images/default_log.png':paotuan_info.club_bgimage}}">
+							<div class="bottom color-white padding-5px">
+								<h4>{{paotuan_info.club_name}}</h4>
+								<img class="attest" src="images/attest.png" ng-if="paotuan_info.club_status==1">
+								<label class="font-small margin-left-5">{{paotuan_info.members}}人</label>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="loading text-center ng-hide" ng-show="busy">
+							<i class="fa fa-spinner fa-spin loading-spinner"></i>
+						</div>
+						<div class="alert text-center ng-hide" ng-show="last">已经是最后一页啦!</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	<div>
+</section>

@@ -1,0 +1,43 @@
+<form class="text-form" name="textForm" novalidate>
+
+	<!-- 非列表类型 -->
+	<div ng-if="thisType!==2">
+		<div class="form-group">
+			<label for="" class="col-sm-2 control-label hidden">title</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="newTitle" name="title" placeholder="单行文本报名填写项" ng-model="newTitle" required>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 列表类型 -->
+	<div ng-if="thisType==2">
+		<div class="form-group" ng-if="showTitle">
+			<label for="" class="col-sm-2 control-label hidden">title</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="newTitle" name="title" placeholder="单选问题" ng-model="newTitle" required>
+			</div>
+		</div>
+
+		<div class="form-group" ng-repeat="text in texts">
+			<label for="" class="col-sm-2 control-label hidden">text</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="" name="{{text.text}}" placeholder="" ng-model="text.text" required>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="" class="col-sm-2 control-label hidden">add</label>
+			<div class="col-sm-10">
+				[<a href ng-click="texts.push({})">add</a>]
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	    	<button type="button" class="btn btn-primary" ng-click="submitForm(textForm.$valid); closeThisDialog()" ng-disabled="textForm.$invalid">确定</button>
+	    	<button type="button" class="btn btn-default" ng-click="closeThisDialog()">取消</button>
+	    </div>
+	</div>
+</form>

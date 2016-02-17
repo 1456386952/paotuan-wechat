@@ -1,0 +1,131 @@
+{
+    "code": 1,
+    "message": [
+        {
+            "id": "0001",
+            "uid": "1111",
+            "activity_id": "1",
+            "view": "于是否有高盛员工也收到了韦尔斯通知，高盛发言人拒绝发表评论于是否有高盛员工也收到了啊我是的",
+            "create_time": "2015-08-13 15:39:07",
+            "update_time": "2015-11-13 15:39:07",
+            "user_face": "./images/image-2.png",
+            "nick_name": "阿三",
+            "user_review": [
+                {
+                    "id": "1",
+                    "to_uid": "1",
+                    "pid": "1",
+                    "activity_id": "1",
+                    "from_uid": "1",
+                    "view": "哎哟，不错哟。活动很好啊，这样的天气适合出游。",
+                    "create_time": "2015-11-13 15:01:16",
+                    "update_time": "2015-11-13 15:01:17",
+                    "user_face": "./images/image-2.png",
+                    "nick_name": "阿宝"
+                },
+                {
+                    "id": "1",
+                    "to_uid": "1",
+                    "pid": "1",
+                    "activity_id": "1",
+                    "from_uid": "1",
+                    "view": "哎哟，不错哟。活动很好啊，这样的天气适合出游。",
+                    "create_time": "2015-11-13 15:01:16",
+                    "update_time": "2015-11-13 15:01:17",
+                    "user_face": "./images/image-2.png",
+                    "nick_name": "阿宝"
+                }
+            ]
+        },
+        {
+            "id": "0002",
+            "uid": "2222",
+            "activity_id": "1",
+            "view": "于是否有高盛员工也收到了韦尔斯通知，高盛发言人拒绝发表评论于是否有高盛员工也收到了啊我是的",
+            "create_time": "2015-11-13 15:39:04",
+            "update_time": "2015-11-13 15:39:04",
+            "user_face": "./images/image-2.png",
+            "nick_name": "阿牛",
+            "user_review": [
+                {
+                    "id": "1",
+                    "to_uid": "1",
+                    "pid": "1",
+                    "activity_id": "1",
+                    "from_uid": "1",
+                    "view": "11111111111111111111",
+                    "create_time": "2015-11-13 15:01:16",
+                    "update_time": "2015-11-13 15:01:17",
+                    "user_face": "./images/image-2.png",
+                    "nick_name": "阿蛋"
+                },
+                {
+                    "id": "1",
+                    "to_uid": "1",
+                    "pid": "1",
+                    "activity_id": "1",
+                    "from_uid": "1",
+                    "view": "22222222222222222",
+                    "create_time": "2015-11-13 15:01:16",
+                    "update_time": "2015-11-13 15:01:17",
+                    "user_face": "./images/image-2.png",
+                    "nick_name": "阿蛋"
+                },
+                {
+                    "id": "1",
+                    "to_uid": "1",
+                    "pid": "1",
+                    "activity_id": "1",
+                    "from_uid": "1",
+                    "view": "33333333333333333",
+                    "create_time": "2015-11-13 15:01:16",
+                    "update_time": "2015-11-13 15:01:17",
+                    "user_face": "./images/image-2.png",
+                    "nick_name": "阿蛋"
+                }
+            ]
+        }
+    ],
+    "acttivity_user": {
+        "isreg": [
+            {
+                "uid": "0001",
+                "nick_name": "米庐",
+                "user_face": "./images/image-2.png",
+                "reg_time": "2015-06-10 17:03:22"
+            },
+            {
+                "uid": "0002",
+                "nick_name": "韩雪",
+                "user_face": "./images/image-2.png",
+                "reg_time": "2015-06-10 17:03:22"
+            },
+            {
+                "uid": "0003",
+                "nick_name": "欧阳平",
+                "user_face": "./images/image-2.png",
+                "reg_time": "2015-06-10 17:03:22"
+            }
+        ],
+        "ischeckin": [
+            {
+                "uid": "0004",
+                "nick_name": "张伟",
+                "user_face": "./images/image-2.png",
+                "checkin_time": "2015-06-10 17:03:22"
+            },
+            {
+                "uid": "0001",
+                "nick_name": "米庐",
+                "user_face": "./images/image-2.png",
+                "checkin_time": "2015-06-10 17:03:22"
+            },
+            {
+                "uid": "0006",
+                "nick_name": "林凡",
+                "user_face": "./images/image-2.png",
+                "checkin_time": "2015-06-10 17:03:22"
+            }
+        ]
+    }
+}

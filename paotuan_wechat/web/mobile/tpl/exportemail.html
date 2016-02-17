@@ -1,0 +1,51 @@
+<section class="section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="search"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">导出邮箱</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</sectiom>
+<section class="exportemail bg-wight">
+	<form class="form-horizontal" name="sendemail" ng-submit="submitForm(sendemail.$valid)" novalidate>
+		<div class="container">
+			<ul>
+				<li ng-repeat="emailnew in common_email">
+					<div class="row  border-bottom-1px-solid-gray">
+						<div class="col-xs-1">
+							<input type="checkbox" value="{{email.user_name}}" name="commonEmail" ng-checked="emailnew.default==true">
+						</div>
+						<div class="col-xs-2">
+							<label ng-if="emailInfo.acquiesce!=1"><small>{{emailnew.user_name}}</small></label>
+						</div>
+						<div class="col-xs-8">
+							<label><small>{{emailnew.user_email}}</small></label>
+						</div>
+						<div class="col-xs-1" ng-click="delete($index)">
+							<i ng-if="emailnew.default!=true" class="fa fa-times-circle"></i>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="row" ng-click="addEmail()">
+				<div class="col-xs-1">
+					<i class="fa fa-plus"></i>
+				</div>
+				<div class="col-xs-11">
+					增加新的邮箱
+				</div>
+			
+			</div>
+		</div>
+
+		<div class="send">
+			<button type="submit" class="login-btn">发送</button>
+		</div>
+	</form>
+</sectiom>

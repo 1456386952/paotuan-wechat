@@ -1,0 +1,61 @@
+body{background: #eee;}
+header{background: url(/mileage/img/header_03.jpg) center bottom no-repeat; background-size: 100%; padding: 20px; text-align: center; min-height: 150px;}
+
+header .team-logo{width: 80px; height: 80px; margin: 0 auto;}
+header .team-logo img{width: 80px; height: 80px; border-radius: 50%;}
+header .team-help{width: 68px; height: 68px; margin: 0 auto;float:right !important;}
+header .team-help img{width: 68px; height: 68px; border-radius: 50%;margin-top:-290%;margin-left:15%;}
+
+header .team-name{font-size: 20px; color: #fff; text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); margin-top: 10px;}
+header .team-desc{font-size: 12px; color: #eee; text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); margin-top: 10px; line-height: 14px;}
+
+.team-number-list{width:100%; display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box; padding: 10px 0; box-shadow: 0 1px 5px rgba(0,0,0,0.7) inset; background: #FFF;}
+.team-number-list li{-webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; text-align: center; line-height: 16px;}
+.team-number-list li:first-child{border-right: 1px #ddd solid;}
+.team-number-list li a{text-decoration: none; color: #626262; display: block;}
+.team-number-list li .icon{color: #cb352b; font-size: 26px;}
+.team-number-list li .num{color: #333; font-size: 24px; line-height: 24px; min-height: 24px; font-family: 'Oswald', sans-serif;}
+.team-number-list li .text{color: #a0a0a0; font-size: 10px;}
+
+.content-box{background: #eee; box-shadow: 0 2px 3px rgba(221,221,221,0.8) inset; padding: 15px 10px;}
+.content-box .content-title{color: #cb352b; font-size: 14px;}
+.content-last{padding-bottom: 75px;}
+.content-box .more-box{line-height: 30px; /*background-color: #e2e2e2;*/ text-align: center; margin: 10px 10px 0; color: #666;}
+.content-box .more-box a{text-decoration: none; color: #626262; display: block;}
+
+.sign-box{padding-bottom: 26px; margin: 15px 10px 0; position: relative;}
+.sign-box .sign-content{padding: 5px 20px; background-color: #FFF;}
+.sign-box .sign-content a{text-decoration: none; display: block;}
+.sign-box .sign-content .run-data{margin-top: 10px; width:100%; display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box;}
+.sign-box .sign-content .run-data li{-webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; vertical-align: bottom; color: #a0a0a0;}
+.sign-box .sign-content .run-data li:last-child{text-align: right;}
+.sign-box .sign-content .run-data li.center{text-align: center;}
+.sign-box .sign-content .run-data li:first-child{ color: #626262;}
+.sign-box .sign-content .run-data li strong{font-size: 18px; font-family: 'Oswald', sans-serif;}
+.sign-box .sign-content .photo-list{display: block; margin: 5px auto 0; width: 220px;}
+.sign-box .sign-content .photo-list li{width: 65px; height: 65px; display: inline-block; position: relative; margin: 0 4px;}
+.sign-box .sign-content .photo-list li .img{width: 65px; height: 65px; line-height: 65px; position: absolute; top: 0; left: 0; overflow: hidden; background-color: #eeeeee;}
+.sign-box .sign-content .photo-list li .img img{width: 65px;}
+.sign-box .sign-content .likes{border-top: 1px #f1f1f1 solid; padding: 5px 0; margin-top: 10px;}
+.sign-box .sign-content .likes li{float: left; width: 20px; height: 20px; margin: 0 2px; text-align: center;}
+.sign-box .sign-content .likes li:first-child{margin-left: 0;}
+.sign-box .sign-content .likes li img{width: 20px; height: 20px; border-radius: 50%;}
+.sign-box .sign-content .likes li.number{border-radius: 1px; height: 16px; line-height: 18px; width: 25px; margin-top: 2px; background-color: #EEE; color: #999; float: right;}
+.sign-box .time{background-color: #d2d2d2; width: 80px; height: 18px; line-height: 18px; border-radius: 2px; text-align: center; color: #FFF; position: absolute; left: 0; bottom: 0px;}
+.sign-box .time:before{content:""; position: absolute; top: -10px; left: 12px; width: 0; height: 0; border-width: 5px; border-style: solid; border-color: transparent transparent #d2d2d2 transparent;}
+.sign-box .more{width: 100px; height: 18px; line-height: 18px; position: absolute; right: 0; bottom: 4px;}
+.sign-box .more .icon-more{width: 20px; height: 16px; border-radius: 2px; background: #d2d2d2; position: absolute; right: 0; bottom: 0;}
+.sign-box .more .icon-more:before{content:""; position: absolute; top: 3px; left: -10px; width: 0; height: 0; border-width: 5px; border-style: solid; border-color: transparent #d2d2d2 transparent transparent;}
+.sign-box .more .icon-more:after{content:". ."; position: absolute; top: -4px; left: 3px; font-size: 14px; font-weight: bold; color: #fff;}
+.sign-box .more .more-content{width: 50px; height: 28px; background-color: #4b4b4b; text-align: center; border-radius: 3px; position: absolute; top: -5px; right: 30px; display: none;}
+.sign-box .more .more-content button{border: 0; background: none; color: #FFF; width: 50px; height: 28px; line-height: 28px; display: block; overflow: hidden;}
+.sign-box-none{text-align: center; padding-top: 50px; color: #666;}
+.sign-box-none i{font-size: 16px;}
+
+.team-box{margin: 15px 10px 0; }
+.team-box a{text-decoration: none; color: #333;}
+.team-box .team-content{background-color: #FFF; border-radius: 3px; padding: 5px 10px 5px 30px; margin-left: 30px; position: relative; min-height: 61px;}
+.team-box .team-content .logo{width: 50px; height: 50px; border-radius: 50%; position: absolute; left: -25px; top: 50%; margin-top: -25px;}
+.team-box .team-content strong{font-size: 14px; font-weight: bold;}
+.team-box .team-content .icon{font-size: 14px;}
+.team-box .team-content p{color: #a0a0a0; line-height: 18px; margin-top: 3px;}

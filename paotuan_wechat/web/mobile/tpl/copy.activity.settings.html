@@ -1,0 +1,50 @@
+<div class="topBar">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+				<i class="fa fa-chevron-left" ng-click="closeThisDialog()"></i>
+			</div>
+			<div class="col-xs-8">
+				<div class="title text-center">高级设置</div>
+			</div>
+			<div class="col-xs-2">
+				<button type="button" class="btn btn-one" ng-click="closeThisDialog()">完成</button>
+			</div>
+		</div>
+	</div>
+</div>
+<section class="advancedsettings">
+	<div class="container" style="padding-top: 7px;">
+		<label>活动项目</label>
+		<div class="row">
+			<div class="col-xs-3">
+				<a class="btn btn-default bg-color-xiaoai" style="padding-top: 10px; padding-bottom: 10px;" role="button"><label class="color-white">默认</label></a>
+			</div>
+			<ul>
+				<li ng-repeat="project in copyAct.project">
+					<div class="col-xs-3">
+						<a class="btn btn-default" style="padding-top: 10px; padding-bottom: 10px;" role="button" ng-click="editProject(project, $index)">{{project.project_name}}</a>
+					</div>
+				</li>
+			</ul>
+			<div class="col-xs-3" ng-click="addProject()">
+				<a class="btn btn-default" role="button"><i class="fa fa-plus"></i></a>
+			</div>
+		</div>
+		<label>报名时需要体提交的信息</label>
+		<div class="row">
+			<ul>
+				<li ng-repeat="item in join_info">
+					<div class="col-xs-3">
+						<a class="btn btn-default" style="padding-top: 10px; padding-bottom: 10px;" role="button" add-info add-flag="{{item.flag}}" add-fn="addFn(item)" del-fn="delFn(item)" ng-class="{'bg-red': item.field=='passport_name'||item.field=='cell'||item.col_name_copy||item.flag, 'disabled': item.field=='passport_name'||item.field=='cell'}">{{item.display}}</a>
+					</div>					
+				</li>
+				<li>
+					<div class="col-xs-3" ng-click="addType()">
+						<a class="btn btn-default" role="button"><i class="fa fa-plus"></i></a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</sectiom>

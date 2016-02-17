@@ -1,0 +1,101 @@
+<div class="share-alert" ng-if="openShareAlert" ng-click="closeShareAlert()"></div>
+
+<section id="activity-info" class="section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="index.activity"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">
+						{{actInfo.act_title}}
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+						<i class="fa fa-paper-plane" ng-click="openShare()"></i>
+						<i class="fa fa-ellipsis-v" ng-click="isTopNavFn()" ng-if="is_admin||isActer"></i>
+						<ul class="top-nav" ng-class="{active: isTopNav}" ng-if="is_admin||isActer">
+							<li ng-click="cancelact()"><i class="icon icon-cancel"></i>取消活动</li>
+							<li ng-click="sendmessage()"><i class="icon icon-remind"></i>活动提醒</li>
+							<li ng-click="signHelper()"><i class="icon icon-sign"></i>签到助理</li>
+							<li ui-sref="sendemail"><i class="icon icon-export"></i>导出</li>
+						</ul>
+						<div class="top-nav-overlay" ng-class="{active: isTopNav}" ng-click="closeFn()" ng-if="is_admin||isActer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<dl class="activity-list dl-horizontal margin-bottom-10" ui-sref="activityDetail({act_id: actInfo.act_id})">
+		<dt>
+			<a href=""><img ng-src="{{actInfo.act_image}}" alt="" class="img-responsive"></a>
+		</dt>
+		<dd>
+			<div class="text">
+				<span class="regular" ng-if="actInfo.recurring_type&&actInfo.recurring_type=='1'">[定期]</span>
+				<span class="title">{{actInfo.act_title}}</span>
+				<span class="badge" ng-if="actInfo.register_fee&&actInfo.register_fee!='0.00'"></span>
+				<span class="limit" ng-if="actInfo.rang_limit==1">限</span>
+				<div class="money">
+					<span ng-if="actInfo.register_fee&&actInfo.register_fee!='0.00'">￥{{actInfo.register_fee}}</span>
+					<i class="fa fa-chevron-right"></i>
+				</div>
+			</div>
+			<div class="number">
+				<i class="fa fa-user"></i>{{actInfo.members}}人
+				<span ng-class="{'praise': isPraise}" ng-click="praise()"><i class="fa fa-thumbs-o-up"></i><span>{{actInfo.act_praise}}</span></span>
+			</div>
+			<div class="time">{{actInfo.check_time}}</div>
+			<div class="start-time">{{actInfo.recurring_type_time}}</div>
+		</dd>
+		<div class="view-detail text-center">查看活动详情</div>
+	</dl>
+	<!-- <div class="comment margin-bottom-10">
+		<div class="head" ng-click="goComment()">
+			<div class="title">评论</div>
+			<span class="number">{{comment.length ? comment.length : 0}}条</span>
+		</div>
+		<div class="body">
+			<ul ng-if="comment.length>0">
+				<li ng-repeat="item in comment">
+					<dl class="comment-list dl-horizontal">
+						<dt>
+							<a href=""><img ng-src="{{item.user_face}}" alt="" class="img-responsive"></a>
+						</dt>
+						<dd>
+							<div class="txt">
+								<span>{{item.view}}</span>
+							</div>
+							<div class="bottom">
+								<span class="time-ago">{{item.diff}}</span>
+								<span class="delete" ng-click="delete(item)">删除</span>
+								<span class="comment-number">{{item.user_review.length}}</span>
+							</div>
+						</dd>
+					</dl>
+				</li>
+			</ul>
+			<div class="alert" ng-if="!comment.length">
+				<p>暂无评论。</p>
+			</div>
+		</div>
+	</div> -->
+	<div class="registration">
+		<div class="head" ui-sref="runnerlist.reg">
+			<div class="title">报名/签到列表</div>
+		</div>
+		<div class="body">
+			<ul class="clearfix">
+				<li ng-repeat="item in regCheck">
+					<img ng-src="{{item.user_face}}" alt="" class="img-responsive">
+				</li>
+				<li>
+					<img src="./images/image-3.png" alt="" class="img-responsive">
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- <button type="button" class="btn btn-red">立即报名</button> -->
+</section>

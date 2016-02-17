@@ -1,0 +1,78 @@
+<form  class="form-horizontal" name="projectFrom" novalidate>
+<div class="topBar">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+				<i class="fa fa-chevron-left" ng-click="closeThisDialog()"></i>
+			</div>
+			<div class="col-xs-8">
+				<div class="title text-center">活动项目</div>
+			</div>
+			<div class="col-xs-2">
+				<button type="button" class="btn btn-one" ng-click="saveProject(projectFrom.$valid); closeThisDialog()" ng-disabled="projectFrom.$invalid">完成</button>
+			</div>
+		</div>
+	</div>
+</div>
+<section class="advancedsettings">
+	
+		<div class="container bg-wight padding-top-7px padding-bottom-7px">
+			<input type="text" class="text-noborder" placeholder="项目名称" name="name" ng-model="project.name" required>
+			<hr>
+			<input type="text" class="text-noborder" placeholder="金额" name="money" ng-model="project.money" required>
+			<hr>
+			<input type="text" class="text-noborder" placeholder="名额数量" name="number" ng-model="project.number" required>
+			<hr>
+			<!-- <input type="checkbox" class="vertical-align-text-top"><label class="color-grey font-size-12px">&nbsp;仅限本次跑团</label> -->
+		</div>
+		<div class="container bg-wight padding-top-7px padding-bottom-7px margin-top-7px">
+			<label>报名积分</label><br>
+			<div class="gain clearfix">
+				<div class="fl-8">
+					<input type="radio" name="regReceive" ng-model="project.reg_gain" ng-value="0" required>
+					<label class="color-grey">获赠</label><br>
+				</div>
+				<div class="fl-2">
+					<input type="text" ng-if="project.reg_gain==0" name="regNum" ng-model="project.reg_num" required>
+				</div>
+			</div>
+			<hr>
+			<div class="gain clearfix">
+				<div class="fl-8">
+					<input type="radio" name="regConsumption" ng-model="project.reg_gain" ng-value="1" required>
+					<label class="color-grey">消费</label><br>
+				</div>
+				<div class="fl-2">
+					<input type="text" ng-if="project.reg_gain==1" name="regNum" ng-model="project.reg_num" required>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="container bg-wight padding-top-7px padding-bottom-7px margin-top-7px">
+			<label>签到积分</label><br>
+			<div class="gain clearfix">
+				<div class="fl-8">
+					<input type="radio" name="signReceive" ng-model="project.checkin_gain" ng-value="0" required>
+					<label class="color-grey">获赠</label><br>
+				</div>
+				<div class="fl-2">
+					<input type="text" ng-if="project.checkin_gain==0" name="checkinNum" ng-model="project.checkin_num" required>
+				</div>
+			</div>
+			<div class="gain clearfix">
+				<div class="fl-8">
+					<input type="radio" name="signConsumption" ng-model="project.checkin_gain" ng-value="1" required>
+					<label class="color-grey">消费</label><br>
+				</div>
+				<div class="fl-2">
+					<input type="text" ng-if="project.checkin_gain==1" name="checkinNum" ng-model="project.checkin_num" required>
+				</div>
+			</div>
+			<hr>
+		</div> -->
+		<div class="container bg-wight padding-top-7px padding-bottom-7px margin-top-7px" ng-click="showMeetConsume()">
+			<label class="color-grey">失约扣除 </label>
+		</div>
+		<!-- <button type="submit" class="btn btn-danger">发布</button> -->
+	
+</section>
+</form>

@@ -1,0 +1,17 @@
+<div class="container">
+	<ul class="row">
+		<li class="col-xs-12">
+			<span class="txt">选择报名填写的类型</span>
+		</li>
+		<li class="col-xs-12" ng-repeat="item in type" ng-click="addTypeText($index); closeThisDialog()">
+			<div class="row">
+				<div class="col-xs-6">
+					<span class="title">{{item}}</span>
+				</div>
+				<div class="col-xs-6">
+					<span class="txt">适用于报名者填写<span>{{item}}</span></span>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

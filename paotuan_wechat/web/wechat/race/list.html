@@ -1,0 +1,36 @@
+<style>
+ span{
+   color: white;
+ }
+</style>
+<div class="container-fluid text-center" style="margin:14px ">
+ <div class="input-group">
+      <input type="search" class="form-control" placeholder="请输入赛事名称" ng-model="search.key" ng-change="loadMore(true)">
+      <div class="input-group-addon no-padding "><button  class="btn no-border no-radius" ng-click="loadMore(true)"  style="background-color: transparent;"><i class="fa fa-search"></i></button></div>
+    </div>
+    </div>
+<div class="container-fluid text-center" ng-if="no_data" style="margin-top:44px">
+    暂无比赛
+</div>
+<div class="list-group no-padding list-no-topborder"  style="padding:4px" infinite-scroll="loadMore(false)" infinite-scroll-listen-for-event="list:filtered">
+		<a ng-href="http://www.irunner.mobi/scorepanel/{{r.short_name}}"   class="list-group-item no-border-side animated fadeInUp animation-delay-{{act.delay}}" ng-repeat="r in list"   style="padding:4px 0;position: relative;line-height:81px">
+		 <img ng-if="r.race_icon" class="media-object pull-left"
+			ng-src="{{STATIC_IMG_PRE}}/{{r.race_icon}}!mid" 
+			style="width: 80px; height: 80px;position: absolute;left: 4px">
+		<div class="container-fluid" style="padding-left:88px;padding-right:0;display:block;line-hieght:80px;height:80px;display: inline-block;width: 100%;vertical-align: middle;">
+		  <div class="col-xs-12  no-padding" style="line-height: 24px;height:24px">
+		  <h5 class="no-margin text-truncate" style="padding:4px 0 0 ">{{r.disp_name}}</h5>
+		  </div>
+		  <div class="col-xs-12" style="line-height: 20px;padding:4px 0 0 0">
+		  		<small class=" text-muted"><i class="fa fa-calendar icon-main"></i> {{r.race_time}}</small>
+		  </div>
+		   <div class="col-xs-12 no-padding" style="line-height: 20px;">
+		  	<small class="text-truncate text-muted"><i class="fa fa-map-marker icon-main" ></i> &nbsp;{{r.city}}·{{r.place}}</small>
+		  </div>
+		</div>
+	</a>
+	<div ng-if="loading" style="width: 100%;height:20px;text-align: center;">
+	   <i class="fa fa-spinner fa-spin"></i>
+    </div>
+</div>
+

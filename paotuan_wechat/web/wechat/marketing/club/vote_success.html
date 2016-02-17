@@ -1,0 +1,96 @@
+<style>
+   .my-vote-bg{
+   max-width:600px;
+   min-height:220px;
+   position: relative;
+   background-image:url('/image/marketing/vote_rank_bg.png');
+   background-position:center;
+   background-size:100% 100%;
+   background-repeat: no-repeat; 
+   }
+   .my-vote{
+   background-image:url('/image/marketing/my_vote.png');
+   background-position:top center;
+   background-size:150px 25px;
+   background-repeat: no-repeat; 
+   height: 100%;
+   margin-top:14px
+   }
+   
+</style>
+<div  id="marketing_container" style="background-image: url('/image/marketing/bg.png');background-size:cover;background-repeat: no-repeat;padding-top:14px">
+<div ng-if="can_vote||myVotes_length>0" class="container-fluid my-vote-bg ">
+   <div class="col-xs-12 my-vote no-padding" >
+      <table style="margin-top:30px;width: 100%">
+      <tr ng-if="myVotes_length==0">
+      <td align="center" class="text-muted">
+      <img src="/image/marketing/no_vote.png" style="height:100px">
+	</td>
+      </tr>
+      <tr ng-if="myVotes_length==0">
+       <td  align="center" class="text-muted">
+      	<a ng-if="can_vote" class="btn btn-default no-padding no-border " ng-href="/wechat/#/marketing/club/vote?id={{marketing.marketing_id}}" style="background-color:transparent;border-radius:24px ">
+  			<img src="/image/marketing/go_vote.png">
+		</a>
+		</td>
+      </tr>
+        <tr ng-if="myVotes_length>0" ng-repeat="mv in myVotes">
+         <td style="width:3rem;color:{{mv.index<=3?'#fe4557':'#fff'}};font-size:20px;padding:8px 0 8px 0" align="center" >{{mv.index}}</td>
+          <td style="width:40px;padding:8px 0 8px 0">
+          <img ng-if="mv.club_logo"
+			ng-src="{{STATIC_IMG_PRE}}/{{mv.club_logo}}!m.pre" class="thumb-circle" style="width:35px;height:35px">
+          <img ng-if="!mv.club_logo"
+			ng-src="/image/club_default.png"  class="thumb-circle" style="width:35px;height:35px">
+		 </td>
+		 <td style="wpadding:8px 0 8px 0">
+		   <div class="col-xs-9 text-left no-padding">
+		       <h5 class="no-margin text-truncate">{{mv.club_name}}</h5>
+		   </div>
+		    <div class="col-xs-3 text-right">
+		      {{mv.like_sum}}
+		   </div>
+		    <div class="col-xs-12 text-left no-padding" style="background-color: gray;">
+		      <div style="background-color: #fe4557;width:{{mv.percent}}%;height:4px"></div>
+		   </div>
+		 </td>
+        </tr>
+      </table>
+   </div>
+
+</div>
+
+<div class="container-fluid" style="margin-top:20px;color: #fff">
+   <div ng-if="go_mileage" class="col-xs-12 no-padding text-center"  style="margin-bottom:10px;">
+<a class="btn btn-default no-padding no-border" ng-href="/wechat/#/marketing/club/result?id={{marketing.marketing_id}}" style="background-color:transparent;border-radius:8px ">
+  <img src="/image/marketing/mileage_rank.png?v=1">
+</a>
+</div>
+
+   <div class="col-xs-12 no-padding" >
+   <h4 >跑团人气排名</h4>
+      <table style="width: 100%">
+        <tr ng-repeat="mv in voteClubs">
+         <td style="width:3rem;color:{{mv.index<=3?'#fe4557':'#fff'}};font-size:20px;padding:8px 0 8px 0" align="center">{{mv.index}}</td>
+          <td style="width:40px;padding:8px 0 8px 0">
+          <img ng-if="mv.club_logo"
+			ng-src="{{STATIC_IMG_PRE}}/{{mv.club_logo}}!m.pre" class="thumb-circle" style="width:35px;height:35px">
+          <img ng-if="!mv.club_logo"
+			ng-src="/image/club_default.png"  class="thumb-circle" style="width:35px;height:35px">
+		 </td>
+		 <td style="padding:8px 0 8px 0">
+		   <div class="col-xs-9 text-left no-padding">
+		      <h5 class="no-margin text-truncate">{{mv.club_name}}</h5>
+		   </div>
+		    <div class="col-xs-3 text-right">
+		      {{mv.like_sum}}
+		   </div>
+		    <div class="col-xs-12 text-left no-padding" style="background-color: gray;">
+		      <div style="background-color: #fe4557;width:{{mv.percent}}%;height:4px"></div>
+		   </div>
+		 </td>
+        </tr>
+      </table>
+   </div>
+
+</div>
+</div>

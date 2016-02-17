@@ -1,0 +1,33 @@
+<div ng-if="act.act_status==1&&act.isReg">
+<div class="top thumbnail no-margin-bottom">
+	<img ng-src="http://xiaoi.b0.upaiyun.com/{{act.image}}" data-pre="http://xiaoi.b0.upaiyun.com/{{act.image}}" />
+	<h5 class="thumbnail-title">{{act.act_title}}</h5>
+</div>
+<div class="no-margin" style="padding:0 14px 0 14px"> 
+<label><i class="fa fa-calendar"></i> {{act.date}}</label>
+<label class="pull-right"><i class="fa fa-clock-o"></i> {{act.act_start_time}}-{{act.act_end_time}}</label>
+<br>
+<i class="fa fa-map-marker"></i> {{location.name}}
+</div>
+<hr>
+<div class="container text-center" ng-if="act.act_status==0">
+   <h6><span class="label label-default">已取消</span></h6>
+</div>
+
+<div class="container text-center no-margin-top" style="padding:14px" ng-if="act.act_status==1">
+<h4 ng-show="act.isReg" style="color:#000">恭喜您，已成功报名</h4>
+<h4 ng-show="!act.isReg" style="color:#000">您还没有报名</h4>
+</div>
+
+<div class="container text-center" style="padding:14px" >
+<a ng-if="act.act_status==1" class="btn btn-ar btn-success btn-block" ng-click="share();">分享</a>
+<a class="btn btn-ar btn-primary btn-block" href="/wechat/#/activity/info?act_id={{act.act_id}}">查看活动详情</a>
+</div>
+</div>
+<div ng-if="act.act_status==0">
+<div  class="container" style="height:300px;background-image: url('/image/paotuanzhuce/act_cancel.jpg');background-position: center;background-size:100% 300px ">
+</div>
+<div class="container text-center" style="padding:44px 44px">
+ <a class="btn btn-info btn-block" ng-href="/wechat/#/activity/list?club_eng={{club.club_eng}}">返回活动列表</a>
+</div>
+</div>

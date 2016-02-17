@@ -1,0 +1,72 @@
+
+<link href="css/user/user.css" rel="stylesheet" />
+<div data-ng-controller="UserTrackerLogsCtrl" data-ng-init="init()">
+  <header>
+    <div class="team-logo animated fadeIn">
+      <img ng-src="{{user.avatar.indexOf('upaiyun')>0 ? user.avatar+'!thumb240' : user.avatar}}">
+    </div>
+    <div class="team-name">{{user.name}}</div>
+  </header>
+  <ul class="team-number-list">
+    <li>
+      <i class="icon ion-ios-list-outline"></i>
+      <p class="num">{{summary.times}}</p>
+      <p class="text">总次数</p>
+    </li>
+    <li>
+      <i class="icon ion-ios-speedometer-outline"></i>
+      <p class="num">{{summary.kms}}</p>
+      <p class="text">总里程</p>
+    </li>
+  </ul>
+  <div class="content-box content-last" infinite-scroll="loadMore()" infinite-scroll-disabled="isLoading" infinite-scroll-distance="1" >
+    <div class="content-title"><i class="ion-android-clipboard"></i> 打卡记录</div>
+    <article class="sign-box" ng-repeat="(trackerIndex, tracker) in trackers">
+      <div class="sign-content">
+        <a href="#/detail/{{currentCrew.domain}}/{{tracker.id}}">
+          <ul class="run-data">
+            <li>
+              <strong>{{tracker.distance}}</strong>
+              <span>KM</span>
+            </li>
+            <li class="center">
+              <i class="icon ion-ios-timer-outline"></i>
+              <span>{{tracker.average}}/KM</span>
+            </li>
+            <li>
+              <i class="icon ion-ios-stopwatch-outline"></i>
+              <span>{{tracker.duration}}</span>
+            </li>
+          </ul>
+        </a>
+        <ul class="photo-list">
+          <li ng-repeat="photo in tracker.photos">
+            <a class="img" href="javascript://" ng-click="previewImage(trackerIndex, photo)">
+              <img ng-src="{{photo.indexOf('upaiyun')>0 ? photo+'!thumb120' : photo}}" />
+            </a>
+          </li>
+        </ul>
+        <ul class="likes clearfix" ng-show="tracker.favors.length != 0">
+          <li ng-show="$index < 8" ng-repeat="favor in tracker.favors">
+            <pt-avatar avatar="{{favor.user.avatar}}" thumb="60"></pt-avatar>
+          </li>
+          <li class="number" ng-show="tracker.favors.length > 8">{{tracker.favors.length}}</li>
+        </ul>
+      </div>
+      <div class="time">{{tracker.executed_at}}</div>
+      <div class="more" ng-show="loggedInUser.id == user.id">
+        <i class="icon-more" ng-click="showMore(tracker.id)"></i>
+        <div class="more-content" id="more_content_{{tracker.id}}">
+          <button ng-click="deleteTracker(tracker.id, $event)"> <i class="ion-trash-a"></i>删除</button>
+        </div>
+      </div>
+    </article>
+    <div class="sign-box-none" ng-show="pageLoading">
+      <p><i class="ion-load-d"></i>加载中……</p>
+    </div>
+    <div class="sign-box-none" ng-show="!pageLoading && trackers.length == 0">
+      <p>暂无打卡</p>
+    </div>
+  </div>
+</div>
+<pt-tab-bar></pt-tab-bar>

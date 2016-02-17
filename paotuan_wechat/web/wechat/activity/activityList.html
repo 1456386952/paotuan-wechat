@@ -1,0 +1,38 @@
+<style>
+ span{
+   color: white;
+ }
+</style>
+<div class="container-fluid text-center" ng-if="act_count<=0">
+           <i class="fa fa-exclamation-triangle"></i><br>
+                                   暂无活动
+</div>
+<div class="list-group no-padding list-no-topborder"  style="padding:4px" infinite-scroll="loadMore()" infinite-scroll-listen-for-event="list:filtered">
+		<a ng-click="actInfo(act);"   class="list-group-item no-border-side animated fadeInUp animation-delay-{{act.delay}}" ng-repeat="act in acts"   style="padding:4px 0;position: relative;line-height:81px">
+		 <img class="media-object pull-left"
+			ng-src="{{STATIC_IMG_PRE}}/{{act.image}}!m.pre" 
+			style="width: 80px; height: 80px;position: absolute;left: 4px">
+		<div class="container-fluid" style="padding-left:88px;padding-right:0;display:block;line-hieght:80px;height:80px;display: inline-block;width: 100%;vertical-align: middle;">
+		  <div class="col-xs-12  no-padding" style="line-height: 24px;height:24px">
+		  <h5 class="no-margin text-truncate" style="padding:4px 0 0 ">{{act.act_title}}</h5>
+		  </div>
+		 <div class="col-xs-12 no-padding" style="line-height: 15px">
+		   <span ng-if="act.can_reg" class="label label-border">正在报名</span>
+		    <span ng-if="act.can_check" class="label label-border">正在签到</span>
+		  	<span ng-if="act.act_create_user==act.act_opt_user||!act.act_opt_user" class="label label-border">我发起的</span>
+		    <span ng-if="act.is_end" class="label label-border">已结束</span>
+		  </div>
+		  <div class="col-xs-12" style="line-height: 17px;padding:4px 0 0 0">
+		  		<small class=" text-muted"><i class="fa fa-calendar icon-main"></i> {{act.date}} {{act.start_time}}-{{act.end_time}}</small>
+		  </div>
+		   <div class="col-xs-12 no-padding" style="line-height: 17px;">
+		  	<small class="text-truncate text-muted"><i class="fa fa-map-marker icon-main" ></i> &nbsp;{{act.location_name}}</small>
+		  </div>
+		</div>
+		<span ng-if="act.isnew" class="badge badge-red border-circle" style="position: absolute;top:0;left:78px;height:10px;width:10px;padding:3px">&nbsp;</span>
+		<img ng-if="act.isreg||act.ischeckin" src="/image/paotuanzhuce/joined.png" style="position: absolute;top:0;right:0;height:30px">
+	</a>
+	<div style="width: 100%;height:20px;text-align: center;background-image: url('/artificial-reason-1.4.3/img/preload.gif');background-position: center;background-repeat: no-repeat;background-size:20px;display: none" id="loadingEl">
+    </div>
+</div>
+

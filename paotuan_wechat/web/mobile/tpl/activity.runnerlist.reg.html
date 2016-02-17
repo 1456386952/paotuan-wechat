@@ -1,0 +1,19 @@
+<div class="alert text-center ng-hide" ng-show="runners.length==0">暂无报名!</div>
+
+<runner class="runner">
+	<runner-list ng-repeat="runner in runners" ng-click="runnerinfo(runner.uid)">
+		<dl class="runner-list dl-horizontal">
+			<dt>
+				<a href=""><img ng-src="{{runner.user_face}}" alt="" class="img-responsive"></a>
+				<i class="icon-arrow" ng-if="runner.icon"></i>	
+			</dt>
+			<dd>
+				<div class="txt">
+					<span class="name">{{runner.nick_name}}</span>
+					<span class="time">{{runner.diff}}</span>
+				</div>
+			</dd>
+		</dl>
+		<div class="cancel" ng-click="cancel(runner, $event)">取消</div>
+	</runner-list>
+</runner>

@@ -1,0 +1,59 @@
+
+<link href="css/detail/detail.css" rel="stylesheet" />
+<link href="css/test/detail.css" rel="stylesheet" />
+<div class="share animated fadeInDown">
+	<p>点击菜单</p>
+	<p><span class="c">分享给朋友们</span></p>
+</div>
+<header>
+	<div class="team-logo animated fadeInUp">
+		<img src="{{detail.user.avatar}}">
+	</div>
+	<div class="team-name animated fadeInUp">{{detail.user.name}}</div>
+</header>
+<article class="content animated flipInY">
+   
+    <div>
+        
+		<a style="text-decoration:none" ng-class="favorsIsMe?'btn btn-on':'btn'" href="javascript://" ng-click="clickFavors()">
+		<img ng-src="img/like.jpg"/ class="text" style="margin-left:95%;margin-top:-20%">
+		<i class="ion-heart"></i>
+		<p style="margin-left:98%;margin-top:-25%;color:rgb(255,255,255);" id="favors-number">{{favors.length != 0 ? favors.length : '0'}}</p>
+		 
+		 </a>
+	</div>
+	<div class="date">{{detail.executed_at}}</div>
+	<div class="km">{{detail.distance}}</div>
+	<span class="tit">KM</span>
+	<ul class="run-data">
+		<li class="center">
+			<i class="icon ion-ios-timer-outline"></i>
+			<span>{{detail.average}}/KM</span>
+		</li>
+		<li>
+			<i class="icon ion-ios-stopwatch-outline"></i>
+			<span>{{detail.duration}}</span>
+		</div>
+	</ul>
+</article>
+<article class="photo">
+	<ul class="photo-list clearfix">
+		<li ng-repeat="photo in detail.photos">
+			<a class="img animated fadeIn" href="javascript://" ng-click="previewImage(photo)">
+				<img ng-src="{{photo.indexOf('upaiyun')>0 ? photo+'!thumb120' : photo}}" />
+			</a>
+		</li>
+	</ul>
+</article>
+<!-- <article class="more-content" ng-show="loggedInUser != null"> -->
+<article class="more-content">
+<!-- 	<div class="btn-box">
+		<a ng-class="favorsIsMe?'btn btn-on':'btn'" href="javascript://" ng-click="clickFavors()"><i class="ion-heart"></i><p id="favors-number">{{favors.length != 0 ? favors.length : '0'}}</p></a>
+	</div> -->
+	<ul class="favors-box clearfix" id="favors-list">
+		<li favors-id="{{favor.user.id}}" ng-repeat="favor in favors" class="animated fadeIn">
+			<a href="#/user/{{currentCrew.domain}}/{{favor.user.id}}"><pt-avatar avatar="{{favor.user.avatar}}" thumb="60"></pt-avatar></a>
+		</li>
+	</ul>
+</article>
+<pt-tab-bar></pt-tab-bar>

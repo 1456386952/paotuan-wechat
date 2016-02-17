@@ -1,0 +1,186 @@
+<link href="/datetime/datetime.min.css" rel="stylesheet" type="text/css">
+<script src="/datetime/datetime.js" type="text/javascript"></script>
+<style type="text/css">
+     input[type='file'],select{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height:100%;
+        width: 100%;
+        opacity:0
+     }
+</style>
+<div class="container-fluid no-padding">
+<ul class="nav nav-pills" style="margin:14px 8px">
+  <li role="presentation" class="active"><a data-toggle='tab' data-target="baseInfo">基本资料</a></li>
+  <li role="presentation" ><a data-toggle='tab' data-target="regInfo">报名资料</a></li>
+    <li role="presentation" ><a data-toggle='tab' data-target="healthInfo">健康资料</a></li>
+</ul>
+<div class="tab-content">
+<div class="list-group list-no-topborder animated fadeInRight" id="baseInfo" style="display: block">
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('passport_name','text','请输入真实姓名',userInfo.passport_name)">
+      <span class="col-xs-3 no-padding text-muted">真实姓名</span><span class="col-xs-9 text-right no-padding" ng-bind="userInfo.passport_name?userInfo.passport_name:'未填写'"></span>
+  </a>
+  <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">性别</span><span class="col-xs-9 text-right no-padding" ng-bind="user_genders[userInfo.user_gender]?user_genders[userInfo.user_gender]:'未设置'"></span>
+   <select ng-selected="userInfo.user_gender" id="user_gender" name="user_gender"  ng-model="userInfo.user_gender" ng-change="submitData('user_gender',userInfo.user_gender,false,false,false)">
+        <option value="1">男</option>
+          <option value="2">女</option>
+            <option value="0">其他</option>
+      </select>
+  </a>
+    <a class="list-group-item container-fluid no-border-side" ng-click="showModify('user_cell','tel','请输入手机号',userInfo.user_cell)">
+      <span class="col-xs-3 no-padding text-muted">手机绑定</span><span class="col-xs-9 text-right no-padding" ng-bind="userInfo.user_cell?userInfo.user_cell:'未绑定'"></span>
+  </a>
+</div>
+
+<div class="list-group list-no-topborder animated fadeInRight" id="regInfo" style="display: none">
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('passport_name','text','请输入真实姓名',userInfo.passport_name)">
+      <span class="col-xs-3 no-padding text-muted">真实姓名</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.passport_name?userInfo.passport_name:"未填写"'></span>
+  </a>
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('nationality','text','请输入国籍',userInfo.nationality)">
+      <span class="col-xs-3 no-padding text-muted">国籍</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.nationality?userInfo.nationality:"未填写"'></span>
+  </a>
+    <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">出生日期</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.birthday?userInfo.birthday:"未填写"'></span>
+      <input style="position: absolute;top: 0;left:0;height: 100%;width:100%;opacity:0" type="text" date-type="date" id="birthday" date-max="now" value="{{userInfo.birthday}}" ng-model="userInfo.birthday" ng-change="submitData('birthday',userInfo.birthday,false,false,false)">
+   </a>
+     <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">证件类型</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.id_type!=null?id_types[userInfo.id_type]:"未填写"'></span>
+      <select id="id_type" name="id_type"  ng-model="userInfo.id_type" ng-change="submitData('id_type',userInfo.id_type,false,false,false)">
+        <option value="1">身份证</option>
+          <option value="2">护照</option>
+            <option value="3">台胞证</option>
+            <option value="4">港澳通行证</option>
+           <option value="0">其他</option>
+      </select>
+  </a>
+    <a class="list-group-item container-fluid no-border-side" ng-click="showModify('id_number','text','请输入证件号码',userInfo.id_number)">
+      <span class="col-xs-3 no-padding text-muted">证件号码</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.id_number?userInfo.id_number:"未填写"'></span>
+  </a>
+    <a class="list-group-item container-fluid no-border-side" ng-click="showModify('user_cell','tel','请输入手机号',userInfo.user_cell)">
+      <span class="col-xs-3 no-padding text-muted">手机绑定</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.user_cell?userInfo.user_cell:"未绑定"'></span>
+  </a>
+    <a class="list-group-item container-fluid no-border-side" ng-click="showModify('user_email','email','请输入邮箱',userInfo.user_email)">
+      <span class="col-xs-3 no-padding text-muted">邮箱绑定</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.user_email?userInfo.user_email:"未绑定"'></span>
+  </a>
+  <fieldset  style="margin:14px 0 0 0 ">
+ <legend class="no-margin" style="font-size: 14px">紧急联系人</legend>
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('emerge_name','text','请输入紧急联系人姓名',userInfo.emerge_name)">
+      <span class="col-xs-3 no-padding text-muted">姓名</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.emerge_name?userInfo.emerge_name:"未填写"'></span>
+  </a>
+   <a class="list-group-item container-fluid no-border-side" ng-click="showModify('emerge_ship','text','请输入于紧急联系人的关系',userInfo.emerge_ship)">
+      <span class="col-xs-3 no-padding text-muted">关系</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.emerge_ship?userInfo.emerge_ship:"未填写"'></span>
+  </a>
+  
+   <a class="list-group-item container-fluid no-border-side" ng-click="showModify('emerge_cell','tel','请输入紧急联系人的电话',userInfo.emerge_cell)">
+      <span class="col-xs-3 no-padding text-muted">联系人电话</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.emerge_cell?userInfo.emerge_cell:"未填写"'></span>
+  </a>
+</fieldset>
+
+  <fieldset  style="margin:14px 0 0 0 ">
+ <legend class="no-margin" style="font-size: 14px">资料证明</legend>
+  <div class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">身份证正面</span>
+      <span class="col-xs-9 text-right no-padding">
+      <img ng-if="userInfo.papers.id_copy" data-pre="{{userInfo.papers.id_copy}}" ng-src="{{userInfo.papers.id_copy}}!mid" style="max-height:50px">
+      <span ng-if="!userInfo.papers.id_copy">未上传</span>
+      </span>
+       <input ng-fileupload='{"isPre":false,"callback":"uploadComplete"}' type="file" name="file[]" id="id_copy" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+  </div>
+   <div class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">身份证反面</span>
+      <span class="col-xs-9 text-right no-padding">
+      <img ng-if="userInfo.papers.id_copy_back" data-pre="{{userInfo.papers.id_copy_back}}" ng-src="{{userInfo.papers.id_copy_back}}!mid" style="max-height:50px">
+      <span ng-if="!userInfo.papers.id_copy_back">未上传</span>
+      </span>
+       <input ng-fileupload='{"isPre":false,"callback":"uploadComplete"}' type="file" name="file[]" id="id_copy_back" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+  </div>
+  <div class="list-group-item container-fluid no-border-side">
+     <input type="hidden" id="health_value" name="health">
+      <span class="col-xs-3 no-padding text-muted">体检证明</span>
+      <span class="col-xs-9 text-right no-padding">
+      <img ng-if="userInfo.papers.health"  data-pre="{{userInfo.papers.health}}" ng-src="{{userInfo.papers.health}}!mid" style="max-height:50px">
+      <span ng-if="!userInfo.papers.health" >未上传</span>
+      </span>
+      <input ng-fileupload='{"isPre":false,"callback":"uploadComplete"}' type="file" name="file[]" id="health" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+  </div>
+   <div class="list-group-item container-fluid no-border-side">
+       <input type="hidden" id="certs_value">
+      <span ng-class="{true:'col-xs-12',false:'col-xs-3'}[userInfo.papers.certs]" class="col-xs-3 no-padding text-muted">完赛证明</span>
+      <span ng-if="userInfo.papers.certs" class="col-xs-12  no-padding container-fluid">
+      <span class="col-xs-4 col-md-2" ng-repeat="cert in userInfo.papers.certs">
+      <img ng-if="cert" data-pre="{{cert.url}}" ng-src="{{cert.url}}!mid" style="max-width: 100%;margin-top: 4px;max-height: 50px">
+      </span>
+      </span>
+       <span class="col-xs-9 text-right no-padding" ng-if="!userInfo.papers.certs">未上传</span>
+   <input ng-fileupload='{"isPre":false,"callback":"uploadComplete"}' type="file" name="file[]" id="certs" multiple="multiple" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp">
+  </div>
+</fieldset>
+</div>
+
+<div class="list-group list-no-topborder animated fadeInRight" id="healthInfo" style="display: none">
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('height','number','请输入身高',userInfo.height)">
+      <span class="col-xs-3 no-padding text-muted">身高(CM)</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.height?userInfo.height:"未填写"'></span>
+  </a>
+  <a class="list-group-item container-fluid no-border-side" ng-click="showModify('weight','number','请输入身高',userInfo.weight)">
+      <span class="col-xs-3 no-padding text-muted">体重(KG)</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.weight?userInfo.weight:"未填写"'></span>
+  </a>
+    <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">鞋码</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.shoes_size?userInfo.shoes_size:"未绑定"'></span>
+       <select id="shoes_size" ng-model="userInfo.shoes_size" name="shoes_size" ng-change="submitData('shoes_size',userInfo.shoes_size,false,false,false)">
+         <option value="35">35</option>
+          <option value="36">36</option>
+           <option value="37">37</option>
+            <option value="38">38</option>
+             <option value="39">39</option>
+              <option value="40">40</option>
+               <option value="41">41</option>
+                <option value="42">42</option>
+                 <option value="43">43</option>
+                  <option value="44">44</option>
+                   <option value="45">45</option>
+                    <option value="46">46</option>
+                     <option value="47">47</option>
+                       <option value="48">48</option>
+      </select>
+  </a>
+   <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">上衣尺寸</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.tshirt_size?userInfo.tshirt_size:"未填写"'></span>
+     <select id="tshirt_size" name="tshirt_size"  ng-model="userInfo.tshirt_size" ng-change="submitData('tshirt_size',userInfo.tshirt_size,false,false)">
+        <option value="XXS">XXS</option>
+          <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+           <option value="L">L</option>
+           <option value="XL">XL</option>
+           <option value="XXL">XXL</option>
+           <option value="XXXL">XXXL</option>
+      </select>
+  </a>
+   <a class="list-group-item container-fluid no-border-side">
+      <span class="col-xs-3 no-padding text-muted">血型</span><span class="col-xs-9 text-right no-padding" ng-bind='userInfo.blood_type?userInfo.blood_type:"未填写"'></span>
+       <select id="blood_type" name="blood_type" ng-model="userInfo.blood_type" ng-change="submitData('blood_type',userInfo.blood_type,false,false)">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+           <option value="Other">其他</option>
+      </select>
+  </a>
+     <a class="list-group-item container-fluid no-border-side" ng-click="showTextAreaModify('medical_history','text','请输入既往病史',userInfo.medical_history)">
+      <span ng-class="{true:'col-xs-12',false:'col-xs-3'}[userInfo.medical_history!=null&&userInfo.medical_history!='']" class="no-padding text-muted">既往病史</span>
+      <pre ng-if="userInfo.medical_history" class="col-xs-12 no-padding no-border">{{userInfo.medical_history}}</pre>
+      <span ng-if="userInfo.medical_history==null||userInfo.medical_history==''" class="col-xs-9 no-padding text-right">未填写</span>
+  </a>
+</div>
+
+</div>
+<form id="userForm" style="display: none;">
+   <input id="sub_data">
+   <textarea rows="" cols="" id="sub_data_textarea"></textarea>
+</form>
+
+</div>
+
+

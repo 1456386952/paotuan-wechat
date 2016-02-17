@@ -1,0 +1,99 @@
+<div class="topBar">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+				<i class="fa fa-chevron-left" ng-click="back()"></i>
+			</div>
+			<div class="col-xs-8">
+				<div class="title text-center">导出邮箱</div>
+			</div>
+			<div class="col-xs-2">
+				
+			</div>
+		</div>
+	</div>
+</div>
+<section class="exportemail bg-wight">
+	<form class="form-horizontal" name="sendemail" ng-submit="submitForm(sendemail.$valid)" novalidate>
+		<div class="email-list" ng-if="default_email">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-1">
+						<span class="i-checkbox" ng-class="{'active': user.email}">
+							<span class="i-checkbox-inner" ng-click="user.email=!user.email"></span>
+							<!-- <input type="checkbox" class="inlineCheckbox i-checkbox-input" value="defaultEmail" name="defaultEmail"  ng-model="user.email" required> -->
+							<input type="checkbox" class="inlineCheckbox i-checkbox-input" value="defaultEmail" name="defaultEmail"  ng-model="user.email">
+						</span>
+					</div>
+					<div class="col-xs-3">
+						<label>{{default_email.user_name}}</label>
+					</div>
+					<div class="col-xs-7">
+						<label>{{default_email.user_email}}</label>
+					</div>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div class="email-list" ng-repeat="email in common_email" ng-if="common_email">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-1">
+						<span class="i-checkbox" ng-class="{'active': newEmail.common}">
+							<span class="i-checkbox-inner" ng-click="newEmail.common=!newEmail.common"></span>
+							<input type="checkbox" class="inlineCheckbox i-checkbox-input" value="{{email.user_name}}" name="commonEmail" ng-change="chanage(this)" ng-model='newEmail.common'> 
+						</span>
+
+						<!-- <input type="checkbox" value="{{email.user_name}}" name="commonEmail"> -->
+					</div>
+					<div class="col-xs-3">
+						<label>{{email.user_name}}</label>
+					</div>
+					<div class="col-xs-7">
+						<label>{{email.user_email}}</label>
+					</div>
+					<div class="col-xs-1">
+						<div ng-click="delete(email, $index)">
+							<i class="fa fa-times-circle"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+		</div>
+		
+		<div class="email-list" ng-click="addEmail()">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-1">
+						<i class="fa fa-plus"></i>
+					</div>
+					<div class="col-xs-11">
+						<a>增加新的邮箱</a>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+		
+		<div class="email-list">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						该活动信息导出涉及跑友资料，需要进行收集验证
+					</div>
+					<div class="col-xs-6">
+						<input type="text" name="code" ng-model="user.code" required>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" class="btn get-code" loading-text="60" ng-click="getCode()">获取验证码</button>
+					</div>
+				</div>
+			</div>
+		</div>	
+
+		<div class="send">
+			<button type="submit" class="login-btn" ng-disabled="sendemail.$invalid || hide">发送</button>
+		</div>
+	</form>
+</sectiom>

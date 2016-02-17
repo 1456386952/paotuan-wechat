@@ -1,0 +1,43 @@
+<div class="container-fluid no-padding" infinite-scroll="loadMore();">
+ <div class="panel panel-default no-margin">
+  <div class="panel-body no-padding">
+  <h5><i class="fa  fa-calendar-o main-color"></i> 最近打卡</h5>
+<div ng-if="recents&&!recents[0]" class="list-group-item  no-border-side text-center" style="border-top:none;border-bottom: none">暂无打卡记录</div>
+<div class="container-fluid text-muted animated fadeInUp animation-delay-{{r.delay}}" ng-repeat=" r in recents" style="padding:4px 8px 20px">
+   <div class="col-xs-1 text-right" style="padding:0"><img ng-src="{{r.mileage.user.user_face}}" class="thumb-circle" style="width:35px;height:35px"></div>
+   <div class="col-xs-11 no-padding-right">
+     <a class="list-group-item no-padding no-border" ng-href="/runners/mileageinfo/{{r.mileage.id}}">
+   <div class="panel panel-default no-margin no-radius" style="background-color: transparent;">
+  <div class="panel-body container-fluid " style="padding:0 4px">
+  <div class="col-xs-8 no-padding" ng-bind="r.mileage.user.nick_name">
+     
+     </div>
+      <div class="col-xs-4 text-right no-padding" ng-bind="r.mileage.mileage_date">
+     
+     </div>
+     <hr>
+     <div class="col-xs-2 no-padding" style="margin-bottom: 4px">
+        <img ng-if="r.mileage.albums" ng-src="{{r.mileage.albums}}" style="width:40px;height:40px">
+         <img ng-if="!r.mileage.albums" ng-src="/image/paotuanzhuce/list-default-pic.jpg" style="width:40px;height:40px">
+     </div>
+      <div class="col-xs-4 text-left no-padding" style="line-height:36px">
+            <label class="text-truncate" style="padding:0 4px">{{r.mileage.mileage}}<small>KM</small></label>
+     </div>
+      <div ng-if="r.mileage.pace" class="col-xs-3 text-left no-padding" style="line-height:36px;font-size:12px">
+        <i class="fa fa-clock-o"></i> {{r.mileage.pace}}
+     </div>
+     <div ng-if="r.mileage.format_duration" class="col-xs-3 text-left no-padding text-truncate"  style="line-height:36px;font-size:12px">
+          <i class="fa fa-history"></i> {{r.mileage.format_duration}}
+     </div>
+     <small ng-if="r.mileage.from_text" class="text-muted" style="position: absolute;bottom:-22px">来自&nbsp;{{r.mileage.from_text}}</small>
+  </div>
+  </div>
+     </a>
+   </div>
+</div>
+  <div style="width: 100%;height:20px;text-align: center;display:block" id="loadingEl">
+  <i class="fa fa-spinner fa-spin"></i>
+</div>
+</div>
+</div>
+</div>

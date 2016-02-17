@@ -1,0 +1,49 @@
+.header{background: url(/mileage/img/header_02.jpg) center 0 no-repeat; background-size: 100%; padding: 20px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.7);}
+
+.team-logo{width: 65px; height: 65px; margin: 0 auto;}
+.team-logo img{width: 65px; height: 65px; border-radius: 50%;}
+.team-name{font-size: 20px; color: #fff; text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); margin-top: 10px;}
+
+.content-box{padding: 25px 40px;}
+.content-box .km{height: 60px; box-shadow: 0px 0px 4px rgba(0,0,0,0.5); position: relative;}
+.content-box .km input{border: none; height: 50px; line-height: 50px; margin-top: 5px; font-size: 40px; color: #cb352b; font-family: 'Oswald', sans-serif; width: 100%; text-align: center;}
+.content-box .km span{position: absolute; bottom: 5px; right: 5px; font-size: 16px; color: #c9c9c9;}
+
+.content-box .date{box-shadow: 0px 0px 4px rgba(0,0,0,0.15); margin-top: 15px; padding: 5px 0; width:100%; display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box;}
+.content-box .date li{ -webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; height: 20px; line-height: 20px; text-align: center; border-right: 1px #e5e5e5 solid; color: #a0a0a0; font-size: 14px;}
+.content-box .date li.on{color: #cb352b;}
+.content-box .date li:last-child{border: none;}
+.content-box .time{margin-top: 20px; color: #a0a0a0;}
+.content-box .time .right{color: #cb352b;}
+.content-box .time input{width: 100%;}
+.content-box .time-list{width:100%; display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box; border-bottom: 1px #e5e5e5 solid; padding: 5px 0;}
+.content-box .time-list li{ -webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; height: 20px; color: #a0a0a0; font-size: 14px; padding: 0 10px; position: relative;}
+.content-box .time-list li:after{content: ":"; position: absolute; top: 2px; right: 0;}
+.content-box .time-list li:last-child:after{content: "";}
+.content-box .time-list li input{height: 20px; text-align: center; border: none;}
+
+.content-box .photo-list{margin-top: 5px;}
+.content-box .photo-list li{ float: left; position: relative; margin-top: 15px;}
+/*.content-box .photo-list li.photo:first-child{margin-left: 0;}*/
+.content-box .photo-list li.photo{width: 50px; height: 50px; margin: 15px 5px 0;}
+.content-box .photo-list li.photo .del{width: 16px; height: 16px; background: #cb352b; border-radius: 50%; position: absolute; z-index: 1; top: -7px; right: -7px;}
+.content-box .photo-list li.photo .del:after{content: ""; width: 9px; height: 1.5px; background: #fff; position: absolute; top: 7px; left: 3px;}
+.content-box .photo-list li.photo .img{width: 50px; height: 50px; line-height: 50px; position: absolute; top: 0; left: 0; overflow: hidden; background-color: #eeeeee;}
+.content-box .photo-list li.photo .img img{width: 50px;}
+.content-box .photo-list li.photo .upload-btn{width: 49px; height: 49px; line-height: 49px; font-size: 40px; text-align: center; color: #dcdcdc; border: 1px #dcdcdc solid; display: block;}
+.content-box .photo-list li.photo .upload-btn i:before{padding-top: 5px;}
+.content-box .photo-list li span{margin-left: 10px; font-size: 12px; color: #a0a0a0; line-height: 50px;}
+
+.button-list{display:-webkit-box; display:-ms-flexbox; display:-moz-box; display:-o-box; display:box; padding: 0 10px;}
+.button-list li{ -webkit-box-flex:1; -ms-flex:1; -moz-box-flex:1; -o-box-flex:1; box-flex:1; height: 40px; padding: 0 5px;}
+.button-list li .btn{width: 100%; display: block; height: 40px; line-height: 40px; font-size: 18px; text-align: center; text-decoration: none; border-width: 0;}
+.button-list li i{font-size: 20px;}
+.button-list li .submit-btn{ background: #cb352b; color: #fff;}
+.button-list li .cancel-btn{ background: #cccccc; color: #535353;}
+
+.duration-box{height: 20px; text-align: center; position: relative;}
+.duration-box .duration-select{opacity: 0; width: 100%; position: absolute; left: 0; top: 0;}
+.duration-box .duration-select option{text-align: center;}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button{ -webkit-appearance: none !important; margin: 0;}
+input[type="number"]{-moz-appearance:textfield;}

@@ -1,0 +1,35 @@
+<section class="activity section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="index.activity"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">活动列表</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="act-list active">
+		<ul>
+			<li class="margin-bottom-10" ng-repeat="item in incheck" ng-click="gosigninfo(item.act_id)">
+				<dl class="activity-list dl-horizontal">
+					<dt>
+						<a href=""><img ng-src="{{item.act_image}}" alt="" class="img-responsive"></a>
+					</dt>
+					<dd>
+						<div class="text">
+							<span class="regular" ng-if="item.recurring_type&&item.recurring_type=='1'">[定期]</span>
+							<span class="title">{{item.act_title}}</span>
+							<span class="badge" ng-if="item.register_fee&&item.register_fee!='0.00'"></span>
+							<span class="limit" ng-if="item.rang_limit==1">限</span>
+						</div>
+						<div class="number"><i class="fa fa-user"></i>{{item.members}}人</div>
+						<div class="time">{{item.check_time}}</div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</section>

@@ -1,0 +1,28 @@
+<div class="bindemail">
+	<div class="container">
+		<form class="" name="bindemail" ng-submit="submitForm(bindemail.$valid)" novalidate>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label hidden">Email</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon icon-email"></i></span>
+					<input type="email" class="form-control" id="" name="useremail" placeholder="请输入绑定的邮箱号" ng-model="user.email" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label hidden">Name</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon icon-code"></i></span>
+					<input type="text" class="form-control" id="input-code" name="code" placeholder="请输入验证码" ng-model="user.code" required>
+					<span class="input-group-btn" id="btn-code">
+						<button type="button" class="btn" loading-text="60" ng-disabled="bindemail.useremail.$invalid || !isloading" ng-click="getCode(bindemail.useremail.$valid)">发送验证码</button>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10 text-center">
+					<button type="submit" class="btn btn-add" ng-disabled="bindemail.$invalid || hide">确定</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

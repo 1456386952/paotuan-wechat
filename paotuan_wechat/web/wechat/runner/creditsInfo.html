@@ -1,0 +1,36 @@
+<!--nav class="navbar navbar-default no-margin" style="line-height:49px;background-color: #f0f0f0;border-radius:0;border: none;">
+    <div class="navbar-header pull-left">
+        <div  class="navbar-brand " style="padding:5px;">
+        <img ng-if="club.club_logo"   ng-src="http://xiaoi.b0.upaiyun.com/{{club.club_logo}}!80X80" class="thumb-circle" style="width:40px;height:40px;">
+        </div>
+         <h4 class=" text-truncate" ng-bind="club.club_name" style="margin: 0;float: left;line-height:50px;width: 11em"></h4>
+    </div> 
+</nav-->
+
+<div class="container-fluid">
+   <div class="col-xs-12  text-left text-truncate page-header no-margin" style="padding:14px 4px 14px 4px">
+      <img ng-if="club.club_logo"   ng-src="http://xiaoi.b0.upaiyun.com/{{club.club_logo}}!80X80" class="thumb-circle" style="width:40px;height:40px;">{{club.club_name}}
+   </div>
+</div>
+
+<div class="container-fluid text-center" ng-if="logs_length<=0">
+	<i class="fa fa-exclamation-triangle"></i><br> 暂无积分记录
+</div>
+<div class="container-fluid no-padding">
+	<div class="list-group list-no-topborder" infinite-scroll="loadMore()">
+		<div class="list-group-item no-border-side animated fadeInUp animation-delay-{{$index}}"
+			ng-repeat="log in logs">
+			<div class="container-fliud">
+			 <div class="col-xs-5 no-padding">
+			 <h4 class="list-group-item-heading no-margin" style="color:{{log.credits<0?'red':'#5cb85c'}}">{{log.credits>0?"+"+log.credits:log.credits}}</h4>
+			 </div>
+			 <div class="col-xs-7 no-padding">
+			 <small class="pull-right">{{log.record_time}}</small>
+			 </div>
+			</div>
+			<p class="list-group-item-text">{{log.desc}}</p>
+		</div>
+		<div style="width: 100%; height: 20px; text-align: center; background-image: url('/artificial-reason-1.4.3/img/preload.gif'); background-position: center; background-repeat: no-repeat; background-size: 20px; display: none"
+			id="loadingEl"></div>
+	</div>
+</div>

@@ -1,0 +1,99 @@
+
+<link href="css/team/team.css" rel="stylesheet" />
+<header class="header">
+	<div class="team-logo animated fadeIn">
+		<img ng-src="{{crew.logo}}">
+	</div>
+	<div class="team-name animated fadeInUp">{{crew.name}}</div>
+	<div class="team-desc animated fadeInUp">{{crew.desc}}</div>
+</header>
+<ul class="team-number-list">
+	<li>
+		<a href="/mileage/#/team/{{crew.domain}}/users">
+			<i class="icon ion-ios-people-outline"></i>
+			<p class="num">{{summary.crew.member_count}}</p>
+			<p class="text">跑友</p>
+		</a>
+	</li>
+	<li>
+		<a href="/mileage/#/team/{{crew.domain}}/trackerlogs">
+			<i class="icon ion-ios-speedometer-outline"></i>
+			<p class="num">{{summary.kms}}</p>
+			<p class="text">总里程</p>
+		</a>
+	</li>
+</ul>
+<!-- <div class="team-daka"> -->
+	  <!-- <a ng-show="isInCrew" href="#/workout/{{currentCrew.domain}}"> -->
+        <!-- <i class="icon ion-android-clipboard"></i> -->
+        <img class="team-daka" style="margin-top:-28%;margin-left:34%" ng-src="http://prod-img-mi-paotuan.b0.upaiyun.com/uploads/crew/41/62/416217fe5cc548ae04029f3f3ba7f288.jpg"  />
+      <!-- </a> -->
+<!-- </div> -->
+<div class="content-box user-run-box" style="margin-top:-7%">
+	<div class="content-title">
+		<i class="ion-android-clipboard"></i> 最近打卡
+	</div>
+	<article class="user-run-list animated fadeInUp" ng-repeat="log in logs">
+		<div class="run-box">
+			<a href="#/user/{{crew.domain}}/{{log.user.id}}" class="user-logo">
+				<pt-avatar avatar="{{log.user.avatar}}" thumb="120"></pt-avatar>
+				<span class="text center">{{log.user.name}}</span>
+			</a>
+			
+			<a href="#/detail/{{crew.domain}}/{{log.id}}">
+				<div class="top clearfix">
+				    <span class="text left">{{log.executed_at}}</span>
+				    <!-- <span class="text right">{{log.user.name}}</span> -->
+				    <img ng-src="img/like.jpg" class="text right" />
+					
+					
+				</div>
+				<ul class="run-data">
+					<li>
+						<strong>{{log.distance}}</strong>
+						<span>KM</span>
+					</li>
+					<li class="center">
+						<i class="icon ion-ios-timer-outline"></i>
+						<span>{{log.average}}/KM</span>
+					</li>
+					<li>
+						<i class="icon ion-ios-stopwatch-outline"></i>
+						<span>{{log.duration}}</span>
+					</li>
+				</ul>
+				<ul class="photos clearfix">
+					<li ng-repeat="photo in log.photos">
+						<img  ng-src="{{photo.indexOf('upaiyun')>0 ? photo+'!thumb60' : photo}}" >
+					</li>
+				</ul>
+				<ul class="likes clearfix" ng-show="log.favors.length != 0">
+					<li ng-show="$index < 8" ng-repeat="favor in log.favors">
+						<pt-avatar avatar="{{favor.user.avatar}}" thumb="60"></pt-avatar>
+					</li>
+					<li class="number" ng-show="log.favors.length > 8">{{log.favors.length}}</li>
+				</ul>
+			</a>
+		</div>
+	</article>
+	<div class="more-box">
+		<a href="/mileage/#/team/{{crew.domain}}/trackerlogs" ng-show="logs.length >= 3">查看更多</a>
+		<p ng-show="logs.length == 0">暂无打卡</p>
+	</div>
+</div>
+<div class="content-box">
+	<div class="content-title clearfix">
+		<div class="left"><i class="ion-trophy"></i> 排行榜</div>
+		<ul class="tab-ul clearfix">
+			<li ng-click="showTop('daily')" ng-class="spec == 'daily' ? 'current' : ''">日</li>
+			<li ng-click="showTop('weekly')" ng-class="spec == 'weekly' ? 'current' : ''">周</li>
+			<li ng-click="showTop('monthly')" ng-class="spec == 'monthly' ? 'current' : ''">月</li>
+		</ul>
+	</div>
+	<a href="/mileage/#/team/{{crew.domain}}/top/{{spec}}" id="rankingChart" class="chart-content animated LightSpeedIn" style="height: 180px; line-height: 180px; "></a>
+</div>
+<div class="content-box content-last">
+	<div class="content-title"><i class="ion-stats-bars"></i> 7日跑量</div>
+	<div id="statsChart" class="chart-content animated LightSpeedIn" style="height: 180px;"></div>
+</div>
+<pt-tab-bar></pt-tab-bar>

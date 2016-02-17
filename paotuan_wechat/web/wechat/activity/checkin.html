@@ -1,0 +1,30 @@
+<div class="container text-center" style="position: relative;background-image: url('/image/paotuanzhuce/checkin_bg1.png');background-size:100% 300px;background-position: center;background-repeat: no-repeat;height:300px">
+	 <div style="position: absolute;top:30px;width: 70%;margin-left: 15%">
+	 <img src="/image/paotuanzhuce/checkin_location.png" style="width:80px">
+	 <br>
+	  <br>
+	           <label style="color:white">输入活动签到码</label> 
+	  <input type="number" id="checkCode"
+			class="form-control text-center"  style="font-size:2.5rem;height:50px;padding: 4px 14px 4px 14px;border-radius:3rem">
+	  <br>
+	  <a class="btn btn-default btn-block" style="width:50%;margin:auto;" data-loading-text="签到中..."  id="codeCheckInBtn" ng-click="checkIn()">确定</a>
+	 </div>
+	
+</div>
+<br>
+<div class="list-group" style="padding:4px 14px">
+
+			<a class="checkin list-group-item" ng-click="qrCheckIn()">
+			<img src="/image/scanner.png" style="width:30px;height:30px;display: inline-block;">
+			<div class="list-group-item-header">点击开启扫一扫签到</div>
+			</a>
+</div>
+
+<div class="list-group" style="padding:4px 14px">
+<div class="checkin list-group-item">
+<img src="/image/shake.png" style="width:30px;height:30px;display: inline-block;">
+			<a><div class="list-group-item-header">使用微信摇一摇功能签到</div>
+			</a>
+			</div>
+<p class="text-muted">1、打开蓝牙<br>2、微信->发现->摇一摇->周边<br>3、摇啊摇</p>
+</div>

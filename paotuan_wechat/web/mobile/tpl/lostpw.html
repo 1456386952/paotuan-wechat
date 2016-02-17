@@ -1,0 +1,48 @@
+<section class="register section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ng-click="back()"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">忘记密码</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form name="register" ng-submit="submitForm(register.$valid)" novalidate>
+		<div class="container register-main">
+			<div class="login-registe">
+				<img src="images/user-name.png">
+				<input type="text" placeholder="请输入手机号" class="color-white width-90" name="name" ng-model="user.name" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" required>
+			</div>
+			<div class="row">
+				<div class="col-xs-7 margin-top-7px">
+					<div class="login-registe">
+						<img src="images/identifyingcode.png">
+						<input class="color-white" type="text" placeholder="请输入验证码" style="width: 80%;" name="pinCode" ng-model="user.pinCode" required>
+					</div>
+				</div>
+				<div class="col-xs-5 margin-top-7px">
+					<button type="button" loading-text="60" ng-disabled="register.name.$invalid || !isloading" ng-click="getCode()" class="validate">发送验证码</button>
+				</div>
+			</div>
+			<div class="login-registe margin-top-7px">
+				<img src="images/password.png">
+				<input type="password" placeholder="请输入密码(8-16位数字或英文字母)" class="color-white width-90" name="passworld" ng-model="user.passworld" required>
+			</div>
+			<div class="login-registe margin-top-7px">
+				<img src="images/password.png">
+				<input type="password" placeholder="清再次确认密码" class="color-white width-90" name="passworld_again" ng-model="user.passworld_again" required>
+			</div>
+			<div style="margin-top: 20px;">
+				<button type="submit" class="login-btn" ng-disabled="register.$invalid">确定</button>
+			</div>
+		</div>
+	</form>
+</sectiom>

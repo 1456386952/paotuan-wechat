@@ -1,0 +1,67 @@
+<section class="activity section signinfo">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ui-sref="{{back_ui_sref}}"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">签到信息</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="top">
+						<i class="fa fa-ellipsis-v" ng-click="isTopNavFn()" ng-if="is_admin||isActer"></i>
+						<ul class="top-nav" ng-class="{active: isTopNav}" ng-if="is_admin||isActer">
+							<li ng-click="f5()"><i class="fa fa-refresh"></i>刷新</li>
+						</ul>
+						<div class="top-nav-overlay" ng-class="{active: isTopNav}" ng-click="closeFn()" ng-if="is_admin||isActer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ul>
+		<li class="margin-bottom-10" ng-repeat="item in inregister">
+			<div class="act-list active">
+				<dl class="activity-list dl-horizontal">
+					<dt>
+						<a href=""><img ng-src="{{item.act_image}}" alt="" class="img-responsive"></a>
+					</dt>
+					<dd>
+						<div class="text">
+							<span class="regular" ng-if="item.recurring_type&&item.recurring_type=='1'">[定期]</span>
+							<span class="title">{{item.act_title}}</span>
+							<span class="badge" ng-if="item.register_fee&&item.register_fee!='0.00'"></span>
+							<span class="limit" ng-if="item.rang_limit==1">限</span>
+						</div>
+						<div class="number">
+							<i class="fa fa-user"></i>{{item.members}}人
+							<span ng-class="{'praise': isPraise}" ng-click="praise()"><i class="fa fa-thumbs-o-up"></i><span>{{item.act_praise}}</span></span>
+						</div>
+						<div class="time">{{item.check_time}}</div>
+					</dd>
+				</dl>
+			</div>
+			<div class="sign margin-top-7px padding-10px bg-color-white container">
+				<img src="images/sign-logo.png" class="sign-logo">
+				<strong>签到码</strong>
+				<strong class="color-xiaoai sign-no">{{inregister[0].check_code}}</strong>
+				<hr>
+			</div>
+			<div class="container two-dimension-code bg-color-white">
+				<img src="http://www.paobuqu.com/v4/activity/qrcode?act_id={{inregister[0].act_id}}&access-token={{access_token}}">
+				<!-- <img src="images/logo-small.png" class="logo-small"> -->
+				<div class="color-grey"><small>通过微信扫一扫签到</small></div>
+			</div>
+			<div class="margin-top-7px bg-color-white padding-10px height-64px" ng-click="bind()">
+				<img class="rock-logo" src="images/rock-and-rock.png" style="float: left">
+				<div style="margin-left: 55px;">
+					<strong ng-if="item.device_id!=0">该活动已经绑定签到摇一摇设备</strong>
+					<strong ng-if="item.device_id==0">无已绑定设备</strong>
+					<br>
+					<small class="color-grey" ng-if="item.device_id!=0">{{item.name}}</small>
+				</div>
+			</div>
+		</li>
+	</ul>
+</section>

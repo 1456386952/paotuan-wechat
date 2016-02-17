@@ -1,0 +1,40 @@
+<section class="discovery section">
+	<div class="topBar">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<i class="fa fa-chevron-left" ng-click="back()"></i>
+				</div>
+				<div class="col-xs-8">
+					<div class="title text-center">发现跑团</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container search-main">
+		<form name="discovery" ng-submit="submitForm(discovery.$valid)" novalidate>
+			<div>
+				<input type="text" ng-focus="onfocus()" class="search-text" placeholder="请输入你想查找的跑团名称"  name="searchdata" ng-model="search.searchdata" required>
+				<button type="submit" class="search-btn" style="width: 17%;" ng-disabled="discovery.$invalid">搜索</button>
+				
+			</div>
+			<div ng-show="!search.searched">
+				<label class="margin-top-7px">附近的跑团</label>
+				<ul>
+					<li ng-repeat="paotuan_info in paotuanListInfo" ng-click="activity(paotuan_info)">
+						<div class="bg-wight padding-7px margin-top-7px color-grey font-size-12px">{{paotuan_info.club_name}}</div>
+					</li>
+				</ul>				
+			</div>
+			<div ng-if="search.searched">
+				<label class="margin-top-7px">搜索到的跑团</label>
+				<ul>
+					<li ng-repeat="search_paotuan_info in search_paotuanListInfo" ng-click="activity(search_paotuan_info)">
+						<div class="bg-wight padding-7px margin-top-7px color-grey font-size-12px">{{search_paotuan_info.club_name}}</div>
+					</li>
+				</ul>				
+			</div>	
+		</form>
+	</div>
+
+</section>

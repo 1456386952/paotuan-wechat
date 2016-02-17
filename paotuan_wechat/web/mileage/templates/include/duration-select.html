@@ -1,0 +1,6 @@
+<div class="duration-box">
+  <strong >{{viewResult || placeholder}}</strong>
+  <select class="duration-select" ng-model="result">
+    <option value="{{duration.value}}" ng-repeat="duration in durationArr">{{duration.key}}</option>
+  </select>
+</div>

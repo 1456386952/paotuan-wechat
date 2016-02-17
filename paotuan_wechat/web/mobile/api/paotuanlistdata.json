@@ -1,0 +1,41 @@
+{
+    "code": 0,
+    "message": [
+        {
+            "clubid": "1",
+            "club_name": "小艾爱跑",
+            "club_bgimage": "http://xiaoi.b0.upaiyun.com/files/club/CEIBS_BK_0rRyoS5.jpg!640X640",
+            "club_slogan": "和未来一起",
+            "club_status": "1",
+            "club_logo": "http://xiaoi.b0.upaiyun.com//image/channel_logo/channel_log.jpg!80X80",
+            "members": "0"
+        },
+        {
+            "clubid": "73",
+            "club_name": "陆家嘴刨地跑团",
+            "club_bgimage": "http://xiaoi.b0.upaiyun.com/files/club/CEIBS_BK_0rRyoS5.jpg!640X640",
+            "club_slogan": "",
+            "club_status": "1",
+            "club_logo": "http://xiaoi.b0.upaiyun.com/!80X80",
+            "members": "2"
+        },
+        {
+            "clubid": "87",
+            "club_name": "枫之舞",
+            "club_bgimage": "http://xiaoi.b0.upaiyun.com/files/club/CEIBS_BK_0rRyoS5.jpg!640X640",
+            "club_slogan": "",
+            "club_status": "1",
+            "club_logo": "http://xiaoi.b0.upaiyun.com/!80X80",
+            "members": "2"
+        },
+        {
+            "clubid": "96",
+            "club_name": "中欧华东戈十",
+            "club_bgimage": "http://xiaoi.b0.upaiyun.com/files/club/CEIBS_BK_0rRyoS5.jpg!640X640",
+            "club_slogan": "玄奘之路，中欧最酷！",
+            "club_status": "0",
+            "club_logo": "http://xiaoi.b0.upaiyun.com//files/club/CEIBS_OON1y6r.png!80X80",
+            "members": "97"
+        }
+    ]
+}
